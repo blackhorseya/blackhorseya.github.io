@@ -141,7 +141,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">2</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -151,7 +151,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives<span class="badge">1</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives<span class="badge">2</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -207,6 +207,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://blackhorseya.github.io/posts/setup-your-mac-in-an-hour/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sean Cheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/setup-your-mac-in-an-hour/" class="post-title-link" itemprop="url">Set up your Mac in an hour</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-02-03 21:51:43 / Modified: 21:53:46" itemprop="dateCreated datePublished" datetime="2020-02-03T21:51:43+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/setup/" itemprop="url" rel="index">
+                    <span itemprop="name">setup</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          快速設定 Mac的心得
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/setup-your-mac-in-an-hour/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://blackhorseya.github.io/posts/how-to-setup-tinc-vpn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -232,7 +309,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-02-03 02:49:51 / Modified: 21:23:12" itemprop="dateCreated datePublished" datetime="2020-02-03T02:49:51+08:00">2020-02-03</time>
+              <time title="Created: 2020-02-03 02:49:51 / Modified: 21:53:15" itemprop="dateCreated datePublished" datetime="2020-02-03T02:49:51+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,89 +334,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>本文適用於 <code>Ubuntu</code> 和 <code>MacOS</code></p>
-<div class="note primary">
-            <p>範例使用版本為 <code>1.1pre17</code>，參考 <a href="https://www.tinc-vpn.org/download" target="_blank" rel="noopener">Tinc</a></p>
-          </div>
-
-<h2 id="安裝必要元件"><a href="#安裝必要元件" class="headerlink" title="安裝必要元件"></a>安裝必要元件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y build-essential libncurses5-dev libreadline6-dev libzlcore-dev zlib1g-dev liblzo2-dev libssl-dev</span><br></pre></td></tr></table></figure>
-
-<h2 id="安裝-Tinc"><a href="#安裝-Tinc" class="headerlink" title="安裝 Tinc"></a>安裝 <code>Tinc</code></h2><h3 id="手動安裝"><a href="#手動安裝" class="headerlink" title="手動安裝"></a>手動安裝</h3><p>下載原始碼</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://www.tinc-vpn.org/packages/<span class="variable">$&#123;tincVersion&#125;</span>.tar.gz | tar zxv</span><br></pre></td></tr></table></figure>
-
-<p>編譯</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> tinc-1.1pre17 &amp;&amp; ./configure &amp;&amp; make</span><br></pre></td></tr></table></figure>
-
-<p>安裝</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-
-<h3 id="透過-Brew-安裝"><a href="#透過-Brew-安裝" class="headerlink" title="透過 Brew 安裝"></a>透過 Brew 安裝</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install tinc</span><br><span class="line">brew cask install tuntap</span><br></pre></td></tr></table></figure>
-
-<div class="note danger">
-            <p>Brew上沒有 <code>tinc-pre</code> 版本</p>
-          </div>
-
-<h3 id="檢查"><a href="#檢查" class="headerlink" title="檢查"></a>檢查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tinc version</span><br></pre></td></tr></table></figure>
-
-<h2 id="設定-Tinc"><a href="#設定-Tinc" class="headerlink" title="設定 Tinc"></a>設定 <code>Tinc</code></h2><h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><p>創建預設目錄</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/var/run/</span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/etc/tinc/</span><br></pre></td></tr></table></figure>
-
-<h3 id="初始化-Tinc-設定"><a href="#初始化-Tinc-設定" class="headerlink" title="初始化 Tinc 設定"></a>初始化 <code>Tinc</code> 設定</h3><p><code>Tinc</code> 使用 <code>RSA</code> 的方式進行認證，所以要先建立公私鑰。<br><code>Tinc</code> 可以建立多個連線，所以要先給定一個能夠辨識的連線名稱，並且給此台電腦一個名字和虛擬 IP 位置。</p>
-<div class="tabs" id="init-tinc"><ul class="nav-tabs"><li class="tab active"><a href="#init-tinc-1">tinc-pre</a></li><li class="tab"><a href="#init-tinc-2">tinc</a></li></ul><div class="tab-content"><div class="tab-pane active" id="init-tinc-1"><table>
-<thead>
-<tr>
-<th>var</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>netName</td>
-<td>能夠辨識連線的名稱</td>
-</tr>
-<tr>
-<td>hostname</td>
-<td>此台電腦的名稱</td>
-</tr>
-<tr>
-<td>vpnSubnet</td>
-<td>此台電腦的虛擬 IP</td>
-</tr>
-<tr>
-<td>address</td>
-<td>此台電腦的公開 IP</td>
-</tr>
-</tbody></table>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">netName=changeme</span><br><span class="line">hostname=changeme</span><br><span class="line">vpnSubnet=changeme</span><br><span class="line">address=changeme</span><br><span class="line"></span><br><span class="line">sudo tinc -n <span class="variable">$&#123;netName&#125;</span> init <span class="variable">$&#123;hostname&#125;</span></span><br><span class="line">sudo tinc -n <span class="variable">$&#123;netName&#125;</span> add Subnet <span class="variable">$&#123;vpnSubnet&#125;</span>/32</span><br><span class="line">sudo tinc -n <span class="variable">$&#123;netName&#125;</span> add Address <span class="variable">$&#123;address&#125;</span></span><br><span class="line">sudo chmod +x tinc-*</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="init-tinc-2"><p>todo</p></div></div></div>
-
-<p><code>hosts</code> 資料夾中會放有各個伺服器的公開資訊，如：<code>Subnet</code>、<code>Public Key</code>、<code>Address</code>、<code>Port</code> 等。<br>當建立好基本設定後，可以看到目錄結構如下。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ tree /usr/<span class="built_in">local</span>/etc/tinc/<span class="variable">$&#123;netName&#125;</span></span><br><span class="line">/usr/<span class="built_in">local</span>/etc/tinc/<span class="variable">$&#123;netName&#125;</span></span><br><span class="line">├── ed25519_key.priv</span><br><span class="line">├── hosts</span><br><span class="line">│   └── <span class="variable">$&#123;hostname&#125;</span> <span class="comment"># 此台電腦公開的資訊</span></span><br><span class="line">├── rsa_key.priv <span class="comment"># 此台電腦的私鑰</span></span><br><span class="line">├── tinc.conf <span class="comment"># tinc 所以用的配置</span></span><br><span class="line">├── tinc-down <span class="comment"># 停止 tinc 時會執行的腳本</span></span><br><span class="line">└── tinc-up <span class="comment"># 啟動 tinc 時會執行的腳本</span></span><br></pre></td></tr></table></figure>
-
-<div class="tabs" id="tinc-file"><ul class="nav-tabs"><li class="tab active"><a href="#tinc-file-1">conf</a></li><li class="tab"><a href="#tinc-file-2">tinc-up</a></li><li class="tab"><a href="#tinc-file-3">tinc-down</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tinc-file-1"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Name = <span class="variable">$&#123;hostname&#125;</span></span><br><span class="line">AddressFamily = ipv4</span><br><span class="line"></span><br><span class="line"><span class="comment"># interface 可以不指定，如果 不指定會自動建立一個與 netName 相同名字的 interface</span></span><br><span class="line"><span class="comment"># Interface = tun0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># pre版才可以設定自動連線，如果開啟自動連線的話，ConnectTo 則會失效</span></span><br><span class="line"><span class="comment"># 如果不想自動連線，一樣可以使用 ConnectTo 指定 server</span></span><br><span class="line">AutoConnect = yes</span><br><span class="line"><span class="comment"># ConnectTo = another-server</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tinc-file-2"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 記得改掉 vpnSubnet</span></span><br><span class="line">ifconfig <span class="variable">$INTERFACE</span> <span class="variable">$&#123;vpnSubnet&#125;</span> netmask 255.255.255.0</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tinc-file-3"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#just bring down the interface. leave it as it is</span></span><br><span class="line">ifconfig <span class="variable">$INTERFACE</span> down</span><br></pre></td></tr></table></figure></div></div></div>
-
-<h3 id="交換-hosts"><a href="#交換-hosts" class="headerlink" title="交換 hosts"></a>交換 <code>hosts</code></h3><p><code>server</code> 與 <code>client</code> 端必須擁有彼此的資訊，並且放在 <code>hosts</code> 資料夾底下。<br>善用 <code>rsync</code> 和 <code>scp</code></p>
-<div class="note danger">
-            <p><strong>此步驟相當重要</strong></p>
-          </div>
-
-<h3 id="設定自動啟動"><a href="#設定自動啟動" class="headerlink" title="設定自動啟動"></a>設定自動啟動</h3><h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><p>建立 <code>tinc.service</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sudo cat &lt;&lt;EOF &gt; /lib/systemd/system/tinc.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=Tinc VPN</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=oneshot</span><br><span class="line">RemainAfterExit=yes</span><br><span class="line">ExecStart=/bin/<span class="literal">true</span></span><br><span class="line">ExecReload=/bin/<span class="literal">true</span></span><br><span class="line">WorkingDirectory=/usr/<span class="built_in">local</span>/etc/tinc</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-
-<p>建立 <code>tinc@.service</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sudo cat &lt;&lt;EOF &gt; /lib/systemd/system/tinc@.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=Tinc net %i</span><br><span class="line">PartOf=tinc.service</span><br><span class="line">ReloadPropagatedFrom=tinc.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">WorkingDirectory=/usr/<span class="built_in">local</span>/etc/tinc/%i</span><br><span class="line">ExecStart=/usr/<span class="built_in">local</span>/sbin/tincd -n %i -D</span><br><span class="line">ExecReload=/usr/<span class="built_in">local</span>/sbin/tincd -n %i -kHUP</span><br><span class="line">KillMode=mixed</span><br><span class="line">TimeoutStopSec=5</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=60</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-
-<p>啟動服務</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> --now tinc@<span class="variable">$&#123;netName&#125;</span>.service</span><br></pre></td></tr></table></figure>
-
-<h4 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h4><h3 id="複製貼上懶人包"><a href="#複製貼上懶人包" class="headerlink" title="複製貼上懶人包"></a>複製貼上懶人包</h3><div class="tabs" id="tab"><ul class="nav-tabs"><li class="tab active"><a href="#tab-1">tinc-pre</a></li><li class="tab"><a href="#tab-2">tinc</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-1"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">tincVersion=tinc-1.1pre17</span><br><span class="line">netName=changeme</span><br><span class="line">hostname=changeme</span><br><span class="line">vpnSubnet=changeme</span><br><span class="line"></span><br><span class="line">sudo apt-get install -y build-essential libncurses5-dev libreadline6-dev libzlcore-dev zlib1g-dev liblzo2-dev libssl-dev</span><br><span class="line"></span><br><span class="line">wget -qO- https://www.tinc-vpn.org/packages/<span class="variable">$&#123;tincVersion&#125;</span>.tar.gz | tar zxv</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;tincVersion&#125;</span> &amp;&amp; ./configure &amp;&amp; make &amp;&amp; sudo make install</span><br><span class="line"></span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/var/run/</span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/etc/tinc/</span><br><span class="line"></span><br><span class="line">sudo tinc -n <span class="variable">$&#123;netName&#125;</span> init <span class="variable">$&#123;hostname&#125;</span></span><br><span class="line">sudo tinc -n <span class="variable">$&#123;netName&#125;</span> add Subnet <span class="variable">$&#123;vpnSubnet&#125;</span>/32</span><br><span class="line">sudo chmod +x tinc-*</span><br><span class="line">sudo sh -c <span class="string">"echo ifconfig <span class="variable">$INTERFACE</span> <span class="variable">$&#123;vpnSubnet&#125;</span> netmask 255.255.255.0 &gt; /usr/local/etc/tinc/<span class="variable">$&#123;netName&#125;</span>/tinc-up"</span></span><br><span class="line"></span><br><span class="line">sudo sh -c <span class="string">"cat &lt;&lt;EOF &gt; /lib/systemd/system/tinc.service</span></span><br><span class="line"><span class="string">[Unit]</span></span><br><span class="line"><span class="string">Description=Tinc VPN</span></span><br><span class="line"><span class="string">After=network.target</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Service]</span></span><br><span class="line"><span class="string">Type=oneshot</span></span><br><span class="line"><span class="string">RemainAfterExit=yes</span></span><br><span class="line"><span class="string">ExecStart=/bin/true</span></span><br><span class="line"><span class="string">ExecReload=/bin/true</span></span><br><span class="line"><span class="string">WorkingDirectory=/usr/local/etc/tinc</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Install]</span></span><br><span class="line"><span class="string">WantedBy=multi-user.target</span></span><br><span class="line"><span class="string">EOF"</span></span><br><span class="line"></span><br><span class="line">sudo sh -c <span class="string">"cat &lt;&lt;EOF &gt; /lib/systemd/system/tinc@.service</span></span><br><span class="line"><span class="string">[Unit]</span></span><br><span class="line"><span class="string">Description=Tinc net %i</span></span><br><span class="line"><span class="string">PartOf=tinc.service</span></span><br><span class="line"><span class="string">ReloadPropagatedFrom=tinc.service</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Service]</span></span><br><span class="line"><span class="string">Type=simple</span></span><br><span class="line"><span class="string">WorkingDirectory=/usr/local/etc/tinc/%i</span></span><br><span class="line"><span class="string">ExecStart=/usr/local/sbin/tincd -n %i -D</span></span><br><span class="line"><span class="string">ExecReload=/usr/local/sbin/tincd -n %i -kHUP</span></span><br><span class="line"><span class="string">KillMode=mixed</span></span><br><span class="line"><span class="string">TimeoutStopSec=5</span></span><br><span class="line"><span class="string">Restart=always</span></span><br><span class="line"><span class="string">RestartSec=60</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Install]</span></span><br><span class="line"><span class="string">WantedBy=multi-user.target</span></span><br><span class="line"><span class="string">EOF"</span></span><br><span class="line"></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> --now tinc@<span class="variable">$&#123;netName&#125;</span>.service</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab-2"><p>todo</p></div></div></div>
-
-<h2 id="使用-Tinc"><a href="#使用-Tinc" class="headerlink" title="使用 Tinc"></a>使用 <code>Tinc</code></h2><p><code>Tinc</code> 和 <code>Tinc-pre</code> 的指令略微不同，斟酌使用。</p>
-<h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><div class="tabs" id="tinc-start"><ul class="nav-tabs"><li class="tab active"><a href="#tinc-start-1">tinc-pre</a></li><li class="tab"><a href="#tinc-start-2">tinc</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tinc-start-1"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tinc -n <span class="variable">$&#123;netName&#125;</span> start</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tinc-start-2"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tincd -n <span class="variable">$&#123;netName&#125;</span> -D</span><br></pre></td></tr></table></figure></div></div></div>
-
-<h3 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h3><div class="tabs" id="tinc-stop"><ul class="nav-tabs"><li class="tab active"><a href="#tinc-stop-1">tinc-pre</a></li><li class="tab"><a href="#tinc-stop-2">tinc</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tinc-stop-1"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tinc -n <span class="variable">$&#123;netName&#125;</span> stop</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tinc-stop-2"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tincd -n <span class="variable">$&#123;netName&#125;</span> -k</span><br></pre></td></tr></table></figure></div></div></div>
-
-<h3 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h3><p>啟動成功後，會看到相對應的interface</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig <span class="variable">$&#123;netName&#125;</span></span><br><span class="line"><span class="variable">$&#123;netName&#125;</span>: flags=4305&lt;UP,POINTOPOINT,RUNNING,NOARP,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 10.36.205.13  netmask 255.255.255.0  destination 10.36.205.13</span><br><span class="line">        inet6 fe80::5cf0:a5b4:3e5c:2e67  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 500  (UNSPEC)</span><br><span class="line">        RX packets 243089132  bytes 66121117371 (66.1 GB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 249144121  bytes 75720457202 (75.7 GB)</span><br><span class="line">        TX errors 0  dropped 2067 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure>
-
+          記錄使用 tinc vpn 的過程
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/how-to-setup-tinc-vpn/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -421,7 +424,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -434,7 +437,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

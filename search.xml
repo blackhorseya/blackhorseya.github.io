@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Set up your Mac in an hour</title>
+    <url>/posts/setup-your-mac-in-an-hour/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>setup</category>
+      </categories>
+      <tags>
+        <tag>setup</tag>
+        <tag>mac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to setup tinc vpn</title>
     <url>/posts/how-to-setup-tinc-vpn/</url>
-    <content><![CDATA[<p>本文適用於 <code>Ubuntu</code> 和 <code>MacOS</code></p>
-<div class="note primary">
-            <p>範例使用版本為 <code>1.1pre17</code>，參考 <a href="https://www.tinc-vpn.org/download" target="_blank" rel="noopener">Tinc</a></p>
+    <content><![CDATA[<div class="note primary">
+            <ul><li>本文適用於 <code>Ubuntu</code> 和 <code>MacOS</code></li><li>範例使用版本為 <code>1.1pre17</code>，參考 <a href="https://www.tinc-vpn.org/download" target="_blank" rel="noopener">Tinc</a></li></ul>
           </div>
 
 <h2 id="安裝必要元件"><a href="#安裝必要元件" class="headerlink" title="安裝必要元件"></a>安裝必要元件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install -y build-essential libncurses5-dev libreadline6-dev libzlcore-dev zlib1g-dev liblzo2-dev libssl-dev</span><br></pre></td></tr></table></figure>
@@ -90,6 +101,7 @@
         <category>setup</category>
       </categories>
       <tags>
+        <tag>setup</tag>
         <tag>tinc</tag>
         <tag>vpn</tag>
       </tags>
