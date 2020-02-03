@@ -73,8 +73,8 @@
       </tags>
   </entry>
   <entry>
-    <title>How to setup tinc vpn</title>
-    <url>/posts/how-to-setup-tinc-vpn/</url>
+    <title>How to set up tinc vpn</title>
+    <url>/posts/how-to-set-up-tinc-vpn/</url>
     <content><![CDATA[<div class="note primary">
             <ul><li>本文適用於 <code>Ubuntu</code> 和 <code>MacOS</code></li><li>範例使用版本為 <code>1.1pre17</code>，參考 <a href="https://www.tinc-vpn.org/download" target="_blank" rel="noopener">Tinc</a></li></ul>
           </div>
