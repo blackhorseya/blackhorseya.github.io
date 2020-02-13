@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Set up your Mac in an hour</title>
-    <url>/posts/setup-your-mac-in-an-hour/</url>
+    <title>How to set up your Mac in an hour</title>
+    <url>/posts/how-to-set-up-your-mac-in-an-hour/</url>
     <content><![CDATA[<h2 id="Brew-必要"><a href="#Brew-必要" class="headerlink" title="Brew (必要)"></a>Brew (必要)</h2><p><code>Brew</code> 是個套件管理工具。</p>
 <h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>安裝的過程，如果缺少 <code>xcode</code> 會提示安裝</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/usr/bin/ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br></pre></td></tr></table></figure>
@@ -69,6 +69,7 @@
       </categories>
       <tags>
         <tag>setup</tag>
+        <tag>howto</tag>
         <tag>mac</tag>
       </tags>
   </entry>
@@ -164,6 +165,7 @@
         <tag>setup</tag>
         <tag>tinc</tag>
         <tag>vpn</tag>
+        <tag>howto</tag>
       </tags>
   </entry>
 </search>
