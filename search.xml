@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Comparison installable platform serverless</title>
+    <url>/posts/Comparison-installable-platform-serverless/</url>
+    <content><![CDATA[<div class="note primary">
+            <p>本文將比較 <code>OpenFaas</code>、<code>OpenWhisk</code>、<code>Kubeless</code>、<code>Knative</code>、<code>Fn</code></p>
+          </div>
+
+<h2 id="概觀"><a href="#概觀" class="headerlink" title="概觀"></a>概觀</h2><p><img src="https://landscape.cncf.io/images/serverless.png" alt="CNCF Serverless Landscape"></p>
+<h2 id="Comparison-table"><a href="#Comparison-table" class="headerlink" title="Comparison table"></a>Comparison table</h2><table>
+<thead>
+<tr>
+<th></th>
+<th><a href="https://github.com/openfaas/faas" target="_blank" rel="noopener">OpenFaas</a></th>
+<th><a href="https://github.com/apache/openwhisk" target="_blank" rel="noopener">OpenWhisk</a></th>
+<th><a href="https://github.com/kubeless/kubeless" target="_blank" rel="noopener">Kubeless</a></th>
+<th><a href="https://github.com/knative/serving" target="_blank" rel="noopener">Knative</a></th>
+<th><a href="https://github.com/fnproject/fn" target="_blank" rel="noopener">Fn</a></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Support serverless framework</td>
+<td>X</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td>Helm</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td>cli</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td>開發語言</td>
+<td>Go</td>
+<td>Scale</td>
+<td>Go</td>
+<td>Go</td>
+<td>Go</td>
+</tr>
+<tr>
+<td>Scale to Zero</td>
+<td>O</td>
+<td>O</td>
+<td>X (<a href="https://github.com/kubeless/kubeless/issues/982" target="_blank" rel="noopener">Issues-982</a>)</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td>缺點</td>
+<td>- 不支持 serverless framework</td>
+<td>- 太複雜</td>
+<td>- serverless 目前沒有支持 Go</td>
+<td>- 太胖</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>- 用 <code>Scale</code> 開發的？？</td>
+<td>- 沒辦法 scale to zero</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<div class="note warning">
+            <p>有支持 <code>Serverless framework</code> 不代表有支持各種語言，請<a href="https://github.com/serverless/serverless/tree/master/lib/plugins/create/templates" target="_blank" rel="noopener">參考</a></p>
+          </div>
+]]></content>
+      <categories>
+        <category>comparison</category>
+      </categories>
+      <tags>
+        <tag>comparison</tag>
+        <tag>serverless</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to set up your Mac in an hour</title>
     <url>/posts/how-to-set-up-your-mac-in-an-hour/</url>
     <content><![CDATA[<h2 id="Brew-必要"><a href="#Brew-必要" class="headerlink" title="Brew (必要)"></a>Brew (必要)</h2><p><code>Brew</code> 是個套件管理工具。</p>
