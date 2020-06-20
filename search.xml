@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>How to setup docker</title>
+    <url>/posts/how-to-setup-docker/</url>
+    <content><![CDATA[<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><p>如果需要自動完成功能<strong>必須</strong>安裝<code>bash-completion</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2 bash-completion</span><br></pre></td></tr></table></figure>
+
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><h4 id="安裝-Docker-最新版本"><a href="#安裝-Docker-最新版本" class="headerlink" title="安裝 Docker 最新版本"></a>安裝 Docker 最新版本</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl -fsSL https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure>
+
+<div class="note warning">
+            <ul><li>此命令直接安裝最新版本的 docker-ce</li></ul>
+          </div>
+
+<h4 id="設定使用權限"><a href="#設定使用權限" class="headerlink" title="設定使用權限"></a>設定使用權限</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="開啟服務"><a href="#開啟服務" class="headerlink" title="開啟服務"></a>開啟服務</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> --now docker</span><br></pre></td></tr></table></figure>
+
+<div class="note danger">
+            <ul><li>使用<code>CentOS</code> <strong>必須</strong>執行此命令</li></ul>
+          </div>
+
+<h4 id="Optional-自動完成功能"><a href="#Optional-自動完成功能" class="headerlink" title="(Optional) 自動完成功能"></a>(Optional) 自動完成功能</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h3><h4 id="Requires-containerd-io"><a href="#Requires-containerd-io" class="headerlink" title="Requires containerd.io"></a>Requires containerd.io</h4><p>在<code>CentOS 8</code> 上需要另外更新 containerd</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker-compose"><a href="#Docker-compose" class="headerlink" title="Docker-compose"></a>Docker-compose</h2><h3 id="安裝-1"><a href="#安裝-1" class="headerlink" title="安裝"></a>安裝</h3><h4 id="安裝-Docker-compose"><a href="#安裝-Docker-compose" class="headerlink" title="安裝 Docker-compose"></a>安裝 Docker-compose</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl -L <span class="string">"https://github.com/docker/compose/releases/latest/download/docker-compose-<span class="variable">$(uname -s)</span>-<span class="variable">$(uname -m)</span>"</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<div class="note warning">
+            <ul><li>此範例是安裝最新版本</li><li>注意安裝版本號碼(<code>release</code>)，<a href="https://github.com/docker/compose/releases" target="_blank" rel="noopener">參考</a></li></ul>
+          </div>
+
+<h4 id="更改執行權限"><a href="#更改執行權限" class="headerlink" title="更改執行權限"></a>更改執行權限</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<h4 id="Optional-自動完成功能-1"><a href="#Optional-自動完成功能-1" class="headerlink" title="(Optional) 自動完成功能"></a>(Optional) 自動完成功能</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl -L https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>setup</category>
+      </categories>
+      <tags>
+        <tag>howto</tag>
+        <tag>setup</tag>
+        <tag>docker</tag>
+        <tag>docker-compose</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to install jenkins on kubernetes</title>
     <url>/posts/how-to-install-jenkins-on-kubernetes/</url>
     <content><![CDATA[<div class="note primary">
