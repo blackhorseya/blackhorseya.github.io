@@ -325,8 +325,8 @@
 <h3 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h3><h4 id="Requires-containerd-io"><a href="#Requires-containerd-io" class="headerlink" title="Requires containerd.io"></a>Requires containerd.io</h4><p>在<code>CentOS 8</code> 上需要另外更新 containerd</p>
 <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
 
-<h4 id="Remove-PodMan"><a href="#Remove-PodMan" class="headerlink" title="Remove PodMan"></a>Remove PodMan</h4><p>在<code>CentOS</code> 上可能預設安裝了 <code>PodMan</code>，必須將它移除</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">sudo dnf remove podman -y</span><br></pre></td></tr></table></figure>
+<h4 id="Remove-PodMan"><a href="#Remove-PodMan" class="headerlink" title="Remove PodMan"></a>Remove PodMan</h4><p>在<code>CentOS</code>上可能預設安裝了<code>PodMan</code>，必須將它移除</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dnf remove podman -y</span><br></pre></td></tr></table></figure>
 
 <h2 id="Docker-compose"><a href="#Docker-compose" class="headerlink" title="Docker-compose"></a>Docker-compose</h2><h3 id="安裝-1"><a href="#安裝-1" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">echo alias docker-compose="'"'docker run --rm \</span><br><span class="line">    -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">    -v "$PWD:$PWD" \</span><br><span class="line">    -w="$PWD" \</span><br><span class="line">    docker/compose:1.24.0'"'" &gt;&gt; ~/.bashrc</span><br><span class="line"></span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
 ]]></content>
