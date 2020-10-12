@@ -35,8 +35,8 @@
 <meta property="article:published_time" content="2020-03-17T13:53:00.000Z">
 <meta property="article:modified_time" content="2020-03-17T13:53:00.000Z">
 <meta property="article:author" content="Sean Cheng">
-<meta property="article:tag" content="setup">
 <meta property="article:tag" content="howto">
+<meta property="article:tag" content="setup">
 <meta property="article:tag" content="jenkins">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://blog.seancheng.space/posts/how-to-install-jenkins-on-kubernetes/github-server-config.png">
@@ -165,7 +165,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">5</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">6</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -224,7 +224,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%A2%9D%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">前置條件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">安裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alues-yaml"><span class="nav-number">3.1.</span> <span class="nav-text">alues.yaml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A"><span class="nav-number">3.2.</span> <span class="nav-text">設定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Github-Server"><span class="nav-number">3.2.1.</span> <span class="nav-text">Github Server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Slack-Notify"><span class="nav-number">3.2.2.</span> <span class="nav-text">Slack Notify</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shared-Library"><span class="nav-number">3.2.3.</span> <span class="nav-text">Shared Library</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-pipeline"><span class="nav-number">4.1.</span> <span class="nav-text">建立 pipeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">4.2.</span> <span class="nav-text">結果</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%A2%9D%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">前置條件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">安裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#values-yaml"><span class="nav-number">3.1.</span> <span class="nav-text">values.yaml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A"><span class="nav-number">3.2.</span> <span class="nav-text">設定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Github-Server"><span class="nav-number">3.2.1.</span> <span class="nav-text">Github Server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Slack-Notify"><span class="nav-number">3.2.2.</span> <span class="nav-text">Slack Notify</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shared-Library"><span class="nav-number">3.2.3.</span> <span class="nav-text">Shared Library</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-pipeline"><span class="nav-number">4.1.</span> <span class="nav-text">建立 pipeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">4.2.</span> <span class="nav-text">結果</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -238,7 +238,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -371,7 +371,7 @@
 <h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>這裡使用 <a target="_blank" rel="noopener" href="https://github.com/helm/charts/tree/master/stable/jenkins">Stable/Jenkins</a> helm chart 安裝</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm --namespace jenkins upgrade --install jenkins stable/jenkins</span><br></pre></td></tr></table></figure>
 
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="alues-yaml"><a href="#alues-yaml" class="headerlink" title="alues.yaml"></a>alues.yaml</h3><p>完整配置<a target="_blank" rel="noopener" href="https://github.com/helm/charts/tree/master/stable/jenkins#configuration">參考</a></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="values-yaml"><a href="#values-yaml" class="headerlink" title="values.yaml"></a>values.yaml</h3><p>完整配置<a target="_blank" rel="noopener" href="https://github.com/helm/charts/tree/master/stable/jenkins#configuration">參考</a></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">master:</span></span><br><span class="line">  <span class="comment"># admin 的名字</span></span><br><span class="line">  <span class="attr">adminUser:</span> <span class="string">&#x27;admin&#x27;</span></span><br><span class="line">  <span class="comment"># admin 的密碼</span></span><br><span class="line">  <span class="attr">adminPassword:</span> <span class="string">&#x27;admin&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 設定 jenkins master 和 slave 要使用的 namespace</span></span><br><span class="line">  <span class="attr">slaveKubernetesNamespace:</span> <span class="string">&#x27;jenkins&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 預先安裝的 plugins</span></span><br><span class="line">  <span class="attr">installPlugins:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">kubernetes:latest</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">workflow-job:latest</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">workflow-aggregator:latest</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">credentials-binding:latest</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">git:latest</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">pipeline-github:latest</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">slack:latest</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">embeddable-build-status:latest</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ssh-agent:latest</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># configuration as code, 未完待續</span></span><br><span class="line">  <span class="attr">JCasC:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="設定"><a href="#設定" class="headerlink" title="設定"></a>設定</h3><h4 id="Github-Server"><a href="#Github-Server" class="headerlink" title="Github Server"></a>Github Server</h4><p>如果有使用 <code>Multibranch pipeline</code> 要設定，這樣才會自動註冊 <code>Webhook</code><br><strong>很重要</strong></p>
@@ -399,8 +399,8 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/setup/" rel="tag"># setup</a>
               <a href="/tags/howto/" rel="tag"># howto</a>
+              <a href="/tags/setup/" rel="tag"># setup</a>
               <a href="/tags/jenkins/" rel="tag"># jenkins</a>
           </div>
 

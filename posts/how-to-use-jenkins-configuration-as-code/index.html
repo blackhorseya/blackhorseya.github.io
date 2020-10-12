@@ -21,29 +21,35 @@
     var CONFIG = {"hostname":"blog.seancheng.space","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Sean&#39;s blog">
-<meta property="og:url" content="https://blog.seancheng.space/index.html">
+  <meta name="description" content="如何使用 Jenkins configuration as code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to use jenkins configuration as code">
+<meta property="og:url" content="https://blog.seancheng.space/posts/how-to-use-jenkins-configuration-as-code/index.html">
 <meta property="og:site_name" content="Sean&#39;s blog">
+<meta property="og:description" content="如何使用 Jenkins configuration as code">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-12T09:54:26.000Z">
+<meta property="article:modified_time" content="2020-10-12T09:54:26.000Z">
 <meta property="article:author" content="Sean Cheng">
+<meta property="article:tag" content="howto">
+<meta property="article:tag" content="jenkins">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.seancheng.space/">
+<link rel="canonical" href="https://blog.seancheng.space/posts/how-to-use-jenkins-configuration-as-code/">
 
 
 <script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Sean's blog</title>
+  <title>How to use jenkins configuration as code | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
     <script>
@@ -200,7 +206,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -212,6 +218,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-OAuth"><span class="nav-number">2.1.</span> <span class="nav-text">Github OAuth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Credentials"><span class="nav-number">2.2.</span> <span class="nav-text">Credentials</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Update-Config"><span class="nav-number">3.</span> <span class="nav-text">Update Config</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -279,11 +286,12 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
       
 
       
-    
+
+  
 
 
 <div class="post-block">
@@ -303,10 +311,9 @@
       <meta itemprop="name" content="Sean's blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/how-to-use-jenkins-configuration-as-code/" class="post-title-link" itemprop="url">How to use jenkins configuration as code</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          How to use jenkins configuration as code
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -329,6 +336,7 @@
     </span>
 </div>
 
+            <div class="post-description">如何使用 Jenkins configuration as code</div>
         </div>
       </header>
 
@@ -336,16 +344,40 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>如何使用 Jenkins configuration as code</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/how-to-use-jenkins-configuration-as-code/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <div class="note primary"><ul>
+<li>本文基於在 <code>Kubernetes</code> 裡使用 <code>Jenkins</code> <a target="_blank" rel="noopener" href="https://github.com/jenkinsci/configuration-as-code-plugin">Configuration as Code</a></li>
+<li>使用 <code>Jenkins</code> <a target="_blank" rel="noopener" href="https://github.com/jenkinsci/helm-charts/tree/main/charts/jenkins">Chart</a></li>
+</ul>
+</div>
+
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>開啟 <code>master.JCasC.enabled</code>，詳細可以參考官方 <a target="_blank" rel="noopener" href="https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/VALUES_SUMMARY.md#jenkins-configuration-as-code-jcasc">values</a></p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>you can reference <a target="_blank" rel="noopener" href="https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos">examples</a> of official provide.</p>
+<p>Sections:</p>
+<ul>
+<li>credentials</li>
+<li>jenkins</li>
+<li>security</li>
+<li>unclassified</li>
+<li>tool</li>
+</ul>
+<h3 id="Github-OAuth"><a href="#Github-OAuth" class="headerlink" title="Github OAuth"></a>Github OAuth</h3><p><a target="_blank" rel="noopener" href="https://plugins.jenkins.io/github-oauth/">Plugin</a></p>
+<ol>
+<li><p>configure <code>securityRealm</code> in <code>jenkins</code> section</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">securityRealm:</span></span><br><span class="line">    <span class="attr">github:</span></span><br><span class="line">      <span class="attr">clientID:</span> <span class="comment"># get from github oauth app client id</span></span><br><span class="line">      <span class="attr">clientSecret:</span> <span class="comment"># get from github oauth app client secret</span></span><br><span class="line">      <span class="attr">githubApiUri:</span> <span class="string">&quot;https://api.github.com&quot;</span> <span class="comment"># if you use github enterprise, might change it</span></span><br><span class="line">      <span class="attr">githubWebUri:</span> <span class="string">&quot;https://github.com&quot;</span> <span class="comment"># if you use github enterprise, might change it</span></span><br><span class="line">      <span class="attr">oauthScopes:</span> <span class="string">&quot;read:org,user:email,repo&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>configure <code>authorizationStrategy</code> in <code>jenkins</code> section</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">authorizationStrategy:</span></span><br><span class="line">    <span class="attr">github:</span></span><br><span class="line">      <span class="attr">adminUserNames:</span> <span class="comment"># admin user name of your organization</span></span><br><span class="line">      <span class="attr">allowAnonymousJobStatusPermission:</span> <span class="literal">true</span> <span class="comment"># can anonymous read job&#x27;s status?</span></span><br><span class="line">      <span class="attr">allowAnonymousReadPermission:</span> <span class="literal">false</span> <span class="comment"># can anonymous read job?</span></span><br><span class="line">      <span class="attr">allowCcTrayPermission:</span> <span class="literal">false</span></span><br><span class="line">      <span class="attr">allowGithubWebHookPermission:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">authenticatedUserCreateJobPermission:</span> <span class="literal">true</span> </span><br><span class="line">      <span class="attr">authenticatedUserReadPermission:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">organizationNames:</span> <span class="comment"># your organization</span></span><br><span class="line">      <span class="attr">useRepositoryPermissions:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>configure CSRF</p>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">crumbIssuer:</span></span><br><span class="line">    <span class="attr">standard:</span></span><br><span class="line">      <span class="attr">excludeClientIPFromCrumb:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Credentials"><a href="#Credentials" class="headerlink" title="Credentials"></a>Credentials</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">credentials:</span></span><br><span class="line">  <span class="attr">system:</span></span><br><span class="line">    <span class="attr">domainCredentials:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">credentials:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">string:</span></span><br><span class="line">              <span class="attr">description:</span> <span class="string">&quot;example description&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;secret-text-id&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">secret:</span> <span class="string">&quot;text&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">usernamePassword:</span></span><br><span class="line">              <span class="attr">description:</span> <span class="string">&quot;example description&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;username-password-id&quot;</span></span><br><span class="line">              <span class="attr">password:</span> <span class="string">&quot;password&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">username:</span> <span class="string">&quot;username&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">file:</span></span><br><span class="line">              <span class="attr">fileName:</span> <span class="string">&quot;filename&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;file-cred-id&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">secretBytes:</span> <span class="string">&quot;ZmlsZQ==&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Update-Config"><a href="#Update-Config" class="headerlink" title="Update Config"></a>Update Config</h2><p>How to update the config</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NS=cicd <span class="comment"># namespace</span></span><br><span class="line">NAME=jenkins-jenkins-jcasc-config <span class="comment"># config name</span></span><br><span class="line">CFG_PATH=./jcasc-default-config.yaml <span class="comment"># you want to update from file path</span></span><br><span class="line"></span><br><span class="line">kubectl --namespace=<span class="variable">$&#123;NS&#125;</span> create configmap <span class="variable">$&#123;NAME&#125;</span> \</span><br><span class="line">  --from-file=<span class="variable">$&#123;CFG_PATH&#125;</span> \</span><br><span class="line">  -o yaml \</span><br><span class="line">  --save-config \</span><br><span class="line">  --dry-run=client | kubectl apply -f -</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -353,457 +385,28 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
+          <div class="post-tags">
+              <a href="/tags/howto/" rel="tag"># howto</a>
+              <a href="/tags/jenkins/" rel="tag"># jenkins</a>
+          </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-setup-docker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sean Cheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/how-to-setup-docker/" class="post-title-link" itemprop="url">How to set up docker</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-10-11 13:00:00" itemprop="dateCreated datePublished" datetime="2020-10-11T13:00:00+08:00">2020-10-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/setup/" itemprop="url" rel="index"><span itemprop="name">setup</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Views">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">Views: </span>
-      <span class="firestore-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>設定docker 的心得</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/how-to-setup-docker/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-install-jenkins-on-kubernetes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sean Cheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/how-to-install-jenkins-on-kubernetes/" class="post-title-link" itemprop="url">How to install jenkins on kubernetes</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-03-17 21:53:00" itemprop="dateCreated datePublished" datetime="2020-03-17T21:53:00+08:00">2020-03-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/setup/" itemprop="url" rel="index"><span itemprop="name">setup</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Views">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">Views: </span>
-      <span class="firestore-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>紀錄如何在Kubernetes安裝Jenkins</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/how-to-install-jenkins-on-kubernetes/">
-                Read more &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/how-to-setup-docker/" rel="prev" title="How to set up docker">
+                  <i class="fa fa-chevron-left"></i> How to set up docker
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/Comparison-installable-platform-serverless/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sean Cheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/Comparison-installable-platform-serverless/" class="post-title-link" itemprop="url">Comparison installable platform serverless</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-02-16 11:35:00" itemprop="dateCreated datePublished" datetime="2020-02-16T11:35:00+08:00">2020-02-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/comparison/" itemprop="url" rel="index"><span itemprop="name">comparison</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Views">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">Views: </span>
-      <span class="firestore-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>比較可安裝的 Serverless 平台</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/Comparison-installable-platform-serverless/">
-                Read more &raquo;
-              </a>
+            <div class="post-nav-item">
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          </div>
     </footer>
   </article>
 </div>
 
 
 
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-set-up-your-mac-in-an-hour/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sean Cheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/how-to-set-up-your-mac-in-an-hour/" class="post-title-link" itemprop="url">How to set up your Mac in an hour</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-02-03 21:51:43" itemprop="dateCreated datePublished" datetime="2020-02-03T21:51:43+08:00">2020-02-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/setup/" itemprop="url" rel="index"><span itemprop="name">setup</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Views">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">Views: </span>
-      <span class="firestore-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>快速設定 Mac的心得</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/how-to-set-up-your-mac-in-an-hour/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-set-up-tinc-vpn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Sean Cheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/how-to-set-up-tinc-vpn/" class="post-title-link" itemprop="url">How to set up tinc vpn</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-02-03 02:49:51" itemprop="dateCreated datePublished" datetime="2020-02-03T02:49:51+08:00">2020-02-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/setup/" itemprop="url" rel="index"><span itemprop="name">setup</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Views">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">Views: </span>
-      <span class="firestore-visitors-count"></span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>記錄使用 tinc vpn 的過程</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/how-to-set-up-tinc-vpn/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-
-  
 
 
 
