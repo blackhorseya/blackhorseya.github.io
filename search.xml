@@ -312,6 +312,40 @@
       </tags>
   </entry>
   <entry>
+    <title>Installing kubernetes on-premise with kubespray</title>
+    <url>/posts/installing-kubernetes-on-premise-with-kubespray/</url>
+    <content><![CDATA[<p>可以參考官方提供的<a href="https://kubespray.io/#/docs/comparisons">比較</a></p>
+<h2 id="Clone-Kubespray"><a href="#Clone-Kubespray" class="headerlink" title="Clone Kubespray"></a>Clone Kubespray</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/kubernetes-sigs/kubespray.git</span><br></pre></td></tr></table></figure>
+
+<p>you can checkout by tag name</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout v2.14.1</span><br></pre></td></tr></table></figure>
+
+<p>or checkout <code>release</code> branch</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout release-2.14</span><br></pre></td></tr></table></figure>
+
+<h2 id="Install-dependencies"><a href="#Install-dependencies" class="headerlink" title="Install dependencies"></a>Install dependencies</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="Building-your-own-inventory"><a href="#Building-your-own-inventory" class="headerlink" title="Building your own inventory"></a>Building your own inventory</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CLUSTER_NAME=mycluster</span><br><span class="line"></span><br><span class="line"><span class="comment"># copy sample inventory to your cluster</span></span><br><span class="line">cp -rfp inventory/sample inventory/<span class="variable">$&#123;CLUSTER_NAME&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># declare your node ips</span></span><br><span class="line"><span class="built_in">declare</span> -a IPS=(10.10.1.3 10.10.1.4 10.10.1.5)</span><br><span class="line"></span><br><span class="line"><span class="comment"># build your inventory</span></span><br><span class="line">CONFIG_FILE=inventory/<span class="variable">$&#123;CLUSTER_NAME&#125;</span>/hosts.yml python3 contrib/inventory_builder/inventory.py <span class="variable">$&#123;IPS[@]&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>你可以在 <code>inventory/$&#123;CLUSTER_NAME&#125;/hosts.yml</code> 看到你的 <code>inventory</code></p>
+<h2 id="Configure-your-cluster"><a href="#Configure-your-cluster" class="headerlink" title="Configure your cluster"></a>Configure your cluster</h2><p>你可以配置你的 <code>cluster</code> 在 <code>inventory/$&#123;CLUSTER_NAME&#125;/group_vars</code> 裡，詳細內容可以<a href="https://github.com/kubernetes-sigs/kubespray/blob/master/docs/vars.md">參考</a></p>
+<h2 id="Starting-custom-deployment"><a href="#Starting-custom-deployment" class="headerlink" title="Starting custom deployment"></a>Starting custom deployment</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ansible-playbook -i inventory/<span class="variable">$&#123;CLUSTER_NAME&#125;</span>/hosts.yml cluster.yml -b --private-key=~/.ssh/private_key</span><br></pre></td></tr></table></figure>
+
+<h3 id="Adding-nodes"><a href="#Adding-nodes" class="headerlink" title="Adding nodes"></a>Adding nodes</h3><ul>
+<li>Add the new work nodes to your inventory</li>
+<li>Run the <code>ansible-playbook</code> command with <code>scale.yml</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ansible-playbook -i inventory/<span class="variable">$&#123;CLUSTER_NAME&#125;</span>/hosts.yml scale.yml -b --private-key=~/.ssh/private_key</span><br></pre></td></tr></table></figure>
+
+<h3 id="Remove-nodes"><a href="#Remove-nodes" class="headerlink" title="Remove nodes"></a>Remove nodes</h3><p>Use <code>--extra-vars &quot;node=node1,node2&quot;</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ansible-playbook -i inventory/<span class="variable">$&#123;CLUSTER_NAME&#125;</span>/hosts.yml remove-node.yml -b \</span><br><span class="line">  --extra-vars <span class="string">&quot;node=node1,node2&quot;</span> \</span><br><span class="line">  --private-key=~/.ssh/private_key</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>kubernetes</tag>
+        <tag>kubespray</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to set up your Mac in an hour</title>
     <url>/posts/how-to-set-up-your-mac-in-an-hour/</url>
     <content><![CDATA[<h2 id="Brew-必要"><a href="#Brew-必要" class="headerlink" title="Brew (必要)"></a>Brew (必要)</h2><p><code>Brew</code> 是個套件管理工具。</p>
