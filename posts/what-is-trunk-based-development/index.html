@@ -21,20 +21,25 @@
     var CONFIG = {"hostname":"blog.seancheng.space","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="3 years experience specializing in the fullstack development, infrastructure. Enjoys to customize all of the development environment. Interested in devising a better problem-solving method for challen">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About Me">
-<meta property="og:url" content="https://blog.seancheng.space/about/index.html">
+  <meta name="description" content="紀錄什麼是 trunk-based development 開發策略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="what is trunk-based development">
+<meta property="og:url" content="https://blog.seancheng.space/posts/what-is-trunk-based-development/index.html">
 <meta property="og:site_name" content="Sean&#39;s blog">
-<meta property="og:description" content="3 years experience specializing in the fullstack development, infrastructure. Enjoys to customize all of the development environment. Interested in devising a better problem-solving method for challen">
+<meta property="og:description" content="紀錄什麼是 trunk-based development 開發策略">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-02-02T18:44:07.000Z">
-<meta property="article:modified_time" content="2020-02-02T18:44:07.000Z">
+<meta property="og:image" content="https://blog.seancheng.space/posts/what-is-trunk-based-development/what-is-trunk-based-development/trunk1b.png">
+<meta property="og:image" content="https://blog.seancheng.space/posts/what-is-trunk-based-development/what-is-trunk-based-development/trunk1c.png">
+<meta property="article:published_time" content="2020-10-14T16:58:56.000Z">
+<meta property="article:modified_time" content="2020-10-14T16:58:56.000Z">
 <meta property="article:author" content="Sean Cheng">
+<meta property="article:tag" content="development">
+<meta property="article:tag" content="software">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.seancheng.space/posts/what-is-trunk-based-development/what-is-trunk-based-development/trunk1b.png">
 
 
-<link rel="canonical" href="https://blog.seancheng.space/about/">
+<link rel="canonical" href="https://blog.seancheng.space/posts/what-is-trunk-based-development/">
 
 
 <script class="page-configurations">
@@ -42,13 +47,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>About Me | Sean's blog
-</title>
+  <title>what is trunk-based development | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
     <script>
@@ -206,7 +210,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -218,6 +222,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is"><span class="nav-number">1.</span> <span class="nav-text">What is</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trunk-Based-Development-For-Smaller-Teams"><span class="nav-number">2.</span> <span class="nav-text">Trunk-Based Development For Smaller Teams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scaled-Trunk-Based-Development"><span class="nav-number">3.</span> <span class="nav-text">Scaled Trunk-Based Development</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -285,45 +290,98 @@
 </noscript>
 
 
-    <div class="main-inner page posts-expand">
+    <div class="main-inner post posts-expand">
       
-  
-  
 
       
 
-    
-    
-    
-    <div class="post-block" lang="en">
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/what-is-trunk-based-development/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sean Cheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean's blog">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          what is trunk-based development
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">About Me
-</h1>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-<div class="post-meta-container">
+      <time title="Created: 2020-10-15 00:58:56" itemprop="dateCreated datePublished" datetime="2020-10-15T00:58:56+08:00">2020-10-15</time>
+    </span>
+
   
-
+    <span class="post-meta-item" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="firestore-visitors-count"></span>
+    </span>
 </div>
 
-</header>
+            <div class="post-description">紀錄什麼是 trunk-based development 開發策略</div>
+        </div>
+      </header>
 
-      
-      
-      
-      <div class="post-body">
-          <p>3 years experience specializing in the fullstack development, infrastructure. Enjoys to customize all of the development environment. Interested in devising a better problem-solving method for challenging tasks, and learning new technologies and tools if the need arises.</p>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="What-is"><a href="#What-is" class="headerlink" title="What is"></a>What is</h2><p>Trunk-based development(TBD) 是一種軟體開發策略，就像是 <code>git-flow</code>。在這個策略下，開發者只維護一個主線。</p>
+<h2 id="Trunk-Based-Development-For-Smaller-Teams"><a href="#Trunk-Based-Development-For-Smaller-Teams" class="headerlink" title="Trunk-Based Development For Smaller Teams"></a>Trunk-Based Development For Smaller Teams</h2><p><img src="what-is-trunk-based-development/trunk1b.png" alt="workflow for smaller teams"></p>
+<h2 id="Scaled-Trunk-Based-Development"><a href="#Scaled-Trunk-Based-Development" class="headerlink" title="Scaled Trunk-Based Development"></a>Scaled Trunk-Based Development</h2><p><img src="what-is-trunk-based-development/trunk1c.png" alt="workflow for scale"></p>
 
-      </div>
-      
-      
-      
     </div>
-    
 
     
     
     
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/development/" rel="tag"># development</a>
+              <a href="/tags/software/" rel="tag"># software</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/how-to-use-kubeconfig/" rel="prev" title="How to use kubeconfig">
+                  <i class="fa fa-chevron-left"></i> How to use kubeconfig
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
 
 
       
