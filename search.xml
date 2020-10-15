@@ -369,7 +369,7 @@
       </tags>
   </entry>
   <entry>
-    <title>what is trunk-based development</title>
+    <title>What is trunk-based development</title>
     <url>/posts/what-is-trunk-based-development/</url>
     <content><![CDATA[<h2 id="What-is"><a href="#What-is" class="headerlink" title="What is"></a>What is</h2><p>Trunk-based development(TBD) 是一種軟體開發策略，就像是 <code>git-flow</code>。在這個策略下，開發者只維護一個主線。</p>
 <h2 id="Trunk-Based-Development-For-Smaller-Teams"><a href="#Trunk-Based-Development-For-Smaller-Teams" class="headerlink" title="Trunk-Based Development For Smaller Teams"></a>Trunk-Based Development For Smaller Teams</h2><p><img src="trunk1b.png" alt="workflow for smaller teams"></p>
