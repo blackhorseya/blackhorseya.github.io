@@ -387,7 +387,7 @@
 <li>release branch 完成它的任務時就可以被砍掉了</li>
 <li>所有 bug fix 都應該發生在 master 再使用 <code>cherry-pick</code> 到 release branch</li>
 </ul>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>我覺得 TBD 對於 release 是非常友善的，但是很考驗 developers 的能力，<br>像是拆分 commit 並確保每個 commit 是能正常的運行。<br>相較 <code>git-flow</code> 不會出現 merge conflict。 </p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>我覺得 TBD 對於 release 是非常友善的，但是很考驗 developers 的能力，像是拆分 commit 並確保每個 commit 是能正常的運行。相較 <code>git-flow</code> 不會出現 merge conflict。</p>
 ]]></content>
       <tags>
         <tag>development</tag>
