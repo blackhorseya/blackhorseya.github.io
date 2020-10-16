@@ -28,15 +28,16 @@
 <meta property="og:site_name" content="Sean&#39;s blog">
 <meta property="og:description" content="紀錄什麼是 trunk-based development 開發策略">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.seancheng.space/posts/what-is-trunk-based-development/what_is_trunk.jpg">
 <meta property="og:image" content="https://blog.seancheng.space/posts/what-is-trunk-based-development/trunk1b.png">
 <meta property="og:image" content="https://blog.seancheng.space/posts/what-is-trunk-based-development/trunk1c.png">
-<meta property="article:published_time" content="2020-10-14T16:58:56.000Z">
-<meta property="article:modified_time" content="2020-10-14T16:58:56.000Z">
+<meta property="article:published_time" content="2020-10-16T02:06:30.060Z">
+<meta property="article:modified_time" content="2020-10-16T02:06:30.060Z">
 <meta property="article:author" content="Sean Cheng">
 <meta property="article:tag" content="development">
 <meta property="article:tag" content="software">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.seancheng.space/posts/what-is-trunk-based-development/trunk1b.png">
+<meta name="twitter:image" content="https://blog.seancheng.space/posts/what-is-trunk-based-development/what_is_trunk.jpg">
 
 
 <link rel="canonical" href="https://blog.seancheng.space/posts/what-is-trunk-based-development/">
@@ -222,7 +223,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is"><span class="nav-number">1.</span> <span class="nav-text">What is</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trunk-Based-Development-For-Smaller-Teams"><span class="nav-number">2.</span> <span class="nav-text">Trunk-Based Development For Smaller Teams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scaled-Trunk-Based-Development"><span class="nav-number">3.</span> <span class="nav-text">Scaled Trunk-Based Development</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is"><span class="nav-number">1.</span> <span class="nav-text">What is</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trunk-Based-Development-For-Smaller-Teams"><span class="nav-number">2.</span> <span class="nav-text">Trunk-Based Development For Smaller Teams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scaled-Trunk-Based-Development"><span class="nav-number">3.</span> <span class="nav-text">Scaled Trunk-Based Development</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Points"><span class="nav-number">4.</span> <span class="nav-text">Key Points</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Developers"><span class="nav-number">4.1.</span> <span class="nav-text">Developers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Release"><span class="nav-number">4.2.</span> <span class="nav-text">Release</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">5.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -327,7 +328,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2020-10-15 00:58:56" itemprop="dateCreated datePublished" datetime="2020-10-15T00:58:56+08:00">2020-10-15</time>
+      <time title="Created: 2020-10-16 10:06:30" itemprop="dateCreated datePublished" datetime="2020-10-16T10:06:30+08:00">2020-10-16</time>
     </span>
 
   
@@ -348,9 +349,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="What-is"><a href="#What-is" class="headerlink" title="What is"></a>What is</h2><p>Trunk-based development(TBD) 是一種軟體開發策略，就像是 <code>git-flow</code>。在這個策略下，開發者只維護一個主線。</p>
+        <h2 id="What-is"><a href="#What-is" class="headerlink" title="What is"></a>What is</h2><p>Trunk-based development(TBD) 是一種軟體開發策略，就像是 <code>git-flow</code>。<br>利用主幹開發可以完整的呈現軟體開發的歷程，像是在 master 上重現 bug。</p>
+<p><img src="what_is_trunk.jpg" alt="what&#39;s trunk"></p>
 <h2 id="Trunk-Based-Development-For-Smaller-Teams"><a href="#Trunk-Based-Development-For-Smaller-Teams" class="headerlink" title="Trunk-Based Development For Smaller Teams"></a>Trunk-Based Development For Smaller Teams</h2><p><img src="trunk1b.png" alt="workflow for smaller teams"></p>
 <h2 id="Scaled-Trunk-Based-Development"><a href="#Scaled-Trunk-Based-Development" class="headerlink" title="Scaled Trunk-Based Development"></a>Scaled Trunk-Based Development</h2><p><img src="trunk1c.png" alt="workflow for scale"></p>
+<h2 id="Key-Points"><a href="#Key-Points" class="headerlink" title="Key Points"></a>Key Points</h2><p>在這個策略有一些很重要的重點</p>
+<h3 id="Developers"><a href="#Developers" class="headerlink" title="Developers"></a>Developers</h3><ul>
+<li>一般而言，只能在 master 上 commit</li>
+<li>確保每一個 commit 是可以正常運作的</li>
+<li>準缺的拆分每個 commit</li>
+</ul>
+<h3 id="Release"><a href="#Release" class="headerlink" title="Release"></a>Release</h3><ul>
+<li>release 時會從 master create a release branch 像是 release-1.1</li>
+<li>一旦 release 後就不太會更動，除非是一些 bug fix</li>
+<li>release branch 完成它的任務時就可以被砍掉了</li>
+<li>所有 bug fix 都應該發生在 master 再使用 <code>cherry-pick</code> 到 release branch</li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>我覺得 TBD 對於 release 是非常友善的，但是很考驗 developers 的能力，<br>像是拆分 commit 並確保每個 commit 是能正常的運行。<br>相較 <code>git-flow</code> 不會出現 merge conflict。 </p>
 
     </div>
 
