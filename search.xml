@@ -131,6 +131,26 @@
       </tags>
   </entry>
   <entry>
+    <title>How to set up Phabricator</title>
+    <url>/posts/how-to-set-up-Phabricator/</url>
+    <content><![CDATA[<h2 id="Installing-on-Kubernetes"><a href="#Installing-on-Kubernetes" class="headerlink" title="Installing on Kubernetes"></a>Installing on Kubernetes</h2><p>使用 <a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/">helm chart</a> 安裝 <code>Phabricator</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd</span><br><span class="line">NAME=pha</span><br><span class="line">repo=bitnami/phabricator</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;repo&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>下載 default values</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
+
+<p>詳細配置可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>setup</tag>
+        <tag>kubernetes</tag>
+        <tag>phabricator</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to set up tinc vpn</title>
     <url>/posts/how-to-set-up-tinc-vpn/</url>
     <content><![CDATA[<div class="note primary"><ul>
