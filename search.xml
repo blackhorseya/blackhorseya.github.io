@@ -87,6 +87,30 @@
       </tags>
   </entry>
   <entry>
+    <title>How to set up Phabricator</title>
+    <url>/posts/how-to-set-up-Phabricator/</url>
+    <content><![CDATA[<h2 id="Installing-on-Kubernetes"><a href="#Installing-on-Kubernetes" class="headerlink" title="Installing on Kubernetes"></a>Installing on Kubernetes</h2><p>使用 <a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/">helm chart</a> 安裝 <code>Phabricator</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd</span><br><span class="line">NAME=pha</span><br><span class="line">repo=bitnami/phabricator</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;repo&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>下載 default values</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
+
+<p>詳細配置可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><h4 id="Manual-verify"><a href="#Manual-verify" class="headerlink" title="Manual verify"></a>Manual verify</h4><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Adding-auth-provider"><a href="#Adding-auth-provider" class="headerlink" title="Adding auth provider"></a>Adding auth provider</h4><p>可以在側邊欄中找到 <code>Auth</code>，點擊 <code>Add Provider</code>，可以新增所需要的 <code>Auth</code>，例如 <code>Github</code>。</p>
+<p>如果 <code>Add Provider</code> 呈現灰色表示 <code>Auth</code> 的設定被鎖定了，可以使用 <code>command line</code> 解鎖，編輯完再將它鎖定</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>kubernetes</tag>
+        <tag>phabricator</tag>
+        <tag>howto</tag>
+        <tag>setup</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to install jenkins on kubernetes</title>
     <url>/posts/how-to-install-jenkins-on-kubernetes/</url>
     <content><![CDATA[<div class="note primary"><ul>
@@ -128,30 +152,6 @@
         <tag>howto</tag>
         <tag>setup</tag>
         <tag>jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to set up Phabricator</title>
-    <url>/posts/how-to-set-up-Phabricator/</url>
-    <content><![CDATA[<h2 id="Installing-on-Kubernetes"><a href="#Installing-on-Kubernetes" class="headerlink" title="Installing on Kubernetes"></a>Installing on Kubernetes</h2><p>使用 <a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/">helm chart</a> 安裝 <code>Phabricator</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd</span><br><span class="line">NAME=pha</span><br><span class="line">repo=bitnami/phabricator</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;repo&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>下載 default values</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
-
-<p>詳細配置可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
-<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><h4 id="Manual-verify"><a href="#Manual-verify" class="headerlink" title="Manual verify"></a>Manual verify</h4><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Adding-auth-provider"><a href="#Adding-auth-provider" class="headerlink" title="Adding auth provider"></a>Adding auth provider</h4><p>可以在側邊欄中找到 <code>Auth</code>，點擊 <code>Add Provider</code>，可以新增所需要的 <code>Auth</code>，例如 <code>Github</code>。</p>
-<p>如果 <code>Add Provider</code> 呈現灰色表示 <code>Auth</code> 的設定被鎖定了，可以使用 <code>command line</code> 解鎖，編輯完再將它鎖定</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>howto</tag>
-        <tag>setup</tag>
-        <tag>kubernetes</tag>
-        <tag>phabricator</tag>
       </tags>
   </entry>
   <entry>
@@ -294,6 +294,29 @@
       </tags>
   </entry>
   <entry>
+    <title>How to use kubeconfig</title>
+    <url>/posts/how-to-use-kubeconfig/</url>
+    <content><![CDATA[<h2 id="Configure-Environment"><a href="#Configure-Environment" class="headerlink" title="Configure Environment"></a>Configure Environment</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> KUBECONFIG=<span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+
+<h2 id="Switch-kubeconfig"><a href="#Switch-kubeconfig" class="headerlink" title="Switch kubeconfig"></a>Switch kubeconfig</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl --kubeconfig ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="Switch-context"><a href="#Switch-context" class="headerlink" title="Switch context"></a>Switch context</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl --context ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="Merge-Multiple-Configs"><a href="#Merge-Multiple-Configs" class="headerlink" title="Merge Multiple Configs"></a>Merge Multiple Configs</h2><p>你可能會有很多個 <code>kubeconfig</code>，雖然 <code>kubectl</code> 有提供 <code>flag</code>，但是頻繁的切換還是有點麻煩，<a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#merging-kubeconfig-files">官方文件</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">KUBECONFIG=<span class="variable">$KUBECONFIG</span>:<span class="variable">$&#123;CONFIG_FILE&#125;</span> kubectl config view --flatten &gt; <span class="variable">$&#123;HOME&#125;</span>/.kube/config</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-context"><a href="#Configure-context" class="headerlink" title="Configure context"></a>Configure context</h2><p>你可以設定當前 <code>namespace</code> 和 <code>context</code> 來切換使用</p>
+<h3 id="List-contexts"><a href="#List-contexts" class="headerlink" title="List contexts"></a>List contexts</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config get-contexts</span><br></pre></td></tr></table></figure>
+
+<h3 id="Switch-context-1"><a href="#Switch-context-1" class="headerlink" title="Switch context"></a>Switch context</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config use-context <span class="variable">$&#123;CONTEXT_NAME&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Switch-namespace"><a href="#Switch-namespace" class="headerlink" title="Switch namespace"></a>Switch namespace</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config set-context $(kubectl config current-context) --namespace <span class="variable">$&#123;NAMESPACE&#125;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to use jenkins configuration as code</title>
     <url>/posts/how-to-use-jenkins-configuration-as-code/</url>
     <content><![CDATA[<div class="note primary"><ul>
@@ -333,29 +356,6 @@
       <tags>
         <tag>howto</tag>
         <tag>jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to use kubeconfig</title>
-    <url>/posts/how-to-use-kubeconfig/</url>
-    <content><![CDATA[<h2 id="Configure-Environment"><a href="#Configure-Environment" class="headerlink" title="Configure Environment"></a>Configure Environment</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> KUBECONFIG=<span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
-
-<h2 id="Switch-kubeconfig"><a href="#Switch-kubeconfig" class="headerlink" title="Switch kubeconfig"></a>Switch kubeconfig</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl --kubeconfig ...</span><br></pre></td></tr></table></figure>
-
-<h2 id="Switch-context"><a href="#Switch-context" class="headerlink" title="Switch context"></a>Switch context</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl --context ...</span><br></pre></td></tr></table></figure>
-
-<h2 id="Merge-Multiple-Configs"><a href="#Merge-Multiple-Configs" class="headerlink" title="Merge Multiple Configs"></a>Merge Multiple Configs</h2><p>你可能會有很多個 <code>kubeconfig</code>，雖然 <code>kubectl</code> 有提供 <code>flag</code>，但是頻繁的切換還是有點麻煩，<a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#merging-kubeconfig-files">官方文件</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">KUBECONFIG=<span class="variable">$KUBECONFIG</span>:<span class="variable">$&#123;CONFIG_FILE&#125;</span> kubectl config view --flatten &gt; <span class="variable">$&#123;HOME&#125;</span>/.kube/config</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configure-context"><a href="#Configure-context" class="headerlink" title="Configure context"></a>Configure context</h2><p>你可以設定當前 <code>namespace</code> 和 <code>context</code> 來切換使用</p>
-<h3 id="List-contexts"><a href="#List-contexts" class="headerlink" title="List contexts"></a>List contexts</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config get-contexts</span><br></pre></td></tr></table></figure>
-
-<h3 id="Switch-context-1"><a href="#Switch-context-1" class="headerlink" title="Switch context"></a>Switch context</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config use-context <span class="variable">$&#123;CONTEXT_NAME&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Switch-namespace"><a href="#Switch-namespace" class="headerlink" title="Switch namespace"></a>Switch namespace</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config set-context $(kubectl config current-context) --namespace <span class="variable">$&#123;NAMESPACE&#125;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>kubernetes</tag>
       </tags>
   </entry>
   <entry>
