@@ -221,7 +221,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installing-on-Kubernetes"><span class="nav-number">1.</span> <span class="nav-text">Installing on Kubernetes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-values"><span class="nav-number">2.</span> <span class="nav-text">Configure values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-use"><span class="nav-number">3.</span> <span class="nav-text">How to use</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Authentication"><span class="nav-number">3.1.</span> <span class="nav-text">Authentication</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installing-on-Kubernetes"><span class="nav-number">1.</span> <span class="nav-text">Installing on Kubernetes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-values"><span class="nav-number">2.</span> <span class="nav-text">Configure values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-use"><span class="nav-number">3.</span> <span class="nav-text">How to use</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Authentication"><span class="nav-number">3.1.</span> <span class="nav-text">Authentication</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Manual-verify"><span class="nav-number">3.1.1.</span> <span class="nav-text">Manual verify</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adding-auth-provider"><span class="nav-number">3.1.2.</span> <span class="nav-text">Adding auth provider</span></a></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -354,8 +354,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
 
 <p>詳細配置可以參考<a target="_blank" rel="noopener" href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
-<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><h4 id="Manual-verify"><a href="#Manual-verify" class="headerlink" title="Manual verify"></a>Manual verify</h4><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Adding-auth-provider"><a href="#Adding-auth-provider" class="headerlink" title="Adding auth provider"></a>Adding auth provider</h4><p>可以在側邊欄中找到 <code>Auth</code>，點擊 <code>Add Provider</code>，可以新增所需要的 <code>Auth</code>，例如 <code>Github</code>。</p>
+<p>如果 <code>Add Provider</code> 呈現灰色表示 <code>Auth</code> 的設定被鎖定了，可以使用 <code>command line</code> 解鎖，編輯完再將它鎖定</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
 
     </div>
 

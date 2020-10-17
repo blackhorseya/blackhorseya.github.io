@@ -140,14 +140,62 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
 
 <p>詳細配置可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
-<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><h4 id="Manual-verify"><a href="#Manual-verify" class="headerlink" title="Manual verify"></a>Manual verify</h4><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Adding-auth-provider"><a href="#Adding-auth-provider" class="headerlink" title="Adding auth provider"></a>Adding auth provider</h4><p>可以在側邊欄中找到 <code>Auth</code>，點擊 <code>Add Provider</code>，可以新增所需要的 <code>Auth</code>，例如 <code>Github</code>。</p>
+<p>如果 <code>Add Provider</code> 呈現灰色表示 <code>Auth</code> 的設定被鎖定了，可以使用 <code>command line</code> 解鎖，編輯完再將它鎖定</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>howto</tag>
         <tag>setup</tag>
         <tag>kubernetes</tag>
         <tag>phabricator</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How to set up docker</title>
+    <url>/posts/how-to-set-up-docker/</url>
+    <content><![CDATA[<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><p>如果需要自動完成功能<strong>必須</strong>安裝<code>bash-completion</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2 bash-completion</span><br></pre></td></tr></table></figure>
+
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><h4 id="安裝-Docker-最新版本"><a href="#安裝-Docker-最新版本" class="headerlink" title="安裝 Docker 最新版本"></a>安裝 Docker 最新版本</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl -fsSL https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><ul>
+<li>此命令直接安裝最新版本的 docker-ce</li>
+</ul>
+</div>
+
+<h4 id="設定使用權限"><a href="#設定使用權限" class="headerlink" title="設定使用權限"></a>設定使用權限</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="開啟服務"><a href="#開啟服務" class="headerlink" title="開啟服務"></a>開啟服務</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> --now docker</span><br></pre></td></tr></table></figure>
+
+<div class="note danger"><ul>
+<li>使用<code>CentOS</code> <strong>必須</strong>執行此命令</li>
+</ul>
+</div>
+
+<h4 id="Suggest-設定-Log-rotate"><a href="#Suggest-設定-Log-rotate" class="headerlink" title="(Suggest) 設定 Log rotate"></a>(Suggest) 設定 Log rotate</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo cat &lt;&lt; EOF &gt; /etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;log-driver&quot;</span>: <span class="string">&quot;json-file&quot;</span>,</span><br><span class="line">  <span class="string">&quot;log-opts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;max-size&quot;</span>: <span class="string">&quot;10m&quot;</span>,</span><br><span class="line">    <span class="string">&quot;max-file&quot;</span>: <span class="string">&quot;10&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h4 id="Optional-自動完成功能"><a href="#Optional-自動完成功能" class="headerlink" title="(Optional) 自動完成功能"></a>(Optional) 自動完成功能</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h3><h4 id="Requires-containerd-io"><a href="#Requires-containerd-io" class="headerlink" title="Requires containerd.io"></a>Requires containerd.io</h4><p>在<code>CentOS 8</code> 上需要另外更新 containerd</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h4 id="Remove-PodMan"><a href="#Remove-PodMan" class="headerlink" title="Remove PodMan"></a>Remove PodMan</h4><p>在<code>CentOS</code>上可能預設安裝了<code>PodMan</code>，必須將它移除</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dnf remove podman -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker-compose"><a href="#Docker-compose" class="headerlink" title="Docker-compose"></a>Docker-compose</h2><h3 id="安裝-1"><a href="#安裝-1" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="built_in">alias</span> docker-compose=<span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;docker run --rm \</span></span><br><span class="line"><span class="string">    -v /var/run/docker.sock:/var/run/docker.sock \</span></span><br><span class="line"><span class="string">    -v &quot;$PWD:$PWD&quot; \</span></span><br><span class="line"><span class="string">    -w=&quot;$PWD&quot; \</span></span><br><span class="line"><span class="string">    docker/compose:1.24.0&#x27;</span><span class="string">&quot;&#x27;&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>setup</category>
+      </categories>
+      <tags>
+        <tag>howto</tag>
+        <tag>setup</tag>
+        <tag>docker</tag>
+        <tag>docker-compose</tag>
       </tags>
   </entry>
   <entry>
@@ -243,50 +291,6 @@
         <tag>setup</tag>
         <tag>tinc</tag>
         <tag>vpn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to set up docker</title>
-    <url>/posts/how-to-setup-docker/</url>
-    <content><![CDATA[<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><p>如果需要自動完成功能<strong>必須</strong>安裝<code>bash-completion</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2 bash-completion</span><br></pre></td></tr></table></figure>
-
-<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><h4 id="安裝-Docker-最新版本"><a href="#安裝-Docker-最新版本" class="headerlink" title="安裝 Docker 最新版本"></a>安裝 Docker 最新版本</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl -fsSL https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure>
-
-<div class="note warning"><ul>
-<li>此命令直接安裝最新版本的 docker-ce</li>
-</ul>
-</div>
-
-<h4 id="設定使用權限"><a href="#設定使用權限" class="headerlink" title="設定使用權限"></a>設定使用權限</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="開啟服務"><a href="#開啟服務" class="headerlink" title="開啟服務"></a>開啟服務</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> --now docker</span><br></pre></td></tr></table></figure>
-
-<div class="note danger"><ul>
-<li>使用<code>CentOS</code> <strong>必須</strong>執行此命令</li>
-</ul>
-</div>
-
-<h4 id="Suggest-設定-Log-rotate"><a href="#Suggest-設定-Log-rotate" class="headerlink" title="(Suggest) 設定 Log rotate"></a>(Suggest) 設定 Log rotate</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo cat &lt;&lt; EOF &gt; /etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;log-driver&quot;</span>: <span class="string">&quot;json-file&quot;</span>,</span><br><span class="line">  <span class="string">&quot;log-opts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;max-size&quot;</span>: <span class="string">&quot;10m&quot;</span>,</span><br><span class="line">    <span class="string">&quot;max-file&quot;</span>: <span class="string">&quot;10&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-
-<h4 id="Optional-自動完成功能"><a href="#Optional-自動完成功能" class="headerlink" title="(Optional) 自動完成功能"></a>(Optional) 自動完成功能</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh</span><br></pre></td></tr></table></figure>
-
-<h3 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h3><h4 id="Requires-containerd-io"><a href="#Requires-containerd-io" class="headerlink" title="Requires containerd.io"></a>Requires containerd.io</h4><p>在<code>CentOS 8</code> 上需要另外更新 containerd</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
-
-<h4 id="Remove-PodMan"><a href="#Remove-PodMan" class="headerlink" title="Remove PodMan"></a>Remove PodMan</h4><p>在<code>CentOS</code>上可能預設安裝了<code>PodMan</code>，必須將它移除</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dnf remove podman -y</span><br></pre></td></tr></table></figure>
-
-<h2 id="Docker-compose"><a href="#Docker-compose" class="headerlink" title="Docker-compose"></a>Docker-compose</h2><h3 id="安裝-1"><a href="#安裝-1" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="built_in">alias</span> docker-compose=<span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;docker run --rm \</span></span><br><span class="line"><span class="string">    -v /var/run/docker.sock:/var/run/docker.sock \</span></span><br><span class="line"><span class="string">    -v &quot;$PWD:$PWD&quot; \</span></span><br><span class="line"><span class="string">    -w=&quot;$PWD&quot; \</span></span><br><span class="line"><span class="string">    docker/compose:1.24.0&#x27;</span><span class="string">&quot;&#x27;&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>setup</category>
-      </categories>
-      <tags>
-        <tag>howto</tag>
-        <tag>setup</tag>
-        <tag>docker</tag>
-        <tag>docker-compose</tag>
       </tags>
   </entry>
   <entry>
