@@ -199,6 +199,25 @@
       </tags>
   </entry>
   <entry>
+    <title>How to set up external-dns</title>
+    <url>/posts/how-to-set-up-external-dns/</url>
+    <content><![CDATA[<h2 id="Installing-external-dns-on-Kubernetes"><a href="#Installing-external-dns-on-Kubernetes" class="headerlink" title="Installing external-dns on Kubernetes"></a>Installing external-dns on Kubernetes</h2><p>Install <code>external-dns</code> via <a href="https://github.com/bitnami/charts/tree/master/bitnami/external-dns/#installing-the-chart">helm chart</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=dns</span><br><span class="line">REPO=bitnami/external-dns</span><br><span class="line">NAME=cf</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;REPO&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">## DNS provider where the DNS records will be created. Available providers are:</span></span><br><span class="line"><span class="comment">## - alibabacloud, aws, azure, azure-private-dns, cloudflare, coredns, designate, digitalocean, google, infoblox, rfc2136, transip</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">provider:</span> <span class="string">cloudflare</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Cloudflare configuration to be set via arguments/env. variables</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">cloudflare:</span></span><br><span class="line">  <span class="comment">## `CF_API_TOKEN` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">apiToken:</span> <span class="string">$&#123;YOUR_TOKEN&#125;</span></span><br><span class="line">  <span class="comment">## `CF_API_KEY` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">apiKey:</span></span><br><span class="line">  <span class="comment">## Use an existing secret with keys &quot;cloudflare_api_token&quot; or &quot;cloudflare_api_key&quot; defined.</span></span><br><span class="line">  <span class="comment">## This ignores cloudflare.apiToken, and cloudflare.apiKey</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="comment"># secretName:</span></span><br><span class="line">  <span class="comment">## `CF_API_EMAIL` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">email:</span></span><br><span class="line">  <span class="comment">## Enable the proxy feature of Cloudflare</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">proxied:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Modify how DNS records are sychronized between sources and providers (options: sync, upsert-only)</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">policy:</span> <span class="string">sync</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>在 <code>ingress</code> 中設定 <code>annotation</code></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">annotations:</span></span><br><span class="line">  <span class="attr">kubernetes.io/ingress.class:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="comment"># 設定你想要的 host</span></span><br><span class="line">  <span class="attr">external-dns.alpha.kubernetes.io/hostname:</span> <span class="string">$&#123;YOUR_HOST&#125;</span></span><br><span class="line">  <span class="comment"># 如果有設定 target 的話會自動使用 CNAME</span></span><br><span class="line">  <span class="attr">external-dns.alpha.kubernetes.io/target:</span> <span class="string">$&#123;YOUR_TARGET&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>setup</tag>
+        <tag>kubernetes</tag>
+        <tag>external-dns</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to set up tinc vpn</title>
     <url>/posts/how-to-set-up-tinc-vpn/</url>
     <content><![CDATA[<div class="note primary"><ul>

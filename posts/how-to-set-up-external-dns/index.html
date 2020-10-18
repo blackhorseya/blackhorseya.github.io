@@ -21,16 +21,24 @@
     var CONFIG = {"hostname":"blog.seancheng.space","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Sean&#39;s blog">
-<meta property="og:url" content="https://blog.seancheng.space/tags/serverless/index.html">
+  <meta name="description" content="如何使用 external-dns 加入 dns record">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to set up external-dns">
+<meta property="og:url" content="https://blog.seancheng.space/posts/how-to-set-up-external-dns/index.html">
 <meta property="og:site_name" content="Sean&#39;s blog">
+<meta property="og:description" content="如何使用 external-dns 加入 dns record">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-18T08:24:26.000Z">
+<meta property="article:modified_time" content="2020-10-18T08:24:26.000Z">
 <meta property="article:author" content="Sean Cheng">
+<meta property="article:tag" content="howto">
+<meta property="article:tag" content="setup">
+<meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="external-dns">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.seancheng.space/tags/serverless/">
+<link rel="canonical" href="https://blog.seancheng.space/posts/how-to-set-up-external-dns/">
 
 
 <script class="page-configurations">
@@ -38,12 +46,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tag: serverless | Sean's blog</title>
+  <title>How to set up external-dns | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
     <script>
@@ -201,7 +209,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -213,6 +221,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installing-external-dns-on-Kubernetes"><span class="nav-number">1.</span> <span class="nav-text">Installing external-dns on Kubernetes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-values"><span class="nav-number">2.</span> <span class="nav-text">Configure values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-use"><span class="nav-number">3.</span> <span class="nav-text">How to use</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -280,54 +289,107 @@
 </noscript>
 
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
       
 
       
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h2 class="collection-header">serverless
-          <small>Tag</small>
-        </h2>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-set-up-external-dns/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sean Cheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          How to set up external-dns
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-10-18 16:24:26" itemprop="dateCreated datePublished" datetime="2020-10-18T16:24:26+08:00">2020-10-18</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="firestore-visitors-count"></span>
+    </span>
+</div>
+
+            <div class="post-description">如何使用 external-dns 加入 dns record</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Installing-external-dns-on-Kubernetes"><a href="#Installing-external-dns-on-Kubernetes" class="headerlink" title="Installing external-dns on Kubernetes"></a>Installing external-dns on Kubernetes</h2><p>Install <code>external-dns</code> via <a target="_blank" rel="noopener" href="https://github.com/bitnami/charts/tree/master/bitnami/external-dns/#installing-the-chart">helm chart</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NS=dns</span><br><span class="line">REPO=bitnami/external-dns</span><br><span class="line">NAME=cf</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;REPO&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## DNS provider where the DNS records will be created. Available providers are:</span></span><br><span class="line"><span class="comment">## - alibabacloud, aws, azure, azure-private-dns, cloudflare, coredns, designate, digitalocean, google, infoblox, rfc2136, transip</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">provider:</span> <span class="string">cloudflare</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Cloudflare configuration to be set via arguments/env. variables</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">cloudflare:</span></span><br><span class="line">  <span class="comment">## `CF_API_TOKEN` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">apiToken:</span> <span class="string">$&#123;YOUR_TOKEN&#125;</span></span><br><span class="line">  <span class="comment">## `CF_API_KEY` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">apiKey:</span></span><br><span class="line">  <span class="comment">## Use an existing secret with keys &quot;cloudflare_api_token&quot; or &quot;cloudflare_api_key&quot; defined.</span></span><br><span class="line">  <span class="comment">## This ignores cloudflare.apiToken, and cloudflare.apiKey</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="comment"># secretName:</span></span><br><span class="line">  <span class="comment">## `CF_API_EMAIL` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">email:</span></span><br><span class="line">  <span class="comment">## Enable the proxy feature of Cloudflare</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">proxied:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Modify how DNS records are sychronized between sources and providers (options: sync, upsert-only)</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">policy:</span> <span class="string">sync</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>在 <code>ingress</code> 中設定 <code>annotation</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">annotations:</span></span><br><span class="line">  <span class="attr">kubernetes.io/ingress.class:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="comment"># 設定你想要的 host</span></span><br><span class="line">  <span class="attr">external-dns.alpha.kubernetes.io/hostname:</span> <span class="string">$&#123;YOUR_HOST&#125;</span></span><br><span class="line">  <span class="comment"># 如果有設定 target 的話會自動使用 CNAME</span></span><br><span class="line">  <span class="attr">external-dns.alpha.kubernetes.io/target:</span> <span class="string">$&#123;YOUR_TARGET&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-02-16T11:35:00+08:00"
-              content="2020-02-16">
-          02-16
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/Comparison-installable-platform-serverless/" itemprop="url">
-            <span itemprop="name">Comparison installable platform serverless</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/howto/" rel="tag"># howto</a>
+              <a href="/tags/setup/" rel="tag"># setup</a>
+              <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+              <a href="/tags/external-dns/" rel="tag"># external-dns</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/how-to-use-kubeconfig/" rel="prev" title="How to use kubeconfig">
+                  <i class="fa fa-chevron-left"></i> How to use kubeconfig
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/what-is-trunk-based-development/" rel="next" title="What is trunk-based development">
+                  What is trunk-based development <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
 
-  
+
 
 
 
