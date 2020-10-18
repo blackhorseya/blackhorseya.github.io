@@ -131,6 +131,30 @@
       </tags>
   </entry>
   <entry>
+    <title>How to set up Phabricator</title>
+    <url>/posts/how-to-set-up-Phabricator/</url>
+    <content><![CDATA[<h2 id="Installing-on-Kubernetes"><a href="#Installing-on-Kubernetes" class="headerlink" title="Installing on Kubernetes"></a>Installing on Kubernetes</h2><p>使用 <a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/">helm chart</a> 安裝 <code>Phabricator</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd</span><br><span class="line">NAME=pha</span><br><span class="line">repo=bitnami/phabricator</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;repo&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>下載 default values</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
+
+<p>詳細配置可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><h4 id="Manual-verify"><a href="#Manual-verify" class="headerlink" title="Manual verify"></a>Manual verify</h4><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Adding-auth-provider"><a href="#Adding-auth-provider" class="headerlink" title="Adding auth provider"></a>Adding auth provider</h4><p>可以在側邊欄中找到 <code>Auth</code>，點擊 <code>Add Provider</code>，可以新增所需要的 <code>Auth</code>，例如 <code>Github</code>。</p>
+<p>如果 <code>Add Provider</code> 呈現灰色表示 <code>Auth</code> 的設定被鎖定了，可以使用 <code>command line</code> 解鎖，編輯完再將它鎖定</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>setup</tag>
+        <tag>kubernetes</tag>
+        <tag>phabricator</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to set up docker</title>
     <url>/posts/how-to-set-up-docker/</url>
     <content><![CDATA[<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><p>如果需要自動完成功能<strong>必須</strong>安裝<code>bash-completion</code></p>
@@ -172,30 +196,6 @@
         <tag>setup</tag>
         <tag>docker</tag>
         <tag>docker-compose</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to set up Phabricator</title>
-    <url>/posts/how-to-set-up-Phabricator/</url>
-    <content><![CDATA[<h2 id="Installing-on-Kubernetes"><a href="#Installing-on-Kubernetes" class="headerlink" title="Installing on Kubernetes"></a>Installing on Kubernetes</h2><p>使用 <a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/">helm chart</a> 安裝 <code>Phabricator</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd</span><br><span class="line">NAME=pha</span><br><span class="line">repo=bitnami/phabricator</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;repo&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>下載 default values</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
-
-<p>詳細配置可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
-<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><h4 id="Manual-verify"><a href="#Manual-verify" class="headerlink" title="Manual verify"></a>Manual verify</h4><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Adding-auth-provider"><a href="#Adding-auth-provider" class="headerlink" title="Adding auth provider"></a>Adding auth provider</h4><p>可以在側邊欄中找到 <code>Auth</code>，點擊 <code>Add Provider</code>，可以新增所需要的 <code>Auth</code>，例如 <code>Github</code>。</p>
-<p>如果 <code>Add Provider</code> 呈現灰色表示 <code>Auth</code> 的設定被鎖定了，可以使用 <code>command line</code> 解鎖，編輯完再將它鎖定</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>howto</tag>
-        <tag>setup</tag>
-        <tag>kubernetes</tag>
-        <tag>phabricator</tag>
       </tags>
   </entry>
   <entry>
