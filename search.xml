@@ -151,6 +151,30 @@
       </tags>
   </entry>
   <entry>
+    <title>How to set up Phabricator</title>
+    <url>/posts/how-to-set-up-Phabricator/</url>
+    <content><![CDATA[<h2 id="Installing-on-Kubernetes"><a href="#Installing-on-Kubernetes" class="headerlink" title="Installing on Kubernetes"></a>Installing on Kubernetes</h2><p>使用 <a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/">helm chart</a> 安裝 <code>Phabricator</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd</span><br><span class="line">NAME=pha</span><br><span class="line">repo=bitnami/phabricator</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;repo&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>下載 default values</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
+
+<p>詳細配置可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><h4 id="Manual-verify"><a href="#Manual-verify" class="headerlink" title="Manual verify"></a>Manual verify</h4><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Adding-auth-provider"><a href="#Adding-auth-provider" class="headerlink" title="Adding auth provider"></a>Adding auth provider</h4><p>可以在側邊欄中找到 <code>Auth</code>，點擊 <code>Add Provider</code>，可以新增所需要的 <code>Auth</code>，例如 <code>Github</code>。</p>
+<p>如果 <code>Add Provider</code> 呈現灰色表示 <code>Auth</code> 的設定被鎖定了，可以使用 <code>command line</code> 解鎖，編輯完再將它鎖定</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>setup</tag>
+        <tag>kubernetes</tag>
+        <tag>phabricator</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to set up a blog using Hexo and Github</title>
     <url>/posts/how-to-set-up-a-blog-using-hexo-and-github/</url>
     <content><![CDATA[<p><a href="https://hexo.io/">Hexo</a></p>
@@ -199,30 +223,6 @@
         <tag>howto</tag>
         <tag>setup</tag>
         <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to set up Phabricator</title>
-    <url>/posts/how-to-set-up-Phabricator/</url>
-    <content><![CDATA[<h2 id="Installing-on-Kubernetes"><a href="#Installing-on-Kubernetes" class="headerlink" title="Installing on Kubernetes"></a>Installing on Kubernetes</h2><p>使用 <a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/">helm chart</a> 安裝 <code>Phabricator</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd</span><br><span class="line">NAME=pha</span><br><span class="line">repo=bitnami/phabricator</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;repo&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>下載 default values</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
-
-<p>詳細配置可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
-<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><h4 id="Manual-verify"><a href="#Manual-verify" class="headerlink" title="Manual verify"></a>Manual verify</h4><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Adding-auth-provider"><a href="#Adding-auth-provider" class="headerlink" title="Adding auth provider"></a>Adding auth provider</h4><p>可以在側邊欄中找到 <code>Auth</code>，點擊 <code>Add Provider</code>，可以新增所需要的 <code>Auth</code>，例如 <code>Github</code>。</p>
-<p>如果 <code>Add Provider</code> 呈現灰色表示 <code>Auth</code> 的設定被鎖定了，可以使用 <code>command line</code> 解鎖，編輯完再將它鎖定</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>howto</tag>
-        <tag>setup</tag>
-        <tag>kubernetes</tag>
-        <tag>phabricator</tag>
       </tags>
   </entry>
   <entry>
@@ -295,6 +295,9 @@
     <content><![CDATA[<p>第三方的服務有時候需要綁定固定 IP，導致服務本體不能任意移動，此時我們可以利用 <code>proxy server</code> 來解決這問題<br>本文使用 <code>Squid</code> 作為 proxy server 演示</p>
 <h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>詳細的資訊可以<a href="https://hub.docker.com/r/sameersbn/squid">參考</a></p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">squid:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">sameersbn/squid:3.5.27-2</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">bridge</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3128:3128&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/srv/docker/squid/cache:/var/spool/squid</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./squid.conf:/etc/squid/squid.conf</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
+
+<p>用 <code>command line</code> 做測試</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">http_proxy=http://192.168.28.241:3128 https_proxy=http://192.168.28.241:3128 curl https://ifconfig.co</span><br></pre></td></tr></table></figure>
 
 <h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><p>squid.conf，啊，配置太多了，挑幾個重要的寫吧</p>
 <h3 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># localnet 是可以替換掉名字</span><br><span class="line">acl localnet src 192.168.0.0&#x2F;16</span><br><span class="line"></span><br><span class="line">acl SSL_ports port 443</span><br><span class="line">acl Safe_ports port 80		# http</span><br><span class="line">acl Safe_ports port 21		# ftp</span><br><span class="line">acl Safe_ports port 443		# https</span><br><span class="line">acl Safe_ports port 70		# gopher</span><br><span class="line">acl Safe_ports port 210		# wais</span><br><span class="line">acl Safe_ports port 1025-65535	# unregistered ports</span><br><span class="line">acl Safe_ports port 280		# http-mgmt</span><br><span class="line">acl Safe_ports port 488		# gss-http</span><br><span class="line">acl Safe_ports port 591		# filemaker</span><br><span class="line">acl Safe_ports port 777		# multiling http</span><br><span class="line">acl CONNECT method CONNECT</span><br></pre></td></tr></table></figure>
