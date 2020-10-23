@@ -21,22 +21,27 @@
     var CONFIG = {"hostname":"blog.seancheng.space","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="如何使用 Jenkins configuration as code">
+  <meta name="description" content="一個從 Docker 發展成 Kubernetes 的故事">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to use jenkins configuration as code">
-<meta property="og:url" content="https://blog.seancheng.space/posts/how-to-use-jenkins-configuration-as-code/index.html">
+<meta property="og:title" content="A story for the evolution of container management">
+<meta property="og:url" content="https://blog.seancheng.space/posts/a-story-for-the-evolution-of-container-management/index.html">
 <meta property="og:site_name" content="Sean&#39;s blog">
-<meta property="og:description" content="如何使用 Jenkins configuration as code">
+<meta property="og:description" content="一個從 Docker 發展成 Kubernetes 的故事">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-12T09:54:26.000Z">
-<meta property="article:modified_time" content="2020-10-12T09:54:26.000Z">
+<meta property="article:published_time" content="2020-10-23T04:15:29.000Z">
+<meta property="article:modified_time" content="2020-10-23T04:15:29.000Z">
 <meta property="article:author" content="Sean Cheng">
-<meta property="article:tag" content="howto">
-<meta property="article:tag" content="jenkins">
+<meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="story">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="traefik">
+<meta property="article:tag" content="reverse-proxy">
+<meta property="article:tag" content="apache">
+<meta property="article:tag" content="docker-swarm">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.seancheng.space/posts/how-to-use-jenkins-configuration-as-code/">
+<link rel="canonical" href="https://blog.seancheng.space/posts/a-story-for-the-evolution-of-container-management/">
 
 
 <script class="page-configurations">
@@ -49,7 +54,7 @@
   };
 </script>
 
-  <title>How to use jenkins configuration as code | Sean's blog</title>
+  <title>A story for the evolution of container management | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
     <script>
@@ -219,7 +224,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-OAuth"><span class="nav-number">2.1.</span> <span class="nav-text">Github OAuth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Credentials"><span class="nav-number">2.2.</span> <span class="nav-text">Credentials</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Update-Config"><span class="nav-number">3.</span> <span class="nav-text">Update Config</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E5%BB%BA%E6%99%82%E4%BB%A3"><span class="nav-number">1.</span> <span class="nav-text">封建時代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%8E%E5%A0%A1%E6%99%82%E4%BB%A3"><span class="nav-number">2.</span> <span class="nav-text">城堡時代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%9D%E7%8E%8B%E6%99%82%E4%BB%A3"><span class="nav-number">3.</span> <span class="nav-text">帝王時代</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -300,7 +305,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-use-jenkins-configuration-as-code/">
+    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/a-story-for-the-evolution-of-container-management/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -313,7 +318,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          How to use jenkins configuration as code
+          A story for the evolution of container management
         </h1>
 
         <div class="post-meta-container">
@@ -324,7 +329,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2020-10-12 17:54:26" itemprop="dateCreated datePublished" datetime="2020-10-12T17:54:26+08:00">2020-10-12</time>
+      <time title="Created: 2020-10-23 12:15:29" itemprop="dateCreated datePublished" datetime="2020-10-23T12:15:29+08:00">2020-10-23</time>
     </span>
 
   
@@ -337,7 +342,7 @@
     </span>
 </div>
 
-            <div class="post-description">如何使用 Jenkins configuration as code</div>
+            <div class="post-description">一個從 Docker 發展成 Kubernetes 的故事</div>
         </div>
       </header>
 
@@ -345,39 +350,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <div class="note primary"><ul>
-<li>本文基於在 <code>Kubernetes</code> 裡使用 <code>Jenkins</code> <a target="_blank" rel="noopener" href="https://github.com/jenkinsci/configuration-as-code-plugin">Configuration as Code</a></li>
-<li>使用 <code>Jenkins</code> <a target="_blank" rel="noopener" href="https://github.com/jenkinsci/helm-charts/tree/main/charts/jenkins">Chart</a></li>
-</ul>
+        <div class="note primary"><p>本文以 <code>世紀帝國2</code> 中的時代為例，<code>封建時代</code>、<code>城堡時代</code>、<code>帝王時代</code><br>為什麼沒有 <code>黑暗時代</code> 呢？因為會用 <code>Docker</code> 先贏一半</p>
 </div>
 
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>開啟 <code>master.JCasC.enabled</code>，詳細可以參考官方 <a target="_blank" rel="noopener" href="https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/VALUES_SUMMARY.md#jenkins-configuration-as-code-jcasc">values</a></p>
-<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>you can reference <a target="_blank" rel="noopener" href="https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos">examples</a> of official provide.</p>
-<p>Sections:</p>
-<ul>
-<li>credentials</li>
-<li>jenkins</li>
-<li>security</li>
-<li>unclassified</li>
-<li>tool</li>
-</ul>
-<h3 id="Github-OAuth"><a href="#Github-OAuth" class="headerlink" title="Github OAuth"></a>Github OAuth</h3><p><a target="_blank" rel="noopener" href="https://plugins.jenkins.io/github-oauth/">Plugin</a></p>
-<ol>
-<li><p>configure <code>securityRealm</code> in <code>jenkins</code> section</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">securityRealm:</span></span><br><span class="line">    <span class="attr">github:</span></span><br><span class="line">      <span class="attr">clientID:</span> <span class="comment"># get from github oauth app client id</span></span><br><span class="line">      <span class="attr">clientSecret:</span> <span class="comment"># get from github oauth app client secret</span></span><br><span class="line">      <span class="attr">githubApiUri:</span> <span class="string">&quot;https://api.github.com&quot;</span> <span class="comment"># if you use github enterprise, might change it</span></span><br><span class="line">      <span class="attr">githubWebUri:</span> <span class="string">&quot;https://github.com&quot;</span> <span class="comment"># if you use github enterprise, might change it</span></span><br><span class="line">      <span class="attr">oauthScopes:</span> <span class="string">&quot;read:org,user:email,repo&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>configure <code>authorizationStrategy</code> in <code>jenkins</code> section</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">authorizationStrategy:</span></span><br><span class="line">    <span class="attr">github:</span></span><br><span class="line">      <span class="attr">adminUserNames:</span> <span class="comment"># admin user name of your organization</span></span><br><span class="line">      <span class="attr">allowAnonymousJobStatusPermission:</span> <span class="literal">true</span> <span class="comment"># can anonymous read job&#x27;s status?</span></span><br><span class="line">      <span class="attr">allowAnonymousReadPermission:</span> <span class="literal">false</span> <span class="comment"># can anonymous read job?</span></span><br><span class="line">      <span class="attr">allowCcTrayPermission:</span> <span class="literal">false</span></span><br><span class="line">      <span class="attr">allowGithubWebHookPermission:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">authenticatedUserCreateJobPermission:</span> <span class="literal">true</span> </span><br><span class="line">      <span class="attr">authenticatedUserReadPermission:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">organizationNames:</span> <span class="comment"># your organization</span></span><br><span class="line">      <span class="attr">useRepositoryPermissions:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>configure CSRF</p>
-</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">crumbIssuer:</span></span><br><span class="line">    <span class="attr">standard:</span></span><br><span class="line">      <span class="attr">excludeClientIPFromCrumb:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Credentials"><a href="#Credentials" class="headerlink" title="Credentials"></a>Credentials</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">credentials:</span></span><br><span class="line">  <span class="attr">system:</span></span><br><span class="line">    <span class="attr">domainCredentials:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">credentials:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">string:</span></span><br><span class="line">              <span class="attr">description:</span> <span class="string">&quot;example description&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;secret-text-id&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">secret:</span> <span class="string">&quot;text&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">usernamePassword:</span></span><br><span class="line">              <span class="attr">description:</span> <span class="string">&quot;example description&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;username-password-id&quot;</span></span><br><span class="line">              <span class="attr">password:</span> <span class="string">&quot;password&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">username:</span> <span class="string">&quot;username&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">file:</span></span><br><span class="line">              <span class="attr">fileName:</span> <span class="string">&quot;filename&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;file-cred-id&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">secretBytes:</span> <span class="string">&quot;ZmlsZQ==&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Update-Config"><a href="#Update-Config" class="headerlink" title="Update Config"></a>Update Config</h2><p>How to update the config</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NS=cicd <span class="comment"># namespace</span></span><br><span class="line">NAME=jenkins-jenkins-jcasc-config <span class="comment"># config name</span></span><br><span class="line">CFG_PATH=./jcasc-default-config.yaml <span class="comment"># you want to update from file path</span></span><br><span class="line"></span><br><span class="line">kubectl --namespace=<span class="variable">$&#123;NS&#125;</span> create configmap <span class="variable">$&#123;NAME&#125;</span> \</span><br><span class="line">  --from-file=<span class="variable">$&#123;CFG_PATH&#125;</span> \</span><br><span class="line">  -o yaml \</span><br><span class="line">  --save-config \</span><br><span class="line">  --dry-run=client | kubectl apply -f -</span><br></pre></td></tr></table></figure>
+<h2 id="封建時代"><a href="#封建時代" class="headerlink" title="封建時代"></a>封建時代</h2><p>只使用 <code>Docker</code> 在 instances 中運行服務並且利用 <code>reverse proxy</code> forward 到相應的 instance</p>
+<p>// todo: docker</p>
+<h2 id="城堡時代"><a href="#城堡時代" class="headerlink" title="城堡時代"></a>城堡時代</h2><p>使用 <code>Docker swarm</code> 在 instances 上部署服務並透過 <code>Traefik</code> forward 到相應的容器</p>
+<p>// todo: docker swarm</p>
+<h2 id="帝王時代"><a href="#帝王時代" class="headerlink" title="帝王時代"></a>帝王時代</h2><p>利用 <code>Kubernetes</code> 達到容器管理，就不專注在 nodes 上了</p>
+<p>// todo: kubernetes<br>未完待續</p>
 
     </div>
 
@@ -387,22 +368,24 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/howto/" rel="tag"># howto</a>
-              <a href="/tags/jenkins/" rel="tag"># jenkins</a>
+              <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+              <a href="/tags/story/" rel="tag"># story</a>
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/traefik/" rel="tag"># traefik</a>
+              <a href="/tags/reverse-proxy/" rel="tag"># reverse-proxy</a>
+              <a href="/tags/apache/" rel="tag"># apache</a>
+              <a href="/tags/docker-swarm/" rel="tag"># docker-swarm</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/how-to-set-up-docker/" rel="prev" title="How to set up docker">
-                  <i class="fa fa-chevron-left"></i> How to set up docker
+                <a href="/posts/how-to-set-up-squid-proxy-server/" rel="prev" title="How to set up Squid proxy server">
+                  <i class="fa fa-chevron-left"></i> How to set up Squid proxy server
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/installing-kubernetes-on-premise-with-kubespray/" rel="next" title="Installing kubernetes on-premise with kubespray">
-                  Installing kubernetes on-premise with kubespray <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

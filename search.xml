@@ -87,6 +87,29 @@
       </tags>
   </entry>
   <entry>
+    <title>A story for the evolution of container management</title>
+    <url>/posts/a-story-for-the-evolution-of-container-management/</url>
+    <content><![CDATA[<div class="note primary"><p>本文以 <code>世紀帝國2</code> 中的時代為例，<code>封建時代</code>、<code>城堡時代</code>、<code>帝王時代</code><br>為什麼沒有 <code>黑暗時代</code> 呢？因為會用 <code>Docker</code> 先贏一半</p>
+</div>
+
+<h2 id="封建時代"><a href="#封建時代" class="headerlink" title="封建時代"></a>封建時代</h2><p>只使用 <code>Docker</code> 在 instances 中運行服務並且利用 <code>reverse proxy</code> forward 到相應的 instance</p>
+<p>// todo: docker</p>
+<h2 id="城堡時代"><a href="#城堡時代" class="headerlink" title="城堡時代"></a>城堡時代</h2><p>使用 <code>Docker swarm</code> 在 instances 上部署服務並透過 <code>Traefik</code> forward 到相應的容器</p>
+<p>// todo: docker swarm</p>
+<h2 id="帝王時代"><a href="#帝王時代" class="headerlink" title="帝王時代"></a>帝王時代</h2><p>利用 <code>Kubernetes</code> 達到容器管理，就不專注在 nodes 上了</p>
+<p>// todo: kubernetes<br>未完待續</p>
+]]></content>
+      <tags>
+        <tag>kubernetes</tag>
+        <tag>story</tag>
+        <tag>docker</tag>
+        <tag>traefik</tag>
+        <tag>reverse-proxy</tag>
+        <tag>apache</tag>
+        <tag>docker-swarm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to collect container log using filebeat</title>
     <url>/posts/how-to-collect-container-log-using-filebeat/</url>
     <content><![CDATA[<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><h4 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull docker.elastic.co/beats/filebeat:7.9.2</span><br></pre></td></tr></table></figure>
