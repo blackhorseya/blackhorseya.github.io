@@ -23,8 +23,8 @@
 
   <meta name="description" content="一個從 Docker 發展成 Kubernetes 的故事">
 <meta property="og:type" content="article">
-<meta property="og:title" content="A story for the evolution of container management">
-<meta property="og:url" content="https://blog.seancheng.space/posts/a-story-for-the-evolution-of-container-management/index.html">
+<meta property="og:title" content="The evolution of container management">
+<meta property="og:url" content="https://blog.seancheng.space/posts/the-evolution-of-container-management/index.html">
 <meta property="og:site_name" content="Sean&#39;s blog">
 <meta property="og:description" content="一個從 Docker 發展成 Kubernetes 的故事">
 <meta property="og:locale" content="en_US">
@@ -32,7 +32,6 @@
 <meta property="article:modified_time" content="2020-10-23T04:15:29.000Z">
 <meta property="article:author" content="Sean Cheng">
 <meta property="article:tag" content="kubernetes">
-<meta property="article:tag" content="story">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="traefik">
 <meta property="article:tag" content="reverse-proxy">
@@ -41,7 +40,7 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.seancheng.space/posts/a-story-for-the-evolution-of-container-management/">
+<link rel="canonical" href="https://blog.seancheng.space/posts/the-evolution-of-container-management/">
 
 
 <script class="page-configurations">
@@ -54,7 +53,7 @@
   };
 </script>
 
-  <title>A story for the evolution of container management | Sean's blog</title>
+  <title>The evolution of container management | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
     <script>
@@ -155,7 +154,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">28</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -224,7 +223,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E5%BB%BA%E6%99%82%E4%BB%A3"><span class="nav-number">1.</span> <span class="nav-text">封建時代</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cons"><span class="nav-number">1.1.</span> <span class="nav-text">Cons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%8E%E5%A0%A1%E6%99%82%E4%BB%A3"><span class="nav-number">2.</span> <span class="nav-text">城堡時代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%9D%E7%8E%8B%E6%99%82%E4%BB%A3"><span class="nav-number">3.</span> <span class="nav-text">帝王時代</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E5%BB%BA%E6%99%82%E4%BB%A3"><span class="nav-number">1.</span> <span class="nav-text">封建時代</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementation"><span class="nav-number">1.1.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cons"><span class="nav-number">1.2.</span> <span class="nav-text">Cons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%8E%E5%A0%A1%E6%99%82%E4%BB%A3"><span class="nav-number">2.</span> <span class="nav-text">城堡時代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%9D%E7%8E%8B%E6%99%82%E4%BB%A3"><span class="nav-number">3.</span> <span class="nav-text">帝王時代</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -251,7 +250,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -305,7 +304,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/a-story-for-the-evolution-of-container-management/">
+    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/the-evolution-of-container-management/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -318,7 +317,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          A story for the evolution of container management
+          The evolution of container management
         </h1>
 
         <div class="post-meta-container">
@@ -354,7 +353,7 @@
 </div>
 
 <h2 id="封建時代"><a href="#封建時代" class="headerlink" title="封建時代"></a>封建時代</h2><p>只使用 <code>Docker</code> 在 instances 中運行服務並且利用 <code>reverse proxy</code> forward 到相應的 instance</p>
-<p>在 instance 上用 <code>Docker</code> 運行 <code>nginx</code></p>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><p>在 instance 上用 <code>Docker</code> 運行 <code>nginx</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 8080:80 --name=test-nginx nginx:alpine</span><br></pre></td></tr></table></figure>
 
 <p>在 ingress instance 上運行 <code>Apache</code></p>
@@ -379,7 +378,6 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
-              <a href="/tags/story/" rel="tag"># story</a>
               <a href="/tags/docker/" rel="tag"># docker</a>
               <a href="/tags/traefik/" rel="tag"># traefik</a>
               <a href="/tags/reverse-proxy/" rel="tag"># reverse-proxy</a>
