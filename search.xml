@@ -468,6 +468,67 @@
       </tags>
   </entry>
   <entry>
+    <title>How to use Ansible achieve blue/green deployment</title>
+    <url>/posts/how-to-use-ansible-achieve-blue-green-deployment/</url>
+    <content><![CDATA[<div class="note primary"><p>本文參考 <a href="https://thenewstack.io/deployment-strategies">Six Strategies for Application Deployment</a></p>
+</div>
+
+<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p>可以參考 <a href="https://blog.seancheng.space/posts/how-to-set-up-traefik-on-docker-swarm/">How to set up Traefik on docker-swarm
+</a></p>
+<ul>
+<li>ansible</li>
+<li>docker-swarm</li>
+<li>traefik</li>
+</ul>
+<h2 id="What’s-blue-green-deployment"><a href="#What’s-blue-green-deployment" class="headerlink" title="What’s blue/green deployment"></a>What’s blue/green deployment</h2><p>看圖說故事吧</p>
+<p><img src="/posts/how-to-use-ansible-achieve-blue-green-deployment/blue-green.gif" alt="blue green"></p>
+<p>Pros:</p>
+<ul>
+<li>即時的 rollout/rollback</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>需要兩倍的資源</li>
+</ul>
+<h2 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h2><ol>
+<li>取得當前 <code>slot</code> 的顏色並且判斷出將要替換的顏色</li>
+<li>部署新版服務到將要替換的顏色</li>
+<li>透過 <code>load balancer</code> 將流量導到新版服務並且更改 <code>slot</code> 的顏色</li>
+</ol>
+<h3 id="Terms"><a href="#Terms" class="headerlink" title="Terms"></a>Terms</h3><table>
+<thead>
+<tr>
+<th align="center">name</th>
+<th align="center">value</th>
+<th align="center">description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">slot</td>
+<td align="center">blue,green</td>
+<td align="center">用以表示當前工作中的顏色</td>
+</tr>
+<tr>
+<td align="center">color</td>
+<td align="center">blue,green</td>
+<td align="center">服務的顏色</td>
+</tr>
+<tr>
+<td align="center">app</td>
+<td align="center">string</td>
+<td align="center">服務的名字</td>
+</tr>
+</tbody></table>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>// todo: write<br>未完待續</p>
+]]></content>
+      <tags>
+        <tag>docker-swarm</tag>
+        <tag>traefik</tag>
+        <tag>blue-green-deployment</tag>
+        <tag>ansible</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to use jenkins configuration as code</title>
     <url>/posts/how-to-use-jenkins-configuration-as-code/</url>
     <content><![CDATA[<div class="note primary"><ul>

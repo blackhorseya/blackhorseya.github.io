@@ -21,21 +21,26 @@
     var CONFIG = {"hostname":"blog.seancheng.space","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="紀錄如何使用 kubeconfig">
+  <meta name="description" content="如何使用 ansible 在 docker-swarm mode 達到 藍綠部署">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to use kubeconfig">
-<meta property="og:url" content="https://blog.seancheng.space/posts/how-to-use-kubeconfig/index.html">
+<meta property="og:title" content="How to use Ansible achieve blue&#x2F;green deployment">
+<meta property="og:url" content="https://blog.seancheng.space/posts/how-to-use-ansible-achieve-blue-green-deployment/index.html">
 <meta property="og:site_name" content="Sean&#39;s blog">
-<meta property="og:description" content="紀錄如何使用 kubeconfig">
+<meta property="og:description" content="如何使用 ansible 在 docker-swarm mode 達到 藍綠部署">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-14T03:34:54.000Z">
-<meta property="article:modified_time" content="2020-10-14T03:34:54.000Z">
+<meta property="og:image" content="https://blog.seancheng.space/posts/how-to-use-ansible-achieve-blue-green-deployment/blue-green.gif">
+<meta property="article:published_time" content="2020-10-27T23:38:41.000Z">
+<meta property="article:modified_time" content="2020-10-27T23:38:41.000Z">
 <meta property="article:author" content="Sean Cheng">
-<meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="docker-swarm">
+<meta property="article:tag" content="traefik">
+<meta property="article:tag" content="blue-green-deployment">
+<meta property="article:tag" content="ansible">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.seancheng.space/posts/how-to-use-ansible-achieve-blue-green-deployment/blue-green.gif">
 
 
-<link rel="canonical" href="https://blog.seancheng.space/posts/how-to-use-kubeconfig/">
+<link rel="canonical" href="https://blog.seancheng.space/posts/how-to-use-ansible-achieve-blue-green-deployment/">
 
 
 <script class="page-configurations">
@@ -48,7 +53,7 @@
   };
 </script>
 
-  <title>How to use kubeconfig | Sean's blog</title>
+  <title>How to use Ansible achieve blue/green deployment | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
     <script>
@@ -218,7 +223,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-Environment"><span class="nav-number">1.</span> <span class="nav-text">Configure Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Switch-kubeconfig"><span class="nav-number">2.</span> <span class="nav-text">Switch kubeconfig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Switch-context"><span class="nav-number">3.</span> <span class="nav-text">Switch context</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Merge-Multiple-Configs"><span class="nav-number">4.</span> <span class="nav-text">Merge Multiple Configs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-context"><span class="nav-number">5.</span> <span class="nav-text">Configure context</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List-contexts"><span class="nav-number">5.1.</span> <span class="nav-text">List contexts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Switch-context-1"><span class="nav-number">5.2.</span> <span class="nav-text">Switch context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Switch-namespace"><span class="nav-number">5.3.</span> <span class="nav-text">Switch namespace</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisite"><span class="nav-number">1.</span> <span class="nav-text">Prerequisite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What%E2%80%99s-blue-green-deployment"><span class="nav-number">2.</span> <span class="nav-text">What’s blue&#x2F;green deployment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">3.</span> <span class="nav-text">Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Terms"><span class="nav-number">3.1.</span> <span class="nav-text">Terms</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">4.</span> <span class="nav-text">Implementation</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -299,7 +304,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-use-kubeconfig/">
+    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-use-ansible-achieve-blue-green-deployment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -312,7 +317,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          How to use kubeconfig
+          How to use Ansible achieve blue/green deployment
         </h1>
 
         <div class="post-meta-container">
@@ -323,7 +328,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2020-10-14 11:34:54" itemprop="dateCreated datePublished" datetime="2020-10-14T11:34:54+08:00">2020-10-14</time>
+      <time title="Created: 2020-10-28 07:38:41" itemprop="dateCreated datePublished" datetime="2020-10-28T07:38:41+08:00">2020-10-28</time>
     </span>
 
   
@@ -336,7 +341,7 @@
     </span>
 </div>
 
-            <div class="post-description">紀錄如何使用 kubeconfig</div>
+            <div class="post-description">如何使用 ansible 在 docker-swarm mode 達到 藍綠部署</div>
         </div>
       </header>
 
@@ -344,21 +349,56 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Configure-Environment"><a href="#Configure-Environment" class="headerlink" title="Configure Environment"></a>Configure Environment</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> KUBECONFIG=<span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+        <div class="note primary"><p>本文參考 <a target="_blank" rel="noopener" href="https://thenewstack.io/deployment-strategies">Six Strategies for Application Deployment</a></p>
+</div>
 
-<h2 id="Switch-kubeconfig"><a href="#Switch-kubeconfig" class="headerlink" title="Switch kubeconfig"></a>Switch kubeconfig</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl --kubeconfig ...</span><br></pre></td></tr></table></figure>
-
-<h2 id="Switch-context"><a href="#Switch-context" class="headerlink" title="Switch context"></a>Switch context</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl --context ...</span><br></pre></td></tr></table></figure>
-
-<h2 id="Merge-Multiple-Configs"><a href="#Merge-Multiple-Configs" class="headerlink" title="Merge Multiple Configs"></a>Merge Multiple Configs</h2><p>你可能會有很多個 <code>kubeconfig</code>，雖然 <code>kubectl</code> 有提供 <code>flag</code>，但是頻繁的切換還是有點麻煩，<a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#merging-kubeconfig-files">官方文件</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KUBECONFIG=<span class="variable">$KUBECONFIG</span>:<span class="variable">$&#123;CONFIG_FILE&#125;</span> kubectl config view --flatten &gt; <span class="variable">$&#123;HOME&#125;</span>/.kube/config</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configure-context"><a href="#Configure-context" class="headerlink" title="Configure context"></a>Configure context</h2><p>你可以設定當前 <code>namespace</code> 和 <code>context</code> 來切換使用</p>
-<h3 id="List-contexts"><a href="#List-contexts" class="headerlink" title="List contexts"></a>List contexts</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config get-contexts</span><br></pre></td></tr></table></figure>
-
-<h3 id="Switch-context-1"><a href="#Switch-context-1" class="headerlink" title="Switch context"></a>Switch context</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config use-context <span class="variable">$&#123;CONTEXT_NAME&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Switch-namespace"><a href="#Switch-namespace" class="headerlink" title="Switch namespace"></a>Switch namespace</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config set-context $(kubectl config current-context) --namespace <span class="variable">$&#123;NAMESPACE&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p>可以參考 <a href="https://blog.seancheng.space/posts/how-to-set-up-traefik-on-docker-swarm/">How to set up Traefik on docker-swarm
+</a></p>
+<ul>
+<li>ansible</li>
+<li>docker-swarm</li>
+<li>traefik</li>
+</ul>
+<h2 id="What’s-blue-green-deployment"><a href="#What’s-blue-green-deployment" class="headerlink" title="What’s blue/green deployment"></a>What’s blue/green deployment</h2><p>看圖說故事吧</p>
+<p><img src="/posts/how-to-use-ansible-achieve-blue-green-deployment/blue-green.gif" alt="blue green"></p>
+<p>Pros:</p>
+<ul>
+<li>即時的 rollout/rollback</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>需要兩倍的資源</li>
+</ul>
+<h2 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h2><ol>
+<li>取得當前 <code>slot</code> 的顏色並且判斷出將要替換的顏色</li>
+<li>部署新版服務到將要替換的顏色</li>
+<li>透過 <code>load balancer</code> 將流量導到新版服務並且更改 <code>slot</code> 的顏色</li>
+</ol>
+<h3 id="Terms"><a href="#Terms" class="headerlink" title="Terms"></a>Terms</h3><table>
+<thead>
+<tr>
+<th align="center">name</th>
+<th align="center">value</th>
+<th align="center">description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">slot</td>
+<td align="center">blue,green</td>
+<td align="center">用以表示當前工作中的顏色</td>
+</tr>
+<tr>
+<td align="center">color</td>
+<td align="center">blue,green</td>
+<td align="center">服務的顏色</td>
+</tr>
+<tr>
+<td align="center">app</td>
+<td align="center">string</td>
+<td align="center">服務的名字</td>
+</tr>
+</tbody></table>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>// todo: write<br>未完待續</p>
 
     </div>
 
@@ -368,21 +408,21 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+              <a href="/tags/docker-swarm/" rel="tag"># docker-swarm</a>
+              <a href="/tags/traefik/" rel="tag"># traefik</a>
+              <a href="/tags/blue-green-deployment/" rel="tag"># blue-green-deployment</a>
+              <a href="/tags/ansible/" rel="tag"># ansible</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/installing-kubernetes-on-premise-with-kubespray/" rel="prev" title="Installing kubernetes on-premise with kubespray">
-                  <i class="fa fa-chevron-left"></i> Installing kubernetes on-premise with kubespray
+                <a href="/posts/how-to-create-a-service-account-and-kubeconfig/" rel="prev" title="How to create a service account and kubeconfig">
+                  <i class="fa fa-chevron-left"></i> How to create a service account and kubeconfig
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/what-is-trunk-based-development/" rel="next" title="What is trunk-based development">
-                  What is trunk-based development <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
