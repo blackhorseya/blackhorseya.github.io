@@ -594,6 +594,29 @@
       </tags>
   </entry>
   <entry>
+    <title>How to use terraform cloud</title>
+    <url>/posts/how-to-use-terraform-cloud/</url>
+    <content><![CDATA[<p><a href="https://www.terraform.io/">Terraform</a></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install terraform</span><br></pre></td></tr></table></figure>
+
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">terraform login</span><br></pre></td></tr></table></figure>
+
+<h2 id="Get-Started"><a href="#Get-Started" class="headerlink" title="Get Started"></a>Get Started</h2><p>Reference official <a href="https://learn.hashicorp.com/terraform?utm_source=terraform_io">tutorials</a></p>
+<p>設定 <code>backend</code> 為 <code>remote</code>，會將 <code>.tfstat</code> 存至 <code>terraform cloud</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># main.tf</span><br><span class="line">terraform &#123;</span><br><span class="line">  backend &quot;remote&quot; &#123;</span><br><span class="line">    organization &#x3D; &quot;$&#123;YOUR_ORG&#125;&quot;</span><br><span class="line"></span><br><span class="line">    workspaces &#123;</span><br><span class="line">      name &#x3D; &quot;$&#123;YOUR_WORKSPACE&#125;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">provider &quot;google&quot; &#123;</span><br><span class="line">  credentials &#x3D; file(&quot;$&#123;YOUR_GCLOUD_SA_KEY&#125;&quot;)</span><br><span class="line">  project     &#x3D; &quot;$&#123;YOUR_PROJECT_ID&#125;&quot;</span><br><span class="line">  region      &#x3D; &quot;asia-east1&quot;</span><br><span class="line">  zone        &#x3D; &quot;asia-east1-c&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Init"><a href="#Init" class="headerlink" title="Init"></a>Init</h3><p>初始化 <code>terraform</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">terraform init</span><br></pre></td></tr></table></figure>
+
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># storage.tf</span><br><span class="line">## set a bucket for static site</span><br><span class="line">resource &quot;google_storage_bucket&quot; &quot;static-site&quot; &#123;</span><br><span class="line">  name          &#x3D; &quot;image-store.com&quot;</span><br><span class="line">  location      &#x3D; &quot;US&quot;</span><br><span class="line">  force_destroy &#x3D; true</span><br><span class="line">  </span><br><span class="line">  uniform_bucket_level_access &#x3D; true</span><br><span class="line">  </span><br><span class="line">  website &#123;</span><br><span class="line">    main_page_suffix &#x3D; &quot;index.html&quot;</span><br><span class="line">    not_found_page   &#x3D; &quot;404.html&quot;</span><br><span class="line">  &#125;</span><br><span class="line">  cors &#123;</span><br><span class="line">    origin          &#x3D; [&quot;http:&#x2F;&#x2F;image-store.com&quot;]</span><br><span class="line">    response_header &#x3D; [&quot;*&quot;]</span><br><span class="line">    max_age_seconds &#x3D; 3600</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">## set public access control for static site</span><br><span class="line">resource &quot;google_storage_bucket_iam_binding&quot; &quot;public_binding&quot; &#123;</span><br><span class="line">  bucket &#x3D; google_storage_bucket.static-site.name</span><br><span class="line">  role &#x3D; &quot;roles&#x2F;storage.objectViewer&quot;</span><br><span class="line">  members &#x3D; [</span><br><span class="line">    &quot;allUsers&quot;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>terraform</tag>
+        <tag>IaC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Installing kubernetes on-premise with kubespray</title>
     <url>/posts/installing-kubernetes-on-premise-with-kubespray/</url>
     <content><![CDATA[<p>可以參考官方提供的<a href="https://kubespray.io/#/docs/comparisons">比較</a></p>
