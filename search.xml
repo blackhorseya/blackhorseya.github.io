@@ -617,6 +617,22 @@
       </tags>
   </entry>
   <entry>
+    <title>How to use Travis CI</title>
+    <url>/posts/how-to-use-travis-ci/</url>
+    <content><![CDATA[<p><a href="https://travis-ci.com/">Travis CI</a></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install travis</span><br></pre></td></tr></table></figure>
+
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">travis login --pro</span><br></pre></td></tr></table></figure>
+
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># .travis.yml</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">go</span></span><br><span class="line"></span><br><span class="line"><span class="attr">go:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&#x27;1.15&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">git:</span></span><br><span class="line">  <span class="attr">submodules:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="attr">directories:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&quot;$HOME/.cache/go-build&quot;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&quot;$HOME/gopath/pkg/mod&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">env:</span></span><br><span class="line">  <span class="attr">global:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">GO111MODULE=on</span></span><br><span class="line"></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">go</span> <span class="string">test</span> <span class="string">-v</span> <span class="string">./...</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>travis</tag>
+        <tag>cicd</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Installing kubernetes on-premise with kubespray</title>
     <url>/posts/installing-kubernetes-on-premise-with-kubespray/</url>
     <content><![CDATA[<p>可以參考官方提供的<a href="https://kubespray.io/#/docs/comparisons">比較</a></p>
