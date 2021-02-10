@@ -529,6 +529,29 @@
       </tags>
   </entry>
   <entry>
+    <title>How to use kubeconfig</title>
+    <url>/posts/how-to-use-kubeconfig/</url>
+    <content><![CDATA[<h2 id="Configure-Environment"><a href="#Configure-Environment" class="headerlink" title="Configure Environment"></a>Configure Environment</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> KUBECONFIG=<span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+
+<h2 id="Switch-kubeconfig"><a href="#Switch-kubeconfig" class="headerlink" title="Switch kubeconfig"></a>Switch kubeconfig</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl --kubeconfig ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="Switch-context"><a href="#Switch-context" class="headerlink" title="Switch context"></a>Switch context</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl --context ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="Merge-Multiple-Configs"><a href="#Merge-Multiple-Configs" class="headerlink" title="Merge Multiple Configs"></a>Merge Multiple Configs</h2><p>你可能會有很多個 <code>kubeconfig</code>，雖然 <code>kubectl</code> 有提供 <code>flag</code>，但是頻繁的切換還是有點麻煩，<a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#merging-kubeconfig-files">官方文件</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">KUBECONFIG=<span class="variable">$KUBECONFIG</span>:<span class="variable">$&#123;CONFIG_FILE&#125;</span> kubectl config view --flatten &gt; <span class="variable">$&#123;HOME&#125;</span>/.kube/config</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-context"><a href="#Configure-context" class="headerlink" title="Configure context"></a>Configure context</h2><p>你可以設定當前 <code>namespace</code> 和 <code>context</code> 來切換使用</p>
+<h3 id="List-contexts"><a href="#List-contexts" class="headerlink" title="List contexts"></a>List contexts</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config get-contexts</span><br></pre></td></tr></table></figure>
+
+<h3 id="Switch-context-1"><a href="#Switch-context-1" class="headerlink" title="Switch context"></a>Switch context</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config use-context <span class="variable">$&#123;CONTEXT_NAME&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Switch-namespace"><a href="#Switch-namespace" class="headerlink" title="Switch namespace"></a>Switch namespace</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config set-context $(kubectl config current-context) --namespace <span class="variable">$&#123;NAMESPACE&#125;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to use jenkins configuration as code</title>
     <url>/posts/how-to-use-jenkins-configuration-as-code/</url>
     <content><![CDATA[<div class="note primary"><ul>
@@ -568,29 +591,6 @@
       <tags>
         <tag>howto</tag>
         <tag>jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to use kubeconfig</title>
-    <url>/posts/how-to-use-kubeconfig/</url>
-    <content><![CDATA[<h2 id="Configure-Environment"><a href="#Configure-Environment" class="headerlink" title="Configure Environment"></a>Configure Environment</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> KUBECONFIG=<span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
-
-<h2 id="Switch-kubeconfig"><a href="#Switch-kubeconfig" class="headerlink" title="Switch kubeconfig"></a>Switch kubeconfig</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl --kubeconfig ...</span><br></pre></td></tr></table></figure>
-
-<h2 id="Switch-context"><a href="#Switch-context" class="headerlink" title="Switch context"></a>Switch context</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl --context ...</span><br></pre></td></tr></table></figure>
-
-<h2 id="Merge-Multiple-Configs"><a href="#Merge-Multiple-Configs" class="headerlink" title="Merge Multiple Configs"></a>Merge Multiple Configs</h2><p>你可能會有很多個 <code>kubeconfig</code>，雖然 <code>kubectl</code> 有提供 <code>flag</code>，但是頻繁的切換還是有點麻煩，<a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#merging-kubeconfig-files">官方文件</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">KUBECONFIG=<span class="variable">$KUBECONFIG</span>:<span class="variable">$&#123;CONFIG_FILE&#125;</span> kubectl config view --flatten &gt; <span class="variable">$&#123;HOME&#125;</span>/.kube/config</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configure-context"><a href="#Configure-context" class="headerlink" title="Configure context"></a>Configure context</h2><p>你可以設定當前 <code>namespace</code> 和 <code>context</code> 來切換使用</p>
-<h3 id="List-contexts"><a href="#List-contexts" class="headerlink" title="List contexts"></a>List contexts</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config get-contexts</span><br></pre></td></tr></table></figure>
-
-<h3 id="Switch-context-1"><a href="#Switch-context-1" class="headerlink" title="Switch context"></a>Switch context</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config use-context <span class="variable">$&#123;CONTEXT_NAME&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Switch-namespace"><a href="#Switch-namespace" class="headerlink" title="Switch namespace"></a>Switch namespace</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl config set-context $(kubectl config current-context) --namespace <span class="variable">$&#123;NAMESPACE&#125;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>kubernetes</tag>
       </tags>
   </entry>
   <entry>
