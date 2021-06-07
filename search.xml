@@ -679,6 +679,53 @@
       </tags>
   </entry>
   <entry>
+    <title>How to use Wire in golang for dependency injection</title>
+    <url>/posts/how-to-use-wire-in-golang-for-dependency-injection/</url>
+    <content><![CDATA[<div class="note primary"><ul>
+<li>這裡就不比較各個 dependency injection 的優缺點，只專注在 <code>Wire</code> 身上</li>
+</ul>
+</div>
+
+<p>參考 <a href="https://github.com/google/wire">Wire</a> 官方。完整實戰應用可以參考 <a href="https://github.com/blackhorseya/todo-app">todo-app</a></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>安裝所需要的執行檔。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go get github.com/google/wire/cmd/wire</span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><p>常常有人裝完在 <code>$GOPATH/bin</code> 裡，是看得到執行檔的，但是在 <code>Terminal</code> 卻不能執行。<br>請注意，將 <code>$GOPATH/bin</code> 加入 <code>$PATH</code> 中，<strong>不會我也沒辦法了</strong>。</p>
+</div>
+
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>直接上個 <code>sample code</code> 吧。順便測試一下 <code>Hexo</code> 的 <code>Gist</code> tag 功能。</p>
+<h3 id="Install-in-your-project-with-gomodule"><a href="#Install-in-your-project-with-gomodule" class="headerlink" title="Install in your project with gomodule"></a>Install in your project with gomodule</h3><p>You can create a sample project then execute <code>go mod init</code> and install <code>wire</code>.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go get -u github.com/google/wire</span><br></pre></td></tr></table></figure>
+
+<h3 id="Generate-wire-code-using-Makefile"><a href="#Generate-wire-code-using-Makefile" class="headerlink" title="Generate wire code using Makefile"></a>Generate wire code using Makefile</h3><p>You can use <code>Makefile</code> to generate <code>wire</code> code.</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: gen-wire</span></span><br><span class="line"><span class="section">gen-wire:</span></span><br><span class="line">	@wire gen ./...</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sample-code"><a href="#Sample-code" class="headerlink" title="Sample code"></a>Sample code</h3><p>In the code using <code>golang</code> build tags like <code>wireinject</code> tag.</p>
+<script src="//gist.github.com/77e25e0353785b07720a4af892d2c08b.js"></script>
+
+<h2 id="In-real-case"><a href="#In-real-case" class="headerlink" title="In real case"></a>In real case</h2><p>You might be need to inject a business service into your api layer. So you can create a ProviderSet for your business service.</p>
+<p>So you can create an interface called <code>HealthBiz</code> and create a struct called <code>impl</code> then implement the interface.</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> business</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> HealthBiz <span class="keyword">interface</span> &#123;</span><br><span class="line">    Readiness() <span class="keyword">bool</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> impl <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i *impl)</span> <span class="title">Readiness</span><span class="params">()</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewBusinessImpl</span><span class="params">()</span> <span class="title">HealthBiz</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;impl&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ProviderSet = wire.NewSet(NewBusinessImpl)</span><br></pre></td></tr></table></figure>
+
+<p>you can add <code>business.ProviderSet</code> in your wire’s set.</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> providerSet = wire.NewSet(business.ProviderSet)</span><br></pre></td></tr></table></figure>
+
+<p>Then you can inject the business in your api layer. It needs same return type and inject type.</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> api</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> impl <span class="keyword">struct</span> &#123;</span><br><span class="line">    biz business.HealthBiz</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>software</category>
+        <category>development</category>
+        <category>golang</category>
+        <category>howto</category>
+      </categories>
+      <tags>
+        <tag>wire</tag>
+        <tag>dependency injection</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Installing kubernetes on-premise with kubespray</title>
     <url>/posts/installing-kubernetes-on-premise-with-kubespray/</url>
     <content><![CDATA[<p>可以參考官方提供的<a href="https://kubespray.io/#/docs/comparisons">比較</a></p>
