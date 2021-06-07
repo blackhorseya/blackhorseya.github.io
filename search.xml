@@ -82,7 +82,6 @@
         <category>comparison</category>
       </categories>
       <tags>
-        <tag>comparison</tag>
         <tag>serverless</tag>
       </tags>
   </entry>
@@ -174,10 +173,10 @@
 ]]></content>
       <categories>
         <category>setup</category>
+        <category>howto</category>
       </categories>
       <tags>
-        <tag>howto</tag>
-        <tag>setup</tag>
+        <tag>kubernetes</tag>
         <tag>jenkins</tag>
       </tags>
   </entry>
@@ -310,10 +309,9 @@
 ]]></content>
       <categories>
         <category>setup</category>
+        <category>howto</category>
       </categories>
       <tags>
-        <tag>howto</tag>
-        <tag>setup</tag>
         <tag>docker</tag>
         <tag>docker-compose</tag>
       </tags>
@@ -358,9 +356,9 @@
       <categories>
         <category>setup</category>
         <category>howto</category>
-        <category>kubernetes</category>
       </categories>
       <tags>
+        <tag>kubernetes</tag>
         <tag>nginx ingress</tag>
         <tag>cloudflare</tag>
         <tag>IP whitelist</tag>
@@ -481,6 +479,7 @@
 ]]></content>
       <categories>
         <category>setup</category>
+        <category>howto</category>
       </categories>
       <tags>
         <tag>howto</tag>
@@ -717,10 +716,11 @@
       <categories>
         <category>software</category>
         <category>development</category>
-        <category>golang</category>
         <category>howto</category>
+        <category>golang</category>
       </categories>
       <tags>
+        <tag>golang</tag>
         <tag>wire</tag>
         <tag>dependency injection</tag>
       </tags>
@@ -900,10 +900,9 @@
 ]]></content>
       <categories>
         <category>setup</category>
+        <category>howto</category>
       </categories>
       <tags>
-        <tag>howto</tag>
-        <tag>setup</tag>
         <tag>mac</tag>
       </tags>
   </entry>
