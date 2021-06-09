@@ -639,6 +639,27 @@
       </tags>
   </entry>
   <entry>
+    <title>How to use protobuf in golang</title>
+    <url>/posts/how-to-use-protobuf-in-golang/</url>
+    <content><![CDATA[<div class="note primary"></div>
+
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go get google.golang.org/protobuf</span><br><span class="line">go get google.golang.org/protobuf/cmd/protoc-gen-go</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>在 <code>Golang</code> 裡是沒有 <code>enum</code> 的功能，這時候用 <code>protobuf</code> 是個蠻好的解法。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># bonus.proto</span><br><span class="line">syntax &#x3D; &quot;proto3&quot;;</span><br><span class="line">package bonus;</span><br><span class="line">option go_package &#x3D; &quot;github.com&#x2F;blackhorseya&#x2F;red-packet&#x2F;internal&#x2F;pkg&#x2F;entity&#x2F;bonus&quot;;</span><br><span class="line"></span><br><span class="line">enum Status &#123;</span><br><span class="line">  UNKNOWN &#x3D; 1;</span><br><span class="line">  ENABLED &#x3D; 2;</span><br><span class="line">  DISABLED &#x3D; 3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message Packet &#123;</span><br><span class="line">  string id &#x3D; 1;</span><br><span class="line">  int64 amount &#x3D; 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>透過 <code>Makefile</code> 去產生 code</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: gen-pb</span></span><br><span class="line"><span class="section">gen-pb:</span></span><br><span class="line">	@protoc --go_out=plugins=grpc,paths=source_relative:. ./internal/pkg/entity/**/*.proto</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>protobuf</tag>
+        <tag>golang</tag>
+        <tag>software</tag>
+        <tag>development</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to use terraform cloud</title>
     <url>/posts/how-to-use-terraform-cloud/</url>
     <content><![CDATA[<p><a href="https://www.terraform.io/">Terraform</a></p>
@@ -830,8 +851,8 @@
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>我覺得 TBD 對於 release 是非常友善的，但是很考驗 developers 的能力，像是拆分 commit 並確保每個 commit 是能正常的運行。相較 <code>git-flow</code> 不會出現 merge conflict。</p>
 ]]></content>
       <tags>
-        <tag>development</tag>
         <tag>software</tag>
+        <tag>development</tag>
       </tags>
   </entry>
   <entry>
