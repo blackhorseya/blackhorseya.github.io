@@ -639,6 +639,27 @@
       </tags>
   </entry>
   <entry>
+    <title>How to use mockery in golang</title>
+    <url>/posts/how-to-use-mockery-in-golang/</url>
+    <content><![CDATA[<p><a href="https://github.com/vektra/mockeryhttps://github.com/vektra/mockery">mockery</a></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install mockery</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>create a <code>interface</code></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span> &#123;</span><br><span class="line">    Test(val <span class="keyword">int</span>) <span class="keyword">bool</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>open your <code>Terminal</code> and cd to the interface directory and input <code>mocker --name $&#123;YOUR_INTERFACE_NAME&#125;</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mockery --name Tester</span><br></pre></td></tr></table></figure>
+
+<p>then it will generate <code>mocks</code> folder and mock code</p>
+]]></content>
+      <tags>
+        <tag>software</tag>
+        <tag>development</tag>
+        <tag>golang</tag>
+        <tag>mockery</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to use protobuf in golang</title>
     <url>/posts/how-to-use-protobuf-in-golang/</url>
     <content><![CDATA[<div class="note primary"></div>
@@ -653,10 +674,10 @@
 ]]></content>
       <tags>
         <tag>howto</tag>
-        <tag>protobuf</tag>
-        <tag>golang</tag>
         <tag>software</tag>
         <tag>development</tag>
+        <tag>golang</tag>
+        <tag>protobuf</tag>
       </tags>
   </entry>
   <entry>

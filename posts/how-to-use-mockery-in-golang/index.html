@@ -21,18 +21,24 @@
     var CONFIG = {"hostname":"blog.seancheng.space","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://blog.seancheng.space/categories/index.html">
+  <meta name="description" content="如何在 golang 裡使用 mockery 產生 mock code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to use mockery in golang">
+<meta property="og:url" content="https://blog.seancheng.space/posts/how-to-use-mockery-in-golang/index.html">
 <meta property="og:site_name" content="Sean&#39;s blog">
+<meta property="og:description" content="如何在 golang 裡使用 mockery 產生 mock code">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-02-02T18:50:38.000Z">
-<meta property="article:modified_time" content="2020-02-02T18:50:38.000Z">
+<meta property="article:published_time" content="2021-06-10T22:06:51.000Z">
+<meta property="article:modified_time" content="2021-06-10T22:06:51.000Z">
 <meta property="article:author" content="Sean Cheng">
+<meta property="article:tag" content="software">
+<meta property="article:tag" content="development">
+<meta property="article:tag" content="golang">
+<meta property="article:tag" content="mockery">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.seancheng.space/categories/">
+<link rel="canonical" href="https://blog.seancheng.space/posts/how-to-use-mockery-in-golang/">
 
 
 <script class="page-configurations">
@@ -40,13 +46,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>categories | Sean's blog
-</title>
+  <title>How to use mockery in golang | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
     <script>
@@ -204,7 +209,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -216,6 +221,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-use"><span class="nav-number">2.</span> <span class="nav-text">How to use</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -283,53 +289,107 @@
 </noscript>
 
 
-    <div class="main-inner page posts-expand">
+    <div class="main-inner post posts-expand">
       
-  
-  
 
       
 
-    
-    
-    
-    <div class="post-block" lang="en">
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-use-mockery-in-golang/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sean Cheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean's blog">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          How to use mockery in golang
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">categories
-</h1>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-<div class="post-meta-container">
+      <time title="Created: 2021-06-11 06:06:51" itemprop="dateCreated datePublished" datetime="2021-06-11T06:06:51+08:00">2021-06-11</time>
+    </span>
+
   
-
+    <span class="post-meta-item" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="firestore-visitors-count"></span>
+    </span>
 </div>
 
-</header>
+            <div class="post-description">如何在 golang 裡使用 mockery 產生 mock code</div>
+        </div>
+      </header>
 
-      
-      
-      
-      <div class="post-body">
-          <div class="category-all-page">
-  <div class="category-all-title">
-    7 categories in total
-  </div>
-  <div class="category-all">
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/comparison/">comparison</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/setup/">setup</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/setup/howto/">howto</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/software/development/">development</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/software/development/howto/">howto</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/software/development/howto/golang/">golang</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li></ul>
-  </div>
-</div>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a target="_blank" rel="noopener" href="https://github.com/vektra/mockeryhttps://github.com/vektra/mockery">mockery</a></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mockery</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>create a <code>interface</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tester <span class="keyword">interface</span> &#123;</span><br><span class="line">    Test(val <span class="keyword">int</span>) <span class="keyword">bool</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>open your <code>Terminal</code> and cd to the interface directory and input <code>mocker --name $&#123;YOUR_INTERFACE_NAME&#125;</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mockery --name Tester</span><br></pre></td></tr></table></figure>
+
+<p>then it will generate <code>mocks</code> folder and mock code</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/software/" rel="tag"># software</a>
+              <a href="/tags/development/" rel="tag"># development</a>
+              <a href="/tags/golang/" rel="tag"># golang</a>
+              <a href="/tags/mockery/" rel="tag"># mockery</a>
+          </div>
 
         
-      </div>
-      
-      
-      
-    </div>
-    
 
-    
-    
-    
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/how-to-use-protobuf-in-golang/" rel="prev" title="How to use protobuf in golang">
+                  <i class="fa fa-chevron-left"></i> How to use protobuf in golang
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
 
 
       
