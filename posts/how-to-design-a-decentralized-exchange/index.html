@@ -287,7 +287,7 @@
 </ol>
 <h2 id="Design-Overview"><a href="#Design-Overview" class="headerlink" title="Design Overview"></a>Design Overview</h2><p>I prefer to use Domain-Driven Design(DDD) to differentiate each microservice.</p>
 <p>Step 1. Roughly distinguish the various components and find the core component.</p>
-<pre class="mermaid">flowchart TB
+<pre class="mermaid">graph TD
     subgraph boundary ["Boundary"]
         subgraph trading ["Trading"]
         end
@@ -308,7 +308,7 @@
     style trading fill:#79c4f2</pre>
 
 <p>Step 2. Write the functions of each component.</p>
-<pre class="mermaid">flowchart TB
+<pre class="mermaid">graph TD
     subgraph boundary ["Boundary"]
         subgraph trading ["Trading"]
             order["Order Context"]
@@ -336,7 +336,7 @@
     style trading fill:#79c4f2</pre>
 
 <p>Step 3. Connect the dependencies of each component.</p>
-<pre class="mermaid">flowchart TB
+<pre class="mermaid">graph TD
     subgraph boundary ["Boundary"]
         subgraph trading ["Trading"]
             order["Order Context"]
@@ -374,7 +374,7 @@
     style trading fill:#79c4f2</pre>
 
 <p>Step 4. Define the kind of domain for each component.</p>
-<pre class="mermaid">flowchart TB
+<pre class="mermaid">graph TD
     subgraph boundary ["Boundary"]
         subgraph trading ["Trading (core subdobmain)"]
             order["Order Context"]
@@ -412,7 +412,7 @@
     style trading fill:#79c4f2</pre>
 
 <p>And then we can get high level system diagram for our system.</p>
-<h2 id="System-Overview"><a href="#System-Overview" class="headerlink" title="System Overview"></a>System Overview</h2><pre class="mermaid">flowchart TB
+<h2 id="System-Overview"><a href="#System-Overview" class="headerlink" title="System Overview"></a>System Overview</h2><pre class="mermaid">graph TD
     subgraph boundary ["Boundary"]
         subgraph user ["User"]
             login(Login)
