@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Comparison installable platform serverless</title>
+    <url>/posts/Comparison-installable-platform-serverless/</url>
+    <content><![CDATA[<div class="note primary"><p>本文將比較 <code>OpenFaas</code>、<code>OpenWhisk</code>、<code>Kubeless</code>、<code>Knative</code>、<code>Fn</code></p>
+</div>
+
+<h2 id="概觀"><a href="#概觀" class="headerlink" title="概觀"></a>概觀</h2><p><img src="https://landscape.cncf.io/images/serverless.png" alt="CNCF Serverless Landscape"></p>
+<h2 id="Comparison-table"><a href="#Comparison-table" class="headerlink" title="Comparison table"></a>Comparison table</h2><table>
+<thead>
+<tr>
+<th></th>
+<th><a href="https://github.com/openfaas/faas">OpenFaas</a></th>
+<th><a href="https://github.com/apache/openwhisk">OpenWhisk</a></th>
+<th><a href="https://github.com/kubeless/kubeless">Kubeless</a></th>
+<th><a href="https://github.com/knative/serving">Knative</a></th>
+<th><a href="https://github.com/fnproject/fn">Fn</a></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Support serverless framework</td>
+<td>X</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td>Helm</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td>cli</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td>開發語言</td>
+<td>Go</td>
+<td>Scale</td>
+<td>Go</td>
+<td>Go</td>
+<td>Go</td>
+</tr>
+<tr>
+<td>Scale to Zero</td>
+<td>O</td>
+<td>O</td>
+<td>X (<a href="https://github.com/kubeless/kubeless/issues/982">Issues-982</a>)</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td>缺點</td>
+<td>- 不支持 serverless framework</td>
+<td>- 太複雜</td>
+<td>- serverless 目前沒有支持 Go</td>
+<td>- 太胖</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>- 用 <code>Scale</code> 開發的？？</td>
+<td>- 沒辦法 scale to zero</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<div class="note warning"><p>有支持 <code>Serverless framework</code> 不代表有支持各種語言，請<a href="https://github.com/serverless/serverless/tree/master/lib/plugins/create/templates">參考</a></p>
+</div>
+]]></content>
+      <tags>
+        <tag>serverless</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to collect container log using filebeat</title>
     <url>/posts/how-to-collect-container-log-using-filebeat/</url>
     <content><![CDATA[<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><h4 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull docker.elastic.co/beats/filebeat:7.9.2</span><br></pre></td></tr></table></figure>
@@ -72,24 +154,24 @@
 <h2 id="Design-Overview"><a href="#Design-Overview" class="headerlink" title="Design Overview"></a>Design Overview</h2><p>I prefer to use Domain-Driven Design(DDD) to differentiate each microservice.</p>
 <p>Step 1. Roughly distinguish the various components and find the core component.</p>
 <pre class="mermaid">flowchart TB
-    subgraph boundary ["Boundary"]
-        subgraph trading ["Trading"]
-        end
-
-        subgraph user ["User"]
-        end
-
-        subgraph product ["Product"]
-        end
-
-        subgraph chia ["Chia"]
-        end
-
-        subgraph pubsub ["Pubsub"]
-        end
+  subgraph boundary ["Boundary"]
+    subgraph trading ["Trading"]
     end
 
-    style trading fill:#79c4f2</pre>
+    subgraph user ["User"]
+    end
+
+    subgraph product ["Product"]
+    end
+
+    subgraph chia ["Chia"]
+    end
+
+    subgraph pubsub ["Pubsub"]
+    end
+  end
+
+  style trading fill:#79c4f2</pre>
 
 <p>Step 2. Write the functions of each component.</p>
 <pre class="mermaid">flowchart TB
@@ -347,30 +429,6 @@
       </tags>
   </entry>
   <entry>
-    <title>How to set up Phabricator</title>
-    <url>/posts/how-to-set-up-Phabricator/</url>
-    <content><![CDATA[<h2 id="Installing-on-Kubernetes"><a href="#Installing-on-Kubernetes" class="headerlink" title="Installing on Kubernetes"></a>Installing on Kubernetes</h2><p>使用 <a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/">helm chart</a> 安裝 <code>Phabricator</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd</span><br><span class="line">NAME=pha</span><br><span class="line">repo=bitnami/phabricator</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;repo&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>下載 default values</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
-
-<p>詳細配置可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
-<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><h4 id="Manual-verify"><a href="#Manual-verify" class="headerlink" title="Manual verify"></a>Manual verify</h4><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Adding-auth-provider"><a href="#Adding-auth-provider" class="headerlink" title="Adding auth provider"></a>Adding auth provider</h4><p>可以在側邊欄中找到 <code>Auth</code>，點擊 <code>Add Provider</code>，可以新增所需要的 <code>Auth</code>，例如 <code>Github</code>。</p>
-<p>如果 <code>Add Provider</code> 呈現灰色表示 <code>Auth</code> 的設定被鎖定了，可以使用 <code>command line</code> 解鎖，編輯完再將它鎖定</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>kubernetes</tag>
-        <tag>howto</tag>
-        <tag>phabricator</tag>
-        <tag>setup</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>how to set up EKS via terraform</title>
     <url>/posts/how-to-set-up-EKS-via-terraform/</url>
     <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>We can use <code>terraform</code> to set up a lot of infrastructure configuration. So I will set up <code>EKS</code> via <code>terraform</code> today.</p>
@@ -392,6 +450,30 @@
         <tag>aws</tag>
         <tag>terraform</tag>
         <tag>eks</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How to set up Phabricator</title>
+    <url>/posts/how-to-set-up-Phabricator/</url>
+    <content><![CDATA[<h2 id="Installing-on-Kubernetes"><a href="#Installing-on-Kubernetes" class="headerlink" title="Installing on Kubernetes"></a>Installing on Kubernetes</h2><p>使用 <a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/">helm chart</a> 安裝 <code>Phabricator</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd</span><br><span class="line">NAME=pha</span><br><span class="line">repo=bitnami/phabricator</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;repo&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>下載 default values</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm show values bitnami/phabricator &gt; values.yaml</span><br></pre></td></tr></table></figure>
+
+<p>詳細配置可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/phabricator/#parameters">官方文件</a></p>
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><h4 id="Manual-verify"><a href="#Manual-verify" class="headerlink" title="Manual verify"></a>Manual verify</h4><p>如果沒有配置 smtp 的話，需要手動認證 mail</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth verity <span class="variable">$&#123;target_mail_address&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Adding-auth-provider"><a href="#Adding-auth-provider" class="headerlink" title="Adding auth provider"></a>Adding auth provider</h4><p>可以在側邊欄中找到 <code>Auth</code>，點擊 <code>Add Provider</code>，可以新增所需要的 <code>Auth</code>，例如 <code>Github</code>。</p>
+<p>如果 <code>Add Provider</code> 呈現灰色表示 <code>Auth</code> 的設定被鎖定了，可以使用 <code>command line</code> 解鎖，編輯完再將它鎖定</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>kubernetes</tag>
+        <tag>howto</tag>
+        <tag>setup</tag>
+        <tag>phabricator</tag>
       </tags>
   </entry>
   <entry>
@@ -446,138 +528,6 @@
       </tags>
   </entry>
   <entry>
-    <title>How to set up external-dns</title>
-    <url>/posts/how-to-set-up-external-dns/</url>
-    <content><![CDATA[<h2 id="Installing-external-dns-on-Kubernetes"><a href="#Installing-external-dns-on-Kubernetes" class="headerlink" title="Installing external-dns on Kubernetes"></a>Installing external-dns on Kubernetes</h2><p>Install <code>external-dns</code> via <a href="https://github.com/bitnami/charts/tree/master/bitnami/external-dns/#installing-the-chart">helm chart</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=dns</span><br><span class="line">REPO=bitnami/external-dns</span><br><span class="line">NAME=cf</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;REPO&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>詳細可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/external-dns/#parameters">官方文件</a></p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">## DNS provider where the DNS records will be created. Available providers are:</span></span><br><span class="line"><span class="comment">## - alibabacloud, aws, azure, azure-private-dns, cloudflare, coredns, designate, digitalocean, google, infoblox, rfc2136, transip</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">provider:</span> <span class="string">cloudflare</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Cloudflare configuration to be set via arguments/env. variables</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">cloudflare:</span></span><br><span class="line">  <span class="comment">## `CF_API_TOKEN` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">apiToken:</span> <span class="string">$&#123;YOUR_TOKEN&#125;</span></span><br><span class="line">  <span class="comment">## `CF_API_KEY` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">apiKey:</span></span><br><span class="line">  <span class="comment">## Use an existing secret with keys &quot;cloudflare_api_token&quot; or &quot;cloudflare_api_key&quot; defined.</span></span><br><span class="line">  <span class="comment">## This ignores cloudflare.apiToken, and cloudflare.apiKey</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="comment"># secretName:</span></span><br><span class="line">  <span class="comment">## `CF_API_EMAIL` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">email:</span></span><br><span class="line">  <span class="comment">## Enable the proxy feature of Cloudflare</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">proxied:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Modify how DNS records are sychronized between sources and providers (options: sync, upsert-only)</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">policy:</span> <span class="string">sync</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>在 <code>ingress</code> 中設定 <code>annotation</code></p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">annotations:</span></span><br><span class="line">  <span class="attr">kubernetes.io/ingress.class:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="comment"># 設定你想要的 host</span></span><br><span class="line">  <span class="attr">external-dns.alpha.kubernetes.io/hostname:</span> <span class="string">$&#123;YOUR_HOST&#125;</span></span><br><span class="line">  <span class="comment"># 如果有設定 target 的話會自動使用 CNAME</span></span><br><span class="line">  <span class="attr">external-dns.alpha.kubernetes.io/target:</span> <span class="string">$&#123;YOUR_TARGET&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>]]></content>
-      <tags>
-        <tag>kubernetes</tag>
-        <tag>howto</tag>
-        <tag>setup</tag>
-        <tag>external-dns</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Comparison installable platform serverless</title>
-    <url>/posts/Comparison-installable-platform-serverless/</url>
-    <content><![CDATA[<div class="note primary"><p>本文將比較 <code>OpenFaas</code>、<code>OpenWhisk</code>、<code>Kubeless</code>、<code>Knative</code>、<code>Fn</code></p>
-</div>
-
-<h2 id="概觀"><a href="#概觀" class="headerlink" title="概觀"></a>概觀</h2><p><img src="https://landscape.cncf.io/images/serverless.png" alt="CNCF Serverless Landscape"></p>
-<h2 id="Comparison-table"><a href="#Comparison-table" class="headerlink" title="Comparison table"></a>Comparison table</h2><table>
-<thead>
-<tr>
-<th></th>
-<th><a href="https://github.com/openfaas/faas">OpenFaas</a></th>
-<th><a href="https://github.com/apache/openwhisk">OpenWhisk</a></th>
-<th><a href="https://github.com/kubeless/kubeless">Kubeless</a></th>
-<th><a href="https://github.com/knative/serving">Knative</a></th>
-<th><a href="https://github.com/fnproject/fn">Fn</a></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Support serverless framework</td>
-<td>X</td>
-<td>O</td>
-<td>O</td>
-<td>O</td>
-<td>O</td>
-</tr>
-<tr>
-<td>Helm</td>
-<td>O</td>
-<td>O</td>
-<td>O</td>
-<td>O</td>
-<td>O</td>
-</tr>
-<tr>
-<td>cli</td>
-<td>O</td>
-<td>O</td>
-<td>O</td>
-<td>O</td>
-<td>O</td>
-</tr>
-<tr>
-<td>開發語言</td>
-<td>Go</td>
-<td>Scale</td>
-<td>Go</td>
-<td>Go</td>
-<td>Go</td>
-</tr>
-<tr>
-<td>Scale to Zero</td>
-<td>O</td>
-<td>O</td>
-<td>X (<a href="https://github.com/kubeless/kubeless/issues/982">Issues-982</a>)</td>
-<td>O</td>
-<td>O</td>
-</tr>
-<tr>
-<td>缺點</td>
-<td>- 不支持 serverless framework</td>
-<td>- 太複雜</td>
-<td>- serverless 目前沒有支持 Go</td>
-<td>- 太胖</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>- 用 <code>Scale</code> 開發的？？</td>
-<td>- 沒辦法 scale to zero</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<div class="note warning"><p>有支持 <code>Serverless framework</code> 不代表有支持各種語言，請<a href="https://github.com/serverless/serverless/tree/master/lib/plugins/create/templates">參考</a></p>
-</div>
-]]></content>
-      <tags>
-        <tag>serverless</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to set up influxdb on kubernetes</title>
-    <url>/posts/how-to-set-up-influxdb-on-kubernetes/</url>
-    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><a href="https://www.influxdata.com/">Influxdb</a> is a time series database. you can collect data into <code>influxdb</code> to show on <code>Grafana</code> dashboard. So I will write down I how to set up influxdb (v1, v2) on <code>Kubernetes</code>. But why not use <code>Prometheus</code> because it is a <code>pull based</code> time series database. If you want to collect very real-time data like business metrics clearly not suitable. </p>
-<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><ul>
-<li><a href="https://helm.sh/">Helm 3</a></li>
-<li><a href="https://kubernetes.io/">Kubernetes</a></li>
-</ul>
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>First, you need to add <code>influxdata</code> repo into helm. </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm repo add influxdata https://helm.influxdata.com/</span><br></pre></td></tr></table></figure>
-
-<h3 id="v1"><a href="#v1" class="headerlink" title="v1"></a>v1</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm --namespace=$(NS) upgrade --install influxdb influxdata/influxdb -f values.yaml</span><br></pre></td></tr></table></figure>
-
-<h3 id="v2"><a href="#v2" class="headerlink" title="v2"></a>v2</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm --namespace=$(NS) upgrade --install influxdb2 influxdata/influxdb2 -f values.yaml</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><h3 id="v1-1"><a href="#v1-1" class="headerlink" title="v1"></a>v1</h3><p>You can reference official documents <a href="https://github.com/influxdata/helm-charts/tree/master/charts/influxdb#configure-the-chart">influxdb</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm show values influxdata/influxdb &gt; values.yaml</span><br></pre></td></tr></table></figure>
-
-<h3 id="v2-1"><a href="#v2-1" class="headerlink" title="v2"></a>v2</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm show values influxdata/influxdb2 &gt; values.yaml</span><br></pre></td></tr></table></figure>
-
-<p>You can change <code>adminUser</code> field to you want. like</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">adminUser:</span></span><br><span class="line">  <span class="attr">organization:</span> <span class="string">&quot;my-org&quot;</span></span><br><span class="line">  <span class="attr">bucket:</span> <span class="string">&quot;my-bucket&quot;</span></span><br><span class="line">  <span class="attr">user:</span> <span class="string">&quot;admin&quot;</span></span><br><span class="line">  <span class="attr">retention_policy:</span> <span class="string">&quot;0s&quot;</span></span><br><span class="line">  <span class="comment">## Leave empty to generate a random password and token.</span></span><br><span class="line">  <span class="comment">## Or fill any of these values to use fixed values.</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">&quot;&lt;&lt;password&gt;&gt;&quot;</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">&quot;&lt;&lt;token&gt;&gt;&quot;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>kubernetes</tag>
-        <tag>howto</tag>
-        <tag>setup</tag>
-        <tag>influxdb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>How to set up docker</title>
     <url>/posts/how-to-set-up-docker/</url>
     <content><![CDATA[<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><p>如果需要自動完成功能<strong>必須</strong>安裝<code>bash-completion</code></p>
@@ -617,6 +567,26 @@
       </tags>
   </entry>
   <entry>
+    <title>How to set up external-dns</title>
+    <url>/posts/how-to-set-up-external-dns/</url>
+    <content><![CDATA[<h2 id="Installing-external-dns-on-Kubernetes"><a href="#Installing-external-dns-on-Kubernetes" class="headerlink" title="Installing external-dns on Kubernetes"></a>Installing external-dns on Kubernetes</h2><p>Install <code>external-dns</code> via <a href="https://github.com/bitnami/charts/tree/master/bitnami/external-dns/#installing-the-chart">helm chart</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=dns</span><br><span class="line">REPO=bitnami/external-dns</span><br><span class="line">NAME=cf</span><br><span class="line"></span><br><span class="line">helm --namespace=<span class="variable">$&#123;NS&#125;</span> upgrade --install <span class="variable">$&#123;NAME&#125;</span> <span class="variable">$&#123;REPO&#125;</span> -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-values"><a href="#Configure-values" class="headerlink" title="Configure values"></a>Configure values</h2><p>詳細可以參考<a href="https://github.com/bitnami/charts/tree/master/bitnami/external-dns/#parameters">官方文件</a></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">## DNS provider where the DNS records will be created. Available providers are:</span></span><br><span class="line"><span class="comment">## - alibabacloud, aws, azure, azure-private-dns, cloudflare, coredns, designate, digitalocean, google, infoblox, rfc2136, transip</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">provider:</span> <span class="string">cloudflare</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Cloudflare configuration to be set via arguments/env. variables</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">cloudflare:</span></span><br><span class="line">  <span class="comment">## `CF_API_TOKEN` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">apiToken:</span> <span class="string">$&#123;YOUR_TOKEN&#125;</span></span><br><span class="line">  <span class="comment">## `CF_API_KEY` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">apiKey:</span></span><br><span class="line">  <span class="comment">## Use an existing secret with keys &quot;cloudflare_api_token&quot; or &quot;cloudflare_api_key&quot; defined.</span></span><br><span class="line">  <span class="comment">## This ignores cloudflare.apiToken, and cloudflare.apiKey</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="comment"># secretName:</span></span><br><span class="line">  <span class="comment">## `CF_API_EMAIL` to set in the environment</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">email:</span></span><br><span class="line">  <span class="comment">## Enable the proxy feature of Cloudflare</span></span><br><span class="line">  <span class="comment">##</span></span><br><span class="line">  <span class="attr">proxied:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Modify how DNS records are sychronized between sources and providers (options: sync, upsert-only)</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">policy:</span> <span class="string">sync</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>在 <code>ingress</code> 中設定 <code>annotation</code></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">annotations:</span></span><br><span class="line">  <span class="attr">kubernetes.io/ingress.class:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="comment"># 設定你想要的 host</span></span><br><span class="line">  <span class="attr">external-dns.alpha.kubernetes.io/hostname:</span> <span class="string">$&#123;YOUR_HOST&#125;</span></span><br><span class="line">  <span class="comment"># 如果有設定 target 的話會自動使用 CNAME</span></span><br><span class="line">  <span class="attr">external-dns.alpha.kubernetes.io/target:</span> <span class="string">$&#123;YOUR_TARGET&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>]]></content>
+      <tags>
+        <tag>kubernetes</tag>
+        <tag>howto</tag>
+        <tag>setup</tag>
+        <tag>external-dns</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to set up GKE via terraform</title>
     <url>/posts/how-to-set-up-gke-via-terraform/</url>
     <content><![CDATA[<h2 id="前置條件"><a href="#前置條件" class="headerlink" title="前置條件"></a>前置條件</h2><ul>
@@ -633,6 +603,36 @@
         <tag>setup</tag>
         <tag>terraform</tag>
         <tag>GCP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How to set up influxdb on kubernetes</title>
+    <url>/posts/how-to-set-up-influxdb-on-kubernetes/</url>
+    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><a href="https://www.influxdata.com/">Influxdb</a> is a time series database. you can collect data into <code>influxdb</code> to show on <code>Grafana</code> dashboard. So I will write down I how to set up influxdb (v1, v2) on <code>Kubernetes</code>. But why not use <code>Prometheus</code> because it is a <code>pull based</code> time series database. If you want to collect very real-time data like business metrics clearly not suitable. </p>
+<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><ul>
+<li><a href="https://helm.sh/">Helm 3</a></li>
+<li><a href="https://kubernetes.io/">Kubernetes</a></li>
+</ul>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>First, you need to add <code>influxdata</code> repo into helm. </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm repo add influxdata https://helm.influxdata.com/</span><br></pre></td></tr></table></figure>
+
+<h3 id="v1"><a href="#v1" class="headerlink" title="v1"></a>v1</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm --namespace=$(NS) upgrade --install influxdb influxdata/influxdb -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="v2"><a href="#v2" class="headerlink" title="v2"></a>v2</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm --namespace=$(NS) upgrade --install influxdb2 influxdata/influxdb2 -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><h3 id="v1-1"><a href="#v1-1" class="headerlink" title="v1"></a>v1</h3><p>You can reference official documents <a href="https://github.com/influxdata/helm-charts/tree/master/charts/influxdb#configure-the-chart">influxdb</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm show values influxdata/influxdb &gt; values.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="v2-1"><a href="#v2-1" class="headerlink" title="v2"></a>v2</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm show values influxdata/influxdb2 &gt; values.yaml</span><br></pre></td></tr></table></figure>
+
+<p>You can change <code>adminUser</code> field to you want. like</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">adminUser:</span></span><br><span class="line">  <span class="attr">organization:</span> <span class="string">&quot;my-org&quot;</span></span><br><span class="line">  <span class="attr">bucket:</span> <span class="string">&quot;my-bucket&quot;</span></span><br><span class="line">  <span class="attr">user:</span> <span class="string">&quot;admin&quot;</span></span><br><span class="line">  <span class="attr">retention_policy:</span> <span class="string">&quot;0s&quot;</span></span><br><span class="line">  <span class="comment">## Leave empty to generate a random password and token.</span></span><br><span class="line">  <span class="comment">## Or fill any of these values to use fixed values.</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">&quot;&lt;&lt;password&gt;&gt;&quot;</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">&quot;&lt;&lt;token&gt;&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>kubernetes</tag>
+        <tag>howto</tag>
+        <tag>setup</tag>
+        <tag>influxdb</tag>
       </tags>
   </entry>
   <entry>
@@ -657,34 +657,6 @@
         <tag>nginx ingress</tag>
         <tag>cloudflare</tag>
         <tag>IP whitelist</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to set up Squid proxy server</title>
-    <url>/posts/how-to-set-up-squid-proxy-server/</url>
-    <content><![CDATA[<p>第三方的服務有時候需要綁定固定 IP，導致服務本體不能任意移動，此時我們可以利用 <code>proxy server</code> 來解決這問題<br>本文使用 <code>Squid</code> 作為 proxy server 演示</p>
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>詳細的資訊可以<a href="https://hub.docker.com/r/sameersbn/squid">參考</a></p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">squid:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">sameersbn/squid:3.5.27-2</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">bridge</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3128:3128&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/srv/docker/squid/cache:/var/spool/squid</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./squid.conf:/etc/squid/squid.conf</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
-
-<p>用 <code>command line</code> 做測試</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">http_proxy=http://192.168.28.241:3128 https_proxy=http://192.168.28.241:3128 curl https://ifconfig.co</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><p>squid.conf，啊，配置太多了，挑幾個重要的寫吧</p>
-<h3 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># localnet 是可以替換掉名字</span><br><span class="line">acl localnet src 192.168.0.0/16</span><br><span class="line"></span><br><span class="line">acl SSL_ports port 443</span><br><span class="line">acl Safe_ports port 80		# http</span><br><span class="line">acl Safe_ports port 21		# ftp</span><br><span class="line">acl Safe_ports port 443		# https</span><br><span class="line">acl Safe_ports port 70		# gopher</span><br><span class="line">acl Safe_ports port 210		# wais</span><br><span class="line">acl Safe_ports port 1025-65535	# unregistered ports</span><br><span class="line">acl Safe_ports port 280		# http-mgmt</span><br><span class="line">acl Safe_ports port 488		# gss-http</span><br><span class="line">acl Safe_ports port 591		# filemaker</span><br><span class="line">acl Safe_ports port 777		# multiling http</span><br><span class="line">acl CONNECT method CONNECT</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 建議從最小權限開始定義，因為以下設定是有順序性的</span><br><span class="line"></span><br><span class="line"># deny 所以來自不是定義好 safe ports 的 request</span><br><span class="line">http_access deny !Safe_ports</span><br><span class="line"></span><br><span class="line"># deny 所有 ssl 不是走 443 的 request，可以在上一個設定中加入自定義的 ssl ports</span><br><span class="line">http_access deny CONNECT !SSL_ports</span><br><span class="line"></span><br><span class="line"># Only allow cachemgr access from localhost</span><br><span class="line">http_access allow localhost manager</span><br><span class="line">http_access deny manager</span><br><span class="line"></span><br><span class="line"># We strongly recommend the following be uncommented to protect innocent</span><br><span class="line"># web applications running on the proxy server who think the only</span><br><span class="line"># one who can access services on &quot;localhost&quot; is a local user</span><br><span class="line">#http_access deny to_localhost</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line"># INSERT YOUR OWN RULE(S) HERE TO ALLOW ACCESS FROM YOUR CLIENTS</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line"># Example rule allowing access from your local networks.</span><br><span class="line"># Adapt localnet in the ACL section to list your (internal) IP networks</span><br><span class="line"># from where browsing should be allowed</span><br><span class="line"># 可以加入自定義的 rules，像是 localnet、localhost、allow network 之類的</span><br><span class="line">http_access allow localnet</span><br><span class="line">http_access allow localhost</span><br><span class="line"></span><br><span class="line"># And finally deny all other access to this proxy</span><br><span class="line">http_access deny all</span><br></pre></td></tr></table></figure>
-
-<h3 id="Listen-ports"><a href="#Listen-ports" class="headerlink" title="Listen ports"></a>Listen ports</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http_port 3128</span><br></pre></td></tr></table></figure>
-
-<h3 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h3><p>有空再研究</p>
-<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><p>以 <code>golang</code> 為例，透過 <code>proxy server</code> 去訪問 <code>https://ifconfig.co</code> 會返回 IP</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;io/ioutil&quot;</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">	<span class="string">&quot;net/url&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	proxy = <span class="string">&quot;http://192.168.28.241:3128&quot;</span></span><br><span class="line">	ifconfig = <span class="string">&quot;https://ifconfig.co&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	proxyUrl, err := url.Parse(proxy)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	c := &amp;http.Client&#123;</span><br><span class="line">		Transport: &amp;http.Transport&#123;</span><br><span class="line">			Proxy: http.ProxyURL(proxyUrl),</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	resp, err := c.Get(ifconfig)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> resp.Body.Close()</span><br><span class="line"></span><br><span class="line">	content, err := ioutil.ReadAll(resp.Body)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	fmt.Println(content)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>howto</tag>
-        <tag>setup</tag>
-        <tag>squid</tag>
-        <tag>proxy</tag>
       </tags>
   </entry>
   <entry>
@@ -742,6 +714,58 @@
         <tag>howto</tag>
         <tag>setup</tag>
         <tag>prometheus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How to set up Squid proxy server</title>
+    <url>/posts/how-to-set-up-squid-proxy-server/</url>
+    <content><![CDATA[<p>第三方的服務有時候需要綁定固定 IP，導致服務本體不能任意移動，此時我們可以利用 <code>proxy server</code> 來解決這問題<br>本文使用 <code>Squid</code> 作為 proxy server 演示</p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>詳細的資訊可以<a href="https://hub.docker.com/r/sameersbn/squid">參考</a></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">squid:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">sameersbn/squid:3.5.27-2</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">bridge</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3128:3128&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/srv/docker/squid/cache:/var/spool/squid</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./squid.conf:/etc/squid/squid.conf</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
+
+<p>用 <code>command line</code> 做測試</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">http_proxy=http://192.168.28.241:3128 https_proxy=http://192.168.28.241:3128 curl https://ifconfig.co</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><p>squid.conf，啊，配置太多了，挑幾個重要的寫吧</p>
+<h3 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># localnet 是可以替換掉名字</span><br><span class="line">acl localnet src 192.168.0.0/16</span><br><span class="line"></span><br><span class="line">acl SSL_ports port 443</span><br><span class="line">acl Safe_ports port 80		# http</span><br><span class="line">acl Safe_ports port 21		# ftp</span><br><span class="line">acl Safe_ports port 443		# https</span><br><span class="line">acl Safe_ports port 70		# gopher</span><br><span class="line">acl Safe_ports port 210		# wais</span><br><span class="line">acl Safe_ports port 1025-65535	# unregistered ports</span><br><span class="line">acl Safe_ports port 280		# http-mgmt</span><br><span class="line">acl Safe_ports port 488		# gss-http</span><br><span class="line">acl Safe_ports port 591		# filemaker</span><br><span class="line">acl Safe_ports port 777		# multiling http</span><br><span class="line">acl CONNECT method CONNECT</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 建議從最小權限開始定義，因為以下設定是有順序性的</span><br><span class="line"></span><br><span class="line"># deny 所以來自不是定義好 safe ports 的 request</span><br><span class="line">http_access deny !Safe_ports</span><br><span class="line"></span><br><span class="line"># deny 所有 ssl 不是走 443 的 request，可以在上一個設定中加入自定義的 ssl ports</span><br><span class="line">http_access deny CONNECT !SSL_ports</span><br><span class="line"></span><br><span class="line"># Only allow cachemgr access from localhost</span><br><span class="line">http_access allow localhost manager</span><br><span class="line">http_access deny manager</span><br><span class="line"></span><br><span class="line"># We strongly recommend the following be uncommented to protect innocent</span><br><span class="line"># web applications running on the proxy server who think the only</span><br><span class="line"># one who can access services on &quot;localhost&quot; is a local user</span><br><span class="line">#http_access deny to_localhost</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line"># INSERT YOUR OWN RULE(S) HERE TO ALLOW ACCESS FROM YOUR CLIENTS</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line"># Example rule allowing access from your local networks.</span><br><span class="line"># Adapt localnet in the ACL section to list your (internal) IP networks</span><br><span class="line"># from where browsing should be allowed</span><br><span class="line"># 可以加入自定義的 rules，像是 localnet、localhost、allow network 之類的</span><br><span class="line">http_access allow localnet</span><br><span class="line">http_access allow localhost</span><br><span class="line"></span><br><span class="line"># And finally deny all other access to this proxy</span><br><span class="line">http_access deny all</span><br></pre></td></tr></table></figure>
+
+<h3 id="Listen-ports"><a href="#Listen-ports" class="headerlink" title="Listen ports"></a>Listen ports</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http_port 3128</span><br></pre></td></tr></table></figure>
+
+<h3 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h3><p>有空再研究</p>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><p>以 <code>golang</code> 為例，透過 <code>proxy server</code> 去訪問 <code>https://ifconfig.co</code> 會返回 IP</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;io/ioutil&quot;</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">	<span class="string">&quot;net/url&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	proxy = <span class="string">&quot;http://192.168.28.241:3128&quot;</span></span><br><span class="line">	ifconfig = <span class="string">&quot;https://ifconfig.co&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	proxyUrl, err := url.Parse(proxy)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	c := &amp;http.Client&#123;</span><br><span class="line">		Transport: &amp;http.Transport&#123;</span><br><span class="line">			Proxy: http.ProxyURL(proxyUrl),</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	resp, err := c.Get(ifconfig)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> resp.Body.Close()</span><br><span class="line"></span><br><span class="line">	content, err := ioutil.ReadAll(resp.Body)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	fmt.Println(content)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>setup</tag>
+        <tag>squid</tag>
+        <tag>proxy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How to set up Traefik on docker-swarm</title>
+    <url>/posts/how-to-set-up-traefik-on-docker-swarm/</url>
+    <content><![CDATA[<p><a href="https://traefik.io/">Traefik</a></p>
+<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><h3 id="Docker-swarm"><a href="#Docker-swarm" class="headerlink" title="Docker swarm"></a>Docker swarm</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker swarm init</span><br><span class="line"></span><br><span class="line">docker network create -d overlay endpoint</span><br></pre></td></tr></table></figure>
+
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># stack.yml</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">traefik:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">traefik</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">endpoint</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="comment"># The http port</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;80:80&quot;</span></span><br><span class="line">      <span class="comment"># The https port</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;443:443&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./traefik.yml:/etc/traefik/traefik.yml</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./certs:/certs:ro</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.enable=true&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.routers.dashboard.rule=Host(`traefik.h365.asia`) &amp;&amp; (PathPrefix(`/api`) || PathPrefix(`/dashboard`))&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.routers.dashboard.tls=false&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.routers.dashboard.service=api@internal&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.services.api@internal.loadbalancer.server.port=8080&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">endpoint:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>run with docker</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker stack deploy -c stack.yml http</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">api:</span></span><br><span class="line">  <span class="attr">insecure:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># enable dashboard</span></span><br><span class="line">  <span class="attr">dashboard:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">debug:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">entryPoints:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">address:</span> <span class="string">&quot;:80&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">websecure:</span></span><br><span class="line">    <span class="attr">address:</span> <span class="string">&quot;:443&quot;</span></span><br><span class="line">    <span class="attr">proxyProtocol:</span></span><br><span class="line">      <span class="attr">insecure:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">forwardedHeaders:</span></span><br><span class="line">      <span class="attr">insecure:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">providers:</span></span><br><span class="line">  <span class="comment"># turn on listen docker container and enabled swarm mode</span></span><br><span class="line">  <span class="attr">docker:</span></span><br><span class="line">    <span class="attr">watch:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">exposedByDefault:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">swarmMode:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set up traefik&#x27;s logs, you can change log level</span></span><br><span class="line"><span class="attr">log:</span></span><br><span class="line">  <span class="attr">level:</span> <span class="string">INFO</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">json</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set up traefik&#x27;s received all request logs writes to console</span></span><br><span class="line"><span class="attr">accessLog:</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">json</span></span><br><span class="line">  <span class="attr">fields:</span></span><br><span class="line">    <span class="attr">defaultMode:</span> <span class="string">keep</span></span><br><span class="line">    <span class="attr">names:</span></span><br><span class="line">      <span class="attr">ClientUsername:</span> <span class="string">drop</span></span><br><span class="line">    <span class="attr">headers:</span></span><br><span class="line">      <span class="attr">defaultMode:</span> <span class="string">keep</span></span><br><span class="line">      <span class="attr">names:</span></span><br><span class="line">        <span class="comment"># drop Authorization, it is sensitive data</span></span><br><span class="line">        <span class="attr">Authorization:</span> <span class="string">drop</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># stack.yml</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">whoami:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">containous/whoami</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">endpoint</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.enable=true&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.routers.whoami.service=whoami@docker&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.services.whoami.loadbalancer.server.port=80&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.routers.whoami.rule=Host(`whoami`)&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">endpoint:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker stack deploy -c stack.yml <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -H <span class="string">&#x27;Host: whoami&#x27;</span> localhost</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>docker-swarm</tag>
+        <tag>traefik</tag>
       </tags>
   </entry>
   <entry>
@@ -837,27 +861,64 @@
       </tags>
   </entry>
   <entry>
-    <title>How to set up Traefik on docker-swarm</title>
-    <url>/posts/how-to-set-up-traefik-on-docker-swarm/</url>
-    <content><![CDATA[<p><a href="https://traefik.io/">Traefik</a></p>
-<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><h3 id="Docker-swarm"><a href="#Docker-swarm" class="headerlink" title="Docker swarm"></a>Docker swarm</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker swarm init</span><br><span class="line"></span><br><span class="line">docker network create -d overlay endpoint</span><br></pre></td></tr></table></figure>
+    <title>How to use Ansible achieve blue/green deployment</title>
+    <url>/posts/how-to-use-ansible-achieve-blue-green-deployment/</url>
+    <content><![CDATA[<div class="note primary"><p>本文參考 <a href="https://thenewstack.io/deployment-strategies">Six Strategies for Application Deployment</a></p>
+</div>
 
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># stack.yml</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">traefik:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">traefik</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">endpoint</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="comment"># The http port</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;80:80&quot;</span></span><br><span class="line">      <span class="comment"># The https port</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;443:443&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./traefik.yml:/etc/traefik/traefik.yml</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./certs:/certs:ro</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.enable=true&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.routers.dashboard.rule=Host(`traefik.h365.asia`) &amp;&amp; (PathPrefix(`/api`) || PathPrefix(`/dashboard`))&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.routers.dashboard.tls=false&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.routers.dashboard.service=api@internal&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.services.api@internal.loadbalancer.server.port=8080&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">endpoint:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>run with docker</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker stack deploy -c stack.yml http</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">api:</span></span><br><span class="line">  <span class="attr">insecure:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># enable dashboard</span></span><br><span class="line">  <span class="attr">dashboard:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">debug:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">entryPoints:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">address:</span> <span class="string">&quot;:80&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">websecure:</span></span><br><span class="line">    <span class="attr">address:</span> <span class="string">&quot;:443&quot;</span></span><br><span class="line">    <span class="attr">proxyProtocol:</span></span><br><span class="line">      <span class="attr">insecure:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">forwardedHeaders:</span></span><br><span class="line">      <span class="attr">insecure:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">providers:</span></span><br><span class="line">  <span class="comment"># turn on listen docker container and enabled swarm mode</span></span><br><span class="line">  <span class="attr">docker:</span></span><br><span class="line">    <span class="attr">watch:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">exposedByDefault:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">swarmMode:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set up traefik&#x27;s logs, you can change log level</span></span><br><span class="line"><span class="attr">log:</span></span><br><span class="line">  <span class="attr">level:</span> <span class="string">INFO</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">json</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set up traefik&#x27;s received all request logs writes to console</span></span><br><span class="line"><span class="attr">accessLog:</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">json</span></span><br><span class="line">  <span class="attr">fields:</span></span><br><span class="line">    <span class="attr">defaultMode:</span> <span class="string">keep</span></span><br><span class="line">    <span class="attr">names:</span></span><br><span class="line">      <span class="attr">ClientUsername:</span> <span class="string">drop</span></span><br><span class="line">    <span class="attr">headers:</span></span><br><span class="line">      <span class="attr">defaultMode:</span> <span class="string">keep</span></span><br><span class="line">      <span class="attr">names:</span></span><br><span class="line">        <span class="comment"># drop Authorization, it is sensitive data</span></span><br><span class="line">        <span class="attr">Authorization:</span> <span class="string">drop</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># stack.yml</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">whoami:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">containous/whoami</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">endpoint</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.enable=true&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.routers.whoami.service=whoami@docker&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.services.whoami.loadbalancer.server.port=80&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;traefik.http.routers.whoami.rule=Host(`whoami`)&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">endpoint:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker stack deploy -c stack.yml <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -H <span class="string">&#x27;Host: whoami&#x27;</span> localhost</span><br></pre></td></tr></table></figure>
+<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p>可以參考 <a href="https://blog.seancheng.space/posts/how-to-set-up-traefik-on-docker-swarm/">How to set up Traefik on docker-swarm
+</a></p>
+<ul>
+<li>ansible</li>
+<li>docker-swarm</li>
+<li>traefik</li>
+</ul>
+<h2 id="What’s-blue-green-deployment"><a href="#What’s-blue-green-deployment" class="headerlink" title="What’s blue/green deployment"></a>What’s blue/green deployment</h2><p>看圖說故事吧</p>
+<p><img src="/posts/how-to-use-ansible-achieve-blue-green-deployment/blue-green.gif" alt="blue green"></p>
+<p>Pros:</p>
+<ul>
+<li>即時的 rollout/rollback</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>需要兩倍的資源</li>
+</ul>
+<h2 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h2><ol>
+<li>取得當前 <code>slot</code> 的顏色並且判斷出將要替換的顏色</li>
+<li>部署新版服務到將要替換的顏色</li>
+<li>透過 <code>load balancer</code> 將流量導到新版服務並且更改 <code>slot</code> 的顏色</li>
+</ol>
+<h3 id="Terms"><a href="#Terms" class="headerlink" title="Terms"></a>Terms</h3><table>
+<thead>
+<tr>
+<th align="center">name</th>
+<th align="center">value</th>
+<th align="center">description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">slot</td>
+<td align="center">blue,green</td>
+<td align="center">用以表示當前工作中的顏色</td>
+</tr>
+<tr>
+<td align="center">color</td>
+<td align="center">blue,green</td>
+<td align="center">服務的顏色</td>
+</tr>
+<tr>
+<td align="center">app</td>
+<td align="center">string</td>
+<td align="center">服務的名字</td>
+</tr>
+</tbody></table>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>// todo: write<br>未完待續</p>
 ]]></content>
       <tags>
         <tag>docker-swarm</tag>
         <tag>traefik</tag>
+        <tag>blue-green-deployment</tag>
+        <tag>ansible</tag>
       </tags>
   </entry>
   <entry>
@@ -929,19 +990,6 @@
       </tags>
   </entry>
   <entry>
-    <title>How to use Github action with golang</title>
-    <url>/posts/how-to-use-github-action-with-golang/</url>
-    <content><![CDATA[<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><p>in <code>.github/workflows/main.yml</code></p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Build</span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">test:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/setup-go@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">go-version:</span> <span class="string">&#x27;1.16&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/cache@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">~/go/pkg/mod</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">$&#123;&#123;</span> <span class="string">runner.os</span> <span class="string">&#125;&#125;-go-$&#123;&#123;</span> <span class="string">hashFiles(&#x27;**/go.sum&#x27;)</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            $&#123;&#123; runner.os &#125;&#125;-go-</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Lint</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          go get -u golang.org/x/lint/golint</span></span><br><span class="line"><span class="string">          make lint</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">report</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          make report</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Test</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          make test-unit</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">codecov/codecov-action@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.CODECOV_TOKEN</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>howto</tag>
-        <tag>setup</tag>
-        <tag>golang</tag>
-        <tag>github action</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>how to use dockertest in golang</title>
     <url>/posts/how-to-use-dockertest-in-golang/</url>
     <content><![CDATA[<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p><a href="https://github.com/ory/dockertest">dockertest</a></p>
@@ -955,106 +1003,16 @@
       </tags>
   </entry>
   <entry>
-    <title>How to use Ansible achieve blue/green deployment</title>
-    <url>/posts/how-to-use-ansible-achieve-blue-green-deployment/</url>
-    <content><![CDATA[<div class="note primary"><p>本文參考 <a href="https://thenewstack.io/deployment-strategies">Six Strategies for Application Deployment</a></p>
-</div>
-
-<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p>可以參考 <a href="https://blog.seancheng.space/posts/how-to-set-up-traefik-on-docker-swarm/">How to set up Traefik on docker-swarm
-</a></p>
-<ul>
-<li>ansible</li>
-<li>docker-swarm</li>
-<li>traefik</li>
-</ul>
-<h2 id="What’s-blue-green-deployment"><a href="#What’s-blue-green-deployment" class="headerlink" title="What’s blue/green deployment"></a>What’s blue/green deployment</h2><p>看圖說故事吧</p>
-<p><img src="/posts/how-to-use-ansible-achieve-blue-green-deployment/blue-green.gif" alt="blue green"></p>
-<p>Pros:</p>
-<ul>
-<li>即時的 rollout/rollback</li>
-</ul>
-<p>Cons:</p>
-<ul>
-<li>需要兩倍的資源</li>
-</ul>
-<h2 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h2><ol>
-<li>取得當前 <code>slot</code> 的顏色並且判斷出將要替換的顏色</li>
-<li>部署新版服務到將要替換的顏色</li>
-<li>透過 <code>load balancer</code> 將流量導到新版服務並且更改 <code>slot</code> 的顏色</li>
-</ol>
-<h3 id="Terms"><a href="#Terms" class="headerlink" title="Terms"></a>Terms</h3><table>
-<thead>
-<tr>
-<th align="center">name</th>
-<th align="center">value</th>
-<th align="center">description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">slot</td>
-<td align="center">blue,green</td>
-<td align="center">用以表示當前工作中的顏色</td>
-</tr>
-<tr>
-<td align="center">color</td>
-<td align="center">blue,green</td>
-<td align="center">服務的顏色</td>
-</tr>
-<tr>
-<td align="center">app</td>
-<td align="center">string</td>
-<td align="center">服務的名字</td>
-</tr>
-</tbody></table>
-<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>// todo: write<br>未完待續</p>
-]]></content>
-      <tags>
-        <tag>docker-swarm</tag>
-        <tag>traefik</tag>
-        <tag>blue-green-deployment</tag>
-        <tag>ansible</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to use jenkins configuration as code</title>
-    <url>/posts/how-to-use-jenkins-configuration-as-code/</url>
-    <content><![CDATA[<div class="note primary"><ul>
-<li>本文基於在 <code>Kubernetes</code> 裡使用 <code>Jenkins</code> <a href="https://github.com/jenkinsci/configuration-as-code-plugin">Configuration as Code</a></li>
-<li>使用 <code>Jenkins</code> <a href="https://github.com/jenkinsci/helm-charts/tree/main/charts/jenkins">Chart</a></li>
-</ul>
-</div>
-
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>開啟 <code>master.JCasC.enabled</code>，詳細可以參考官方 <a href="https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/VALUES_SUMMARY.md#jenkins-configuration-as-code-jcasc">values</a></p>
-<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>you can reference <a href="https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos">examples</a> of official provide.</p>
-<p>Sections:</p>
-<ul>
-<li>credentials</li>
-<li>jenkins</li>
-<li>security</li>
-<li>unclassified</li>
-<li>tool</li>
-</ul>
-<h3 id="Github-OAuth"><a href="#Github-OAuth" class="headerlink" title="Github OAuth"></a>Github OAuth</h3><p><a href="https://plugins.jenkins.io/github-oauth/">Plugin</a></p>
-<ol>
-<li><p>configure <code>securityRealm</code> in <code>jenkins</code> section</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">securityRealm:</span></span><br><span class="line">    <span class="attr">github:</span></span><br><span class="line">      <span class="attr">clientID:</span> <span class="comment"># get from github oauth app client id</span></span><br><span class="line">      <span class="attr">clientSecret:</span> <span class="comment"># get from github oauth app client secret</span></span><br><span class="line">      <span class="attr">githubApiUri:</span> <span class="string">&quot;https://api.github.com&quot;</span> <span class="comment"># if you use github enterprise, might change it</span></span><br><span class="line">      <span class="attr">githubWebUri:</span> <span class="string">&quot;https://github.com&quot;</span> <span class="comment"># if you use github enterprise, might change it</span></span><br><span class="line">      <span class="attr">oauthScopes:</span> <span class="string">&quot;read:org,user:email,repo&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>configure <code>authorizationStrategy</code> in <code>jenkins</code> section</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">authorizationStrategy:</span></span><br><span class="line">    <span class="attr">github:</span></span><br><span class="line">      <span class="attr">adminUserNames:</span> <span class="comment"># admin user name of your organization</span></span><br><span class="line">      <span class="attr">allowAnonymousJobStatusPermission:</span> <span class="literal">true</span> <span class="comment"># can anonymous read job&#x27;s status?</span></span><br><span class="line">      <span class="attr">allowAnonymousReadPermission:</span> <span class="literal">false</span> <span class="comment"># can anonymous read job?</span></span><br><span class="line">      <span class="attr">allowCcTrayPermission:</span> <span class="literal">false</span></span><br><span class="line">      <span class="attr">allowGithubWebHookPermission:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">authenticatedUserCreateJobPermission:</span> <span class="literal">true</span> </span><br><span class="line">      <span class="attr">authenticatedUserReadPermission:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">organizationNames:</span> <span class="comment"># your organization</span></span><br><span class="line">      <span class="attr">useRepositoryPermissions:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>configure CSRF</p>
-</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">crumbIssuer:</span></span><br><span class="line">    <span class="attr">standard:</span></span><br><span class="line">      <span class="attr">excludeClientIPFromCrumb:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Credentials"><a href="#Credentials" class="headerlink" title="Credentials"></a>Credentials</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">credentials:</span></span><br><span class="line">  <span class="attr">system:</span></span><br><span class="line">    <span class="attr">domainCredentials:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">credentials:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">string:</span></span><br><span class="line">              <span class="attr">description:</span> <span class="string">&quot;example description&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;secret-text-id&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">secret:</span> <span class="string">&quot;text&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">usernamePassword:</span></span><br><span class="line">              <span class="attr">description:</span> <span class="string">&quot;example description&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;username-password-id&quot;</span></span><br><span class="line">              <span class="attr">password:</span> <span class="string">&quot;password&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">username:</span> <span class="string">&quot;username&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">file:</span></span><br><span class="line">              <span class="attr">fileName:</span> <span class="string">&quot;filename&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;file-cred-id&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">secretBytes:</span> <span class="string">&quot;ZmlsZQ==&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Update-Config"><a href="#Update-Config" class="headerlink" title="Update Config"></a>Update Config</h2><p>How to update the config</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd <span class="comment"># namespace</span></span><br><span class="line">NAME=jenkins-jenkins-jcasc-config <span class="comment"># config name</span></span><br><span class="line">CFG_PATH=./jcasc-default-config.yaml <span class="comment"># you want to update from file path</span></span><br><span class="line"></span><br><span class="line">kubectl --namespace=<span class="variable">$&#123;NS&#125;</span> create configmap <span class="variable">$&#123;NAME&#125;</span> \</span><br><span class="line">  --from-file=<span class="variable">$&#123;CFG_PATH&#125;</span> \</span><br><span class="line">  -o yaml \</span><br><span class="line">  --save-config \</span><br><span class="line">  --dry-run=client | kubectl apply -f -</span><br></pre></td></tr></table></figure>
+    <title>How to use Github action with golang</title>
+    <url>/posts/how-to-use-github-action-with-golang/</url>
+    <content><![CDATA[<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><p>in <code>.github/workflows/main.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Build</span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">test:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/setup-go@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">go-version:</span> <span class="string">&#x27;1.16&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/cache@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">~/go/pkg/mod</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">$&#123;&#123;</span> <span class="string">runner.os</span> <span class="string">&#125;&#125;-go-$&#123;&#123;</span> <span class="string">hashFiles(&#x27;**/go.sum&#x27;)</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            $&#123;&#123; runner.os &#125;&#125;-go-</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Lint</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          go get -u golang.org/x/lint/golint</span></span><br><span class="line"><span class="string">          make lint</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">report</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          make report</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Test</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          make test-unit</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">codecov/codecov-action@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.CODECOV_TOKEN</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>howto</tag>
-        <tag>jenkins</tag>
+        <tag>setup</tag>
+        <tag>golang</tag>
+        <tag>github action</tag>
       </tags>
   </entry>
   <entry>
@@ -1100,17 +1058,45 @@
       </tags>
   </entry>
   <entry>
-    <title>How to use mock code in unit test</title>
-    <url>/posts/how-to-use-mock-code-in-unit-test/</url>
-    <content><![CDATA[<h2 id="定義-test-suite"><a href="#定義-test-suite" class="headerlink" title="定義 test suite"></a>定義 test suite</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// biz_test.go</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// declare test suite struct</span></span><br><span class="line"><span class="keyword">type</span> bizSuite <span class="keyword">struct</span> &#123;</span><br><span class="line">	suite.Suite</span><br><span class="line">	mock *mocks.IRepo</span><br><span class="line">	biz  IBiz</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// setup test suite</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *bizSuite)</span> <span class="title">SetupTest</span><span class="params">()</span></span> &#123;</span><br><span class="line">	logger, _ := zap.NewDevelopment()</span><br><span class="line">	node, _ := snowflake.NewNode(<span class="number">1</span>)</span><br><span class="line">	factory, _ := token.New(&amp;token.Options&#123;Signature: <span class="string">&quot;7d01eb0200bc730a2c58&quot;</span>&#125;, logger)</span><br><span class="line"></span><br><span class="line">	s.mock = <span class="built_in">new</span>(mocks.IRepo)</span><br><span class="line">	<span class="keyword">if</span> biz, err := CreateIBiz(logger, s.mock, node, factory); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		s.biz = biz</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// teardown test suite</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *bizSuite)</span> <span class="title">TearDownTest</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s.mock.AssertExpectations(s.T())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestBizSuite</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	suite.Run(t, <span class="built_in">new</span>(bizSuite))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>How to use jenkins configuration as code</title>
+    <url>/posts/how-to-use-jenkins-configuration-as-code/</url>
+    <content><![CDATA[<div class="note primary"><ul>
+<li>本文基於在 <code>Kubernetes</code> 裡使用 <code>Jenkins</code> <a href="https://github.com/jenkinsci/configuration-as-code-plugin">Configuration as Code</a></li>
+<li>使用 <code>Jenkins</code> <a href="https://github.com/jenkinsci/helm-charts/tree/main/charts/jenkins">Chart</a></li>
+</ul>
+</div>
 
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>開啟 <code>master.JCasC.enabled</code>，詳細可以參考官方 <a href="https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/VALUES_SUMMARY.md#jenkins-configuration-as-code-jcasc">values</a></p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>you can reference <a href="https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos">examples</a> of official provide.</p>
+<p>Sections:</p>
+<ul>
+<li>credentials</li>
+<li>jenkins</li>
+<li>security</li>
+<li>unclassified</li>
+<li>tool</li>
+</ul>
+<h3 id="Github-OAuth"><a href="#Github-OAuth" class="headerlink" title="Github OAuth"></a>Github OAuth</h3><p><a href="https://plugins.jenkins.io/github-oauth/">Plugin</a></p>
+<ol>
+<li><p>configure <code>securityRealm</code> in <code>jenkins</code> section</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">securityRealm:</span></span><br><span class="line">    <span class="attr">github:</span></span><br><span class="line">      <span class="attr">clientID:</span> <span class="comment"># get from github oauth app client id</span></span><br><span class="line">      <span class="attr">clientSecret:</span> <span class="comment"># get from github oauth app client secret</span></span><br><span class="line">      <span class="attr">githubApiUri:</span> <span class="string">&quot;https://api.github.com&quot;</span> <span class="comment"># if you use github enterprise, might change it</span></span><br><span class="line">      <span class="attr">githubWebUri:</span> <span class="string">&quot;https://github.com&quot;</span> <span class="comment"># if you use github enterprise, might change it</span></span><br><span class="line">      <span class="attr">oauthScopes:</span> <span class="string">&quot;read:org,user:email,repo&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>configure <code>authorizationStrategy</code> in <code>jenkins</code> section</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">authorizationStrategy:</span></span><br><span class="line">    <span class="attr">github:</span></span><br><span class="line">      <span class="attr">adminUserNames:</span> <span class="comment"># admin user name of your organization</span></span><br><span class="line">      <span class="attr">allowAnonymousJobStatusPermission:</span> <span class="literal">true</span> <span class="comment"># can anonymous read job&#x27;s status?</span></span><br><span class="line">      <span class="attr">allowAnonymousReadPermission:</span> <span class="literal">false</span> <span class="comment"># can anonymous read job?</span></span><br><span class="line">      <span class="attr">allowCcTrayPermission:</span> <span class="literal">false</span></span><br><span class="line">      <span class="attr">allowGithubWebHookPermission:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">authenticatedUserCreateJobPermission:</span> <span class="literal">true</span> </span><br><span class="line">      <span class="attr">authenticatedUserReadPermission:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">organizationNames:</span> <span class="comment"># your organization</span></span><br><span class="line">      <span class="attr">useRepositoryPermissions:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>configure CSRF</p>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">jenkins:</span></span><br><span class="line">  <span class="attr">crumbIssuer:</span></span><br><span class="line">    <span class="attr">standard:</span></span><br><span class="line">      <span class="attr">excludeClientIPFromCrumb:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="撰寫測試"><a href="#撰寫測試" class="headerlink" title="撰寫測試"></a>撰寫測試</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *bizSuite)</span> <span class="title">Test_impl_GetByID</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">type</span> args <span class="keyword">struct</span> &#123;</span><br><span class="line">		ctx  contextx.Contextx</span><br><span class="line">		id   <span class="keyword">int64</span></span><br><span class="line">		mock <span class="function"><span class="keyword">func</span><span class="params">()</span></span></span><br><span class="line">	&#125;</span><br><span class="line">	tests := []<span class="keyword">struct</span> &#123;</span><br><span class="line">		name     <span class="keyword">string</span></span><br><span class="line">		args     args</span><br><span class="line">		wantInfo *user.Profile</span><br><span class="line">		wantErr  <span class="keyword">bool</span></span><br><span class="line">	&#125;&#123;</span><br><span class="line">		&#123;</span><br><span class="line">			name: <span class="string">&quot;get by id then error&quot;</span>,</span><br><span class="line">			args: args&#123;id: id1, mock: <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">				s.mock.On(<span class="string">&quot;GetByID&quot;</span>, mock.Anything, id1).Return(<span class="literal">nil</span>, errors.New(<span class="string">&quot;error&quot;</span>)).Once()</span><br><span class="line">			&#125;&#125;,</span><br><span class="line">			wantInfo: <span class="literal">nil</span>,</span><br><span class="line">			wantErr:  <span class="literal">true</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			name: <span class="string">&quot;get by id then not exists&quot;</span>,</span><br><span class="line">			args: args&#123;id: id1, mock: <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">				s.mock.On(<span class="string">&quot;GetByID&quot;</span>, mock.Anything, id1).Return(<span class="literal">nil</span>, <span class="literal">nil</span>).Once()</span><br><span class="line">			&#125;&#125;,</span><br><span class="line">			wantInfo: <span class="literal">nil</span>,</span><br><span class="line">			wantErr:  <span class="literal">true</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			name: <span class="string">&quot;get by id then user&quot;</span>,</span><br><span class="line">			args: args&#123;id: id1, mock: <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">				s.mock.On(<span class="string">&quot;GetByID&quot;</span>, mock.Anything, id1).Return(info1, <span class="literal">nil</span>).Once()</span><br><span class="line">			&#125;&#125;,</span><br><span class="line">			wantInfo: info1,</span><br><span class="line">			wantErr:  <span class="literal">false</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, tt := <span class="keyword">range</span> tests &#123;</span><br><span class="line">		s.T().Run(tt.name, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">			<span class="keyword">if</span> tt.args.mock != <span class="literal">nil</span> &#123;</span><br><span class="line">				tt.args.mock()</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			gotInfo, err := s.biz.GetByID(tt.args.ctx, tt.args.id)</span><br><span class="line">			<span class="keyword">if</span> (err != <span class="literal">nil</span>) != tt.wantErr &#123;</span><br><span class="line">				t.Errorf(<span class="string">&quot;GetByID() error = %v, wantErr %v&quot;</span>, err, tt.wantErr)</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> !reflect.DeepEqual(gotInfo, tt.wantInfo) &#123;</span><br><span class="line">				t.Errorf(<span class="string">&quot;GetByID() gotInfo = %v, want %v&quot;</span>, gotInfo, tt.wantInfo)</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			s.TearDownTest()</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Credentials"><a href="#Credentials" class="headerlink" title="Credentials"></a>Credentials</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">credentials:</span></span><br><span class="line">  <span class="attr">system:</span></span><br><span class="line">    <span class="attr">domainCredentials:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">credentials:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">string:</span></span><br><span class="line">              <span class="attr">description:</span> <span class="string">&quot;example description&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;secret-text-id&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">secret:</span> <span class="string">&quot;text&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">usernamePassword:</span></span><br><span class="line">              <span class="attr">description:</span> <span class="string">&quot;example description&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;username-password-id&quot;</span></span><br><span class="line">              <span class="attr">password:</span> <span class="string">&quot;password&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">username:</span> <span class="string">&quot;username&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">file:</span></span><br><span class="line">              <span class="attr">fileName:</span> <span class="string">&quot;filename&quot;</span></span><br><span class="line">              <span class="attr">id:</span> <span class="string">&quot;file-cred-id&quot;</span></span><br><span class="line">              <span class="attr">scope:</span> <span class="string">GLOBAL</span></span><br><span class="line">              <span class="attr">secretBytes:</span> <span class="string">&quot;ZmlsZQ==&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Update-Config"><a href="#Update-Config" class="headerlink" title="Update Config"></a>Update Config</h2><p>How to update the config</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NS=cicd <span class="comment"># namespace</span></span><br><span class="line">NAME=jenkins-jenkins-jcasc-config <span class="comment"># config name</span></span><br><span class="line">CFG_PATH=./jcasc-default-config.yaml <span class="comment"># you want to update from file path</span></span><br><span class="line"></span><br><span class="line">kubectl --namespace=<span class="variable">$&#123;NS&#125;</span> create configmap <span class="variable">$&#123;NAME&#125;</span> \</span><br><span class="line">  --from-file=<span class="variable">$&#123;CFG_PATH&#125;</span> \</span><br><span class="line">  -o yaml \</span><br><span class="line">  --save-config \</span><br><span class="line">  --dry-run=client | kubectl apply -f -</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>golang</tag>
-        <tag>software development</tag>
-        <tag>unit test</tag>
+        <tag>howto</tag>
+        <tag>jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -1137,6 +1123,20 @@
       </tags>
   </entry>
   <entry>
+    <title>How to use mock code in unit test</title>
+    <url>/posts/how-to-use-mock-code-in-unit-test/</url>
+    <content><![CDATA[<h2 id="定義-test-suite"><a href="#定義-test-suite" class="headerlink" title="定義 test suite"></a>定義 test suite</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// biz_test.go</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// declare test suite struct</span></span><br><span class="line"><span class="keyword">type</span> bizSuite <span class="keyword">struct</span> &#123;</span><br><span class="line">	suite.Suite</span><br><span class="line">	mock *mocks.IRepo</span><br><span class="line">	biz  IBiz</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// setup test suite</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *bizSuite)</span> <span class="title">SetupTest</span><span class="params">()</span></span> &#123;</span><br><span class="line">	logger, _ := zap.NewDevelopment()</span><br><span class="line">	node, _ := snowflake.NewNode(<span class="number">1</span>)</span><br><span class="line">	factory, _ := token.New(&amp;token.Options&#123;Signature: <span class="string">&quot;7d01eb0200bc730a2c58&quot;</span>&#125;, logger)</span><br><span class="line"></span><br><span class="line">	s.mock = <span class="built_in">new</span>(mocks.IRepo)</span><br><span class="line">	<span class="keyword">if</span> biz, err := CreateIBiz(logger, s.mock, node, factory); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		s.biz = biz</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// teardown test suite</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *bizSuite)</span> <span class="title">TearDownTest</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s.mock.AssertExpectations(s.T())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestBizSuite</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	suite.Run(t, <span class="built_in">new</span>(bizSuite))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="撰寫測試"><a href="#撰寫測試" class="headerlink" title="撰寫測試"></a>撰寫測試</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *bizSuite)</span> <span class="title">Test_impl_GetByID</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">type</span> args <span class="keyword">struct</span> &#123;</span><br><span class="line">		ctx  contextx.Contextx</span><br><span class="line">		id   <span class="keyword">int64</span></span><br><span class="line">		mock <span class="function"><span class="keyword">func</span><span class="params">()</span></span></span><br><span class="line">	&#125;</span><br><span class="line">	tests := []<span class="keyword">struct</span> &#123;</span><br><span class="line">		name     <span class="keyword">string</span></span><br><span class="line">		args     args</span><br><span class="line">		wantInfo *user.Profile</span><br><span class="line">		wantErr  <span class="keyword">bool</span></span><br><span class="line">	&#125;&#123;</span><br><span class="line">		&#123;</span><br><span class="line">			name: <span class="string">&quot;get by id then error&quot;</span>,</span><br><span class="line">			args: args&#123;id: id1, mock: <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">				s.mock.On(<span class="string">&quot;GetByID&quot;</span>, mock.Anything, id1).Return(<span class="literal">nil</span>, errors.New(<span class="string">&quot;error&quot;</span>)).Once()</span><br><span class="line">			&#125;&#125;,</span><br><span class="line">			wantInfo: <span class="literal">nil</span>,</span><br><span class="line">			wantErr:  <span class="literal">true</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			name: <span class="string">&quot;get by id then not exists&quot;</span>,</span><br><span class="line">			args: args&#123;id: id1, mock: <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">				s.mock.On(<span class="string">&quot;GetByID&quot;</span>, mock.Anything, id1).Return(<span class="literal">nil</span>, <span class="literal">nil</span>).Once()</span><br><span class="line">			&#125;&#125;,</span><br><span class="line">			wantInfo: <span class="literal">nil</span>,</span><br><span class="line">			wantErr:  <span class="literal">true</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			name: <span class="string">&quot;get by id then user&quot;</span>,</span><br><span class="line">			args: args&#123;id: id1, mock: <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">				s.mock.On(<span class="string">&quot;GetByID&quot;</span>, mock.Anything, id1).Return(info1, <span class="literal">nil</span>).Once()</span><br><span class="line">			&#125;&#125;,</span><br><span class="line">			wantInfo: info1,</span><br><span class="line">			wantErr:  <span class="literal">false</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, tt := <span class="keyword">range</span> tests &#123;</span><br><span class="line">		s.T().Run(tt.name, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">			<span class="keyword">if</span> tt.args.mock != <span class="literal">nil</span> &#123;</span><br><span class="line">				tt.args.mock()</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			gotInfo, err := s.biz.GetByID(tt.args.ctx, tt.args.id)</span><br><span class="line">			<span class="keyword">if</span> (err != <span class="literal">nil</span>) != tt.wantErr &#123;</span><br><span class="line">				t.Errorf(<span class="string">&quot;GetByID() error = %v, wantErr %v&quot;</span>, err, tt.wantErr)</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> !reflect.DeepEqual(gotInfo, tt.wantInfo) &#123;</span><br><span class="line">				t.Errorf(<span class="string">&quot;GetByID() gotInfo = %v, want %v&quot;</span>, gotInfo, tt.wantInfo)</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			s.TearDownTest()</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>golang</tag>
+        <tag>software development</tag>
+        <tag>unit test</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to use mockery in golang</title>
     <url>/posts/how-to-use-mockery-in-golang/</url>
     <content><![CDATA[<p><a href="https://github.com/vektra/mockeryhttps://github.com/vektra/mockery">mockery</a></p>
@@ -1155,27 +1155,6 @@
         <tag>software</tag>
         <tag>development</tag>
         <tag>mockery</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to use protobuf in golang</title>
-    <url>/posts/how-to-use-protobuf-in-golang/</url>
-    <content><![CDATA[<div class="note primary"></div>
-
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go get google.golang.org/protobuf</span><br><span class="line">go get google.golang.org/protobuf/cmd/protoc-gen-go</span><br></pre></td></tr></table></figure>
-
-<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>在 <code>Golang</code> 裡是沒有 <code>enum</code> 的功能，這時候用 <code>protobuf</code> 是個蠻好的解法。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># bonus.proto</span><br><span class="line">syntax = &quot;proto3&quot;;</span><br><span class="line">package bonus;</span><br><span class="line">option go_package = &quot;github.com/blackhorseya/red-packet/internal/pkg/entity/bonus&quot;;</span><br><span class="line"></span><br><span class="line">enum Status &#123;</span><br><span class="line">  UNKNOWN = 1;</span><br><span class="line">  ENABLED = 2;</span><br><span class="line">  DISABLED = 3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message Packet &#123;</span><br><span class="line">  string id = 1;</span><br><span class="line">  int64 amount = 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>透過 <code>Makefile</code> 去產生 code</p>
-<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: gen-pb</span></span><br><span class="line"><span class="section">gen-pb:</span></span><br><span class="line">	@protoc --go_out=plugins=grpc,paths=source_relative:. ./internal/pkg/entity/**/*.proto</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>howto</tag>
-        <tag>golang</tag>
-        <tag>software</tag>
-        <tag>development</tag>
-        <tag>protobuf</tag>
       </tags>
   </entry>
   <entry>
@@ -1218,6 +1197,50 @@
       </tags>
   </entry>
   <entry>
+    <title>How to use protobuf in golang</title>
+    <url>/posts/how-to-use-protobuf-in-golang/</url>
+    <content><![CDATA[<div class="note primary"></div>
+
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go get google.golang.org/protobuf</span><br><span class="line">go get google.golang.org/protobuf/cmd/protoc-gen-go</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>在 <code>Golang</code> 裡是沒有 <code>enum</code> 的功能，這時候用 <code>protobuf</code> 是個蠻好的解法。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># bonus.proto</span><br><span class="line">syntax = &quot;proto3&quot;;</span><br><span class="line">package bonus;</span><br><span class="line">option go_package = &quot;github.com/blackhorseya/red-packet/internal/pkg/entity/bonus&quot;;</span><br><span class="line"></span><br><span class="line">enum Status &#123;</span><br><span class="line">  UNKNOWN = 1;</span><br><span class="line">  ENABLED = 2;</span><br><span class="line">  DISABLED = 3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message Packet &#123;</span><br><span class="line">  string id = 1;</span><br><span class="line">  int64 amount = 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>透過 <code>Makefile</code> 去產生 code</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: gen-pb</span></span><br><span class="line"><span class="section">gen-pb:</span></span><br><span class="line">	@protoc --go_out=plugins=grpc,paths=source_relative:. ./internal/pkg/entity/**/*.proto</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>golang</tag>
+        <tag>software</tag>
+        <tag>development</tag>
+        <tag>protobuf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How to use terraform cloud</title>
+    <url>/posts/how-to-use-terraform-cloud/</url>
+    <content><![CDATA[<p><a href="https://www.terraform.io/">Terraform</a></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install terraform</span><br></pre></td></tr></table></figure>
+
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">terraform login</span><br></pre></td></tr></table></figure>
+
+<h2 id="Get-Started"><a href="#Get-Started" class="headerlink" title="Get Started"></a>Get Started</h2><p>Reference official <a href="https://learn.hashicorp.com/terraform?utm_source=terraform_io">tutorials</a></p>
+<p>設定 <code>backend</code> 為 <code>remote</code>，會將 <code>.tfstat</code> 存至 <code>terraform cloud</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># main.tf</span><br><span class="line">terraform &#123;</span><br><span class="line">  backend &quot;remote&quot; &#123;</span><br><span class="line">    organization = &quot;$&#123;YOUR_ORG&#125;&quot;</span><br><span class="line"></span><br><span class="line">    workspaces &#123;</span><br><span class="line">      name = &quot;$&#123;YOUR_WORKSPACE&#125;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">provider &quot;google&quot; &#123;</span><br><span class="line">  credentials = file(&quot;$&#123;YOUR_GCLOUD_SA_KEY&#125;&quot;)</span><br><span class="line">  project     = &quot;$&#123;YOUR_PROJECT_ID&#125;&quot;</span><br><span class="line">  region      = &quot;asia-east1&quot;</span><br><span class="line">  zone        = &quot;asia-east1-c&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Init"><a href="#Init" class="headerlink" title="Init"></a>Init</h3><p>初始化 <code>terraform</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">terraform init</span><br></pre></td></tr></table></figure>
+
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># storage.tf</span><br><span class="line">## set a bucket for static site</span><br><span class="line">resource &quot;google_storage_bucket&quot; &quot;static-site&quot; &#123;</span><br><span class="line">  name          = &quot;image-store.com&quot;</span><br><span class="line">  location      = &quot;US&quot;</span><br><span class="line">  force_destroy = true</span><br><span class="line">  </span><br><span class="line">  uniform_bucket_level_access = true</span><br><span class="line">  </span><br><span class="line">  website &#123;</span><br><span class="line">    main_page_suffix = &quot;index.html&quot;</span><br><span class="line">    not_found_page   = &quot;404.html&quot;</span><br><span class="line">  &#125;</span><br><span class="line">  cors &#123;</span><br><span class="line">    origin          = [&quot;http://image-store.com&quot;]</span><br><span class="line">    response_header = [&quot;*&quot;]</span><br><span class="line">    max_age_seconds = 3600</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">## set public access control for static site</span><br><span class="line">resource &quot;google_storage_bucket_iam_binding&quot; &quot;public_binding&quot; &#123;</span><br><span class="line">  bucket = google_storage_bucket.static-site.name</span><br><span class="line">  role = &quot;roles/storage.objectViewer&quot;</span><br><span class="line">  members = [</span><br><span class="line">    &quot;allUsers&quot;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>terraform</tag>
+        <tag>IaC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>how to use oauth2 via auth0</title>
     <url>/posts/how-to-use-oauth2-via-auth0/</url>
     <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><a href="https://auth0.com">auth0</a></p>
@@ -1243,29 +1266,6 @@
         <tag>golang</tag>
         <tag>oauth2</tag>
         <tag>auth0</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to use terraform cloud</title>
-    <url>/posts/how-to-use-terraform-cloud/</url>
-    <content><![CDATA[<p><a href="https://www.terraform.io/">Terraform</a></p>
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install terraform</span><br></pre></td></tr></table></figure>
-
-<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">terraform login</span><br></pre></td></tr></table></figure>
-
-<h2 id="Get-Started"><a href="#Get-Started" class="headerlink" title="Get Started"></a>Get Started</h2><p>Reference official <a href="https://learn.hashicorp.com/terraform?utm_source=terraform_io">tutorials</a></p>
-<p>設定 <code>backend</code> 為 <code>remote</code>，會將 <code>.tfstat</code> 存至 <code>terraform cloud</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># main.tf</span><br><span class="line">terraform &#123;</span><br><span class="line">  backend &quot;remote&quot; &#123;</span><br><span class="line">    organization = &quot;$&#123;YOUR_ORG&#125;&quot;</span><br><span class="line"></span><br><span class="line">    workspaces &#123;</span><br><span class="line">      name = &quot;$&#123;YOUR_WORKSPACE&#125;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">provider &quot;google&quot; &#123;</span><br><span class="line">  credentials = file(&quot;$&#123;YOUR_GCLOUD_SA_KEY&#125;&quot;)</span><br><span class="line">  project     = &quot;$&#123;YOUR_PROJECT_ID&#125;&quot;</span><br><span class="line">  region      = &quot;asia-east1&quot;</span><br><span class="line">  zone        = &quot;asia-east1-c&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Init"><a href="#Init" class="headerlink" title="Init"></a>Init</h3><p>初始化 <code>terraform</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">terraform init</span><br></pre></td></tr></table></figure>
-
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># storage.tf</span><br><span class="line">## set a bucket for static site</span><br><span class="line">resource &quot;google_storage_bucket&quot; &quot;static-site&quot; &#123;</span><br><span class="line">  name          = &quot;image-store.com&quot;</span><br><span class="line">  location      = &quot;US&quot;</span><br><span class="line">  force_destroy = true</span><br><span class="line">  </span><br><span class="line">  uniform_bucket_level_access = true</span><br><span class="line">  </span><br><span class="line">  website &#123;</span><br><span class="line">    main_page_suffix = &quot;index.html&quot;</span><br><span class="line">    not_found_page   = &quot;404.html&quot;</span><br><span class="line">  &#125;</span><br><span class="line">  cors &#123;</span><br><span class="line">    origin          = [&quot;http://image-store.com&quot;]</span><br><span class="line">    response_header = [&quot;*&quot;]</span><br><span class="line">    max_age_seconds = 3600</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">## set public access control for static site</span><br><span class="line">resource &quot;google_storage_bucket_iam_binding&quot; &quot;public_binding&quot; &#123;</span><br><span class="line">  bucket = google_storage_bucket.static-site.name</span><br><span class="line">  role = &quot;roles/storage.objectViewer&quot;</span><br><span class="line">  members = [</span><br><span class="line">    &quot;allUsers&quot;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>howto</tag>
-        <tag>terraform</tag>
-        <tag>IaC</tag>
       </tags>
   </entry>
   <entry>
@@ -1355,36 +1355,6 @@
       </tags>
   </entry>
   <entry>
-    <title>how to write golang project layout</title>
-    <url>/posts/how-to-write-golang-project-layout/</url>
-    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Project layout is <strong>important</strong> in <code>golang</code> because each folder is a package. So I will follow up <a href="https://github.com/golang-standards/project-layout">golang project layout</a> and <a href="https://github.com/sdgmf/go-project-sample">go project sample</a> two projects integrate to my project layout.</p>
-<h2 id="Project-layout"><a href="#Project-layout" class="headerlink" title="Project layout"></a>Project layout</h2><h3 id="Go-Directories"><a href="#Go-Directories" class="headerlink" title="Go Directories"></a>Go Directories</h3><h4 id="cmd"><a href="#cmd" class="headerlink" title="/cmd"></a>/cmd</h4><p>Main applications for this project. (e.g., <code>/cmd/todo-app</code>)</p>
-<h4 id="internal"><a href="#internal" class="headerlink" title="/internal"></a>/internal</h4><p>Private application and library code. (e.go., <code>/internal/app/todo</code>, <code>internal/pkg/lib</code>).</p>
-<h4 id="pkg"><a href="#pkg" class="headerlink" title="/pkg"></a>/pkg</h4><p>Library code that’s ok to use by external application (e.g., <code>pkg/utils</code>).</p>
-<h4 id="pb"><a href="#pb" class="headerlink" title="/pb"></a>/pb</h4><p>It’s protobuf for this project.</p>
-<p>You can generate <code>protobuf</code> in <code>Makefile</code>.</p>
-<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: gen-pb</span></span><br><span class="line"><span class="section">gen-pb:</span></span><br><span class="line">	@protoc --go_out=paths=source_relative:. --go-grpc_out=paths=source_relative:. ./pb/*.proto</span><br><span class="line">	@echo Successfully generated proto</span><br></pre></td></tr></table></figure>
-
-<h3 id="Service-application-directories"><a href="#Service-application-directories" class="headerlink" title="Service application directories"></a>Service application directories</h3><h4 id="api"><a href="#api" class="headerlink" title="/api"></a>/api</h4><p>OpenAPI/Swagger specs.</p>
-<p>You can generate <code>Swagger</code> spec in <code>Makefile</code>.</p>
-<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: gen-swagger</span></span><br><span class="line"><span class="section">gen-swagger:</span></span><br><span class="line">	@swag init -g cmd/<span class="variable">$(APP_NAME)</span>/main.go --parseInternal -o api/docs</span><br></pre></td></tr></table></figure>
-
-<h4 id="web"><a href="#web" class="headerlink" title="/web"></a>/web</h4><p>Web application specific components: static web assets, server side templates and SPAs.</p>
-<h3 id="Common-application-directories"><a href="#Common-application-directories" class="headerlink" title="Common application directories"></a>Common application directories</h3><h4 id="configs"><a href="#configs" class="headerlink" title="/configs"></a>/configs</h4><p>Configuration file templates or default configs.</p>
-<h4 id="scripts"><a href="#scripts" class="headerlink" title="/scripts"></a>/scripts</h4><p>Scripts to perform various build, install, analysis, etc. operations.</p>
-<h4 id="deployments"><a href="#deployments" class="headerlink" title="/deployments"></a>/deployments</h4><p>IaaS, PaaS, system and container orchestration deployment configurations and templates (docker-compose, kubernetes/helm, mesos, terraform, bosh).</p>
-<h4 id="test"><a href="#test" class="headerlink" title="/test"></a>/test</h4><p>Additional external test apps and test data. For example, you can have <code>/test/testdata</code>.</p>
-<h3 id="Other-directories"><a href="#Other-directories" class="headerlink" title="Other directories"></a>Other directories</h3><h4 id="docs"><a href="#docs" class="headerlink" title="/docs"></a>/docs</h4><p>Design and user documents (in addition to your godoc generated documentation).</p>
-<h4 id="examples"><a href="#examples" class="headerlink" title="/examples"></a>/examples</h4><p>Examples for your applications and/or public libraries.</p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>You can view my complete open source repository.</p>
-<p><a href="https://github.com/blackhorseya/todo-app">Todo APP</a></p>
-]]></content>
-      <tags>
-        <tag>howto</tag>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>how to write git commit message</title>
     <url>/posts/how-to-write-git-commit-message/</url>
     <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The git commit message is very <strong>important</strong>. You can use commit message to generate <code>CHANGELOG</code> in your ci pipeline Or any you want to do something.<br>So, We can standardize standard commit message for you or your team.</p>
@@ -1450,6 +1420,62 @@
       </tags>
   </entry>
   <entry>
+    <title>how to write golang project layout</title>
+    <url>/posts/how-to-write-golang-project-layout/</url>
+    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Project layout is <strong>important</strong> in <code>golang</code> because each folder is a package. So I will follow up <a href="https://github.com/golang-standards/project-layout">golang project layout</a> and <a href="https://github.com/sdgmf/go-project-sample">go project sample</a> two projects integrate to my project layout.</p>
+<h2 id="Project-layout"><a href="#Project-layout" class="headerlink" title="Project layout"></a>Project layout</h2><h3 id="Go-Directories"><a href="#Go-Directories" class="headerlink" title="Go Directories"></a>Go Directories</h3><h4 id="cmd"><a href="#cmd" class="headerlink" title="/cmd"></a>/cmd</h4><p>Main applications for this project. (e.g., <code>/cmd/todo-app</code>)</p>
+<h4 id="internal"><a href="#internal" class="headerlink" title="/internal"></a>/internal</h4><p>Private application and library code. (e.go., <code>/internal/app/todo</code>, <code>internal/pkg/lib</code>).</p>
+<h4 id="pkg"><a href="#pkg" class="headerlink" title="/pkg"></a>/pkg</h4><p>Library code that’s ok to use by external application (e.g., <code>pkg/utils</code>).</p>
+<h4 id="pb"><a href="#pb" class="headerlink" title="/pb"></a>/pb</h4><p>It’s protobuf for this project.</p>
+<p>You can generate <code>protobuf</code> in <code>Makefile</code>.</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: gen-pb</span></span><br><span class="line"><span class="section">gen-pb:</span></span><br><span class="line">	@protoc --go_out=paths=source_relative:. --go-grpc_out=paths=source_relative:. ./pb/*.proto</span><br><span class="line">	@echo Successfully generated proto</span><br></pre></td></tr></table></figure>
+
+<h3 id="Service-application-directories"><a href="#Service-application-directories" class="headerlink" title="Service application directories"></a>Service application directories</h3><h4 id="api"><a href="#api" class="headerlink" title="/api"></a>/api</h4><p>OpenAPI/Swagger specs.</p>
+<p>You can generate <code>Swagger</code> spec in <code>Makefile</code>.</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: gen-swagger</span></span><br><span class="line"><span class="section">gen-swagger:</span></span><br><span class="line">	@swag init -g cmd/<span class="variable">$(APP_NAME)</span>/main.go --parseInternal -o api/docs</span><br></pre></td></tr></table></figure>
+
+<h4 id="web"><a href="#web" class="headerlink" title="/web"></a>/web</h4><p>Web application specific components: static web assets, server side templates and SPAs.</p>
+<h3 id="Common-application-directories"><a href="#Common-application-directories" class="headerlink" title="Common application directories"></a>Common application directories</h3><h4 id="configs"><a href="#configs" class="headerlink" title="/configs"></a>/configs</h4><p>Configuration file templates or default configs.</p>
+<h4 id="scripts"><a href="#scripts" class="headerlink" title="/scripts"></a>/scripts</h4><p>Scripts to perform various build, install, analysis, etc. operations.</p>
+<h4 id="deployments"><a href="#deployments" class="headerlink" title="/deployments"></a>/deployments</h4><p>IaaS, PaaS, system and container orchestration deployment configurations and templates (docker-compose, kubernetes/helm, mesos, terraform, bosh).</p>
+<h4 id="test"><a href="#test" class="headerlink" title="/test"></a>/test</h4><p>Additional external test apps and test data. For example, you can have <code>/test/testdata</code>.</p>
+<h3 id="Other-directories"><a href="#Other-directories" class="headerlink" title="Other directories"></a>Other directories</h3><h4 id="docs"><a href="#docs" class="headerlink" title="/docs"></a>/docs</h4><p>Design and user documents (in addition to your godoc generated documentation).</p>
+<h4 id="examples"><a href="#examples" class="headerlink" title="/examples"></a>/examples</h4><p>Examples for your applications and/or public libraries.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>You can view my complete open source repository.</p>
+<p><a href="https://github.com/blackhorseya/todo-app">Todo APP</a></p>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>What is trunk-based development</title>
+    <url>/posts/what-is-trunk-based-development/</url>
+    <content><![CDATA[<h2 id="What-is"><a href="#What-is" class="headerlink" title="What is"></a>What is</h2><p>Trunk-based development(TBD) 是一種軟體開發策略，就像是 <code>git-flow</code>。<br>利用主幹開發可以完整的呈現軟體開發的歷程，像是在 master 上重現 bug。</p>
+<p><img src="what_is_trunk.jpg" alt="what&#39;s trunk"></p>
+<h2 id="Trunk-Based-Development-For-Smaller-Teams"><a href="#Trunk-Based-Development-For-Smaller-Teams" class="headerlink" title="Trunk-Based Development For Smaller Teams"></a>Trunk-Based Development For Smaller Teams</h2><p><img src="trunk1b.png" alt="workflow for smaller teams"></p>
+<h2 id="Scaled-Trunk-Based-Development"><a href="#Scaled-Trunk-Based-Development" class="headerlink" title="Scaled Trunk-Based Development"></a>Scaled Trunk-Based Development</h2><p><img src="trunk1c.png" alt="workflow for scale"></p>
+<h2 id="Key-Points"><a href="#Key-Points" class="headerlink" title="Key Points"></a>Key Points</h2><p>在這個策略有一些很重要的重點</p>
+<h3 id="Developers"><a href="#Developers" class="headerlink" title="Developers"></a>Developers</h3><ul>
+<li>一般而言，只能在 master 上 commit</li>
+<li>確保每一個 commit 是可以正常運作的</li>
+<li>準缺的拆分每個 commit</li>
+</ul>
+<h3 id="Release"><a href="#Release" class="headerlink" title="Release"></a>Release</h3><ul>
+<li>release 時會從 master create a release branch 像是 release-1.1</li>
+<li>一旦 release 後就不太會更動，除非是一些 bug fix</li>
+<li>release branch 完成它的任務時就可以被砍掉了</li>
+<li>所有 bug fix 都應該發生在 master 再使用 <code>cherry-pick</code> 到 release branch</li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>我覺得 TBD 對於 release 是非常友善的，但是很考驗 developers 的能力，像是拆分 commit 並確保每個 commit 是能正常的運行。相較 <code>git-flow</code> 不會出現 merge conflict。</p>
+]]></content>
+      <tags>
+        <tag>software</tag>
+        <tag>development</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Installing kubernetes on-premise with kubespray</title>
     <url>/posts/installing-kubernetes-on-premise-with-kubespray/</url>
     <content><![CDATA[<p>可以參考官方提供的<a href="https://kubespray.io/#/docs/comparisons">比較</a></p>
@@ -1481,32 +1507,6 @@
       <tags>
         <tag>kubernetes</tag>
         <tag>kubespray</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>What is trunk-based development</title>
-    <url>/posts/what-is-trunk-based-development/</url>
-    <content><![CDATA[<h2 id="What-is"><a href="#What-is" class="headerlink" title="What is"></a>What is</h2><p>Trunk-based development(TBD) 是一種軟體開發策略，就像是 <code>git-flow</code>。<br>利用主幹開發可以完整的呈現軟體開發的歷程，像是在 master 上重現 bug。</p>
-<p><img src="what_is_trunk.jpg" alt="what&#39;s trunk"></p>
-<h2 id="Trunk-Based-Development-For-Smaller-Teams"><a href="#Trunk-Based-Development-For-Smaller-Teams" class="headerlink" title="Trunk-Based Development For Smaller Teams"></a>Trunk-Based Development For Smaller Teams</h2><p><img src="trunk1b.png" alt="workflow for smaller teams"></p>
-<h2 id="Scaled-Trunk-Based-Development"><a href="#Scaled-Trunk-Based-Development" class="headerlink" title="Scaled Trunk-Based Development"></a>Scaled Trunk-Based Development</h2><p><img src="trunk1c.png" alt="workflow for scale"></p>
-<h2 id="Key-Points"><a href="#Key-Points" class="headerlink" title="Key Points"></a>Key Points</h2><p>在這個策略有一些很重要的重點</p>
-<h3 id="Developers"><a href="#Developers" class="headerlink" title="Developers"></a>Developers</h3><ul>
-<li>一般而言，只能在 master 上 commit</li>
-<li>確保每一個 commit 是可以正常運作的</li>
-<li>準缺的拆分每個 commit</li>
-</ul>
-<h3 id="Release"><a href="#Release" class="headerlink" title="Release"></a>Release</h3><ul>
-<li>release 時會從 master create a release branch 像是 release-1.1</li>
-<li>一旦 release 後就不太會更動，除非是一些 bug fix</li>
-<li>release branch 完成它的任務時就可以被砍掉了</li>
-<li>所有 bug fix 都應該發生在 master 再使用 <code>cherry-pick</code> 到 release branch</li>
-</ul>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>我覺得 TBD 對於 release 是非常友善的，但是很考驗 developers 的能力，像是拆分 commit 並確保每個 commit 是能正常的運行。相較 <code>git-flow</code> 不會出現 merge conflict。</p>
-]]></content>
-      <tags>
-        <tag>software</tag>
-        <tag>development</tag>
       </tags>
   </entry>
   <entry>
