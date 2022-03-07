@@ -2,12 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.1">
-
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/logo512.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/logo512.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/logo192.png">
@@ -17,10 +14,14 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.seancheng.space","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="How to set up EKS via terraform achieve Infrastructure as Code(IaC)">
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.seancheng.space","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="How to set up EKS via terraform achieve Infrastructure as Code(IaC)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="how to set up EKS via terraform">
 <meta property="og:url" content="https://blog.seancheng.space/posts/how-to-set-up-EKS-via-terraform/index.html">
@@ -42,22 +43,68 @@
 <link rel="canonical" href="https://blog.seancheng.space/posts/how-to-set-up-EKS-via-terraform/">
 
 
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://blog.seancheng.space/posts/how-to-set-up-EKS-via-terraform/","path":"posts/how-to-set-up-EKS-via-terraform/","title":"how to set up EKS via terraform"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>how to set up EKS via terraform | Sean's blog</title>
+  <title>how to set up EKS via terraform | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-157746412-1","only_pageview":false}</script>
-  <script src="/js/third-party/analytics/google-analytics.js"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-157746412-1');
+      }
+    </script>
+
+
 
 
 
 
   <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -67,7 +114,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    <div class="toggle" aria-label="Toggle navigation bar">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -78,7 +125,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">Sean's blog</p>
+      <h1 class="site-title">Sean's blog</h1>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Software Engineer</p>
@@ -95,11 +142,31 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
-        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">59</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">0</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li>
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">59</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -110,7 +177,8 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
+    <div class="popup search-popup">
+        <div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
@@ -119,7 +187,7 @@
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close" role="button">
+  <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -135,7 +203,7 @@
 </div>
         
   
-  <div class="toggle sidebar-toggle" role="button">
+  <div class="toggle sidebar-toggle">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -153,28 +221,29 @@
         </li>
       </ul>
 
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisite"><span class="nav-number">2.</span> <span class="nav-text">Prerequisite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Initialize-project"><span class="nav-number">3.</span> <span class="nav-text">Initialize project</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-up-EKS"><span class="nav-number">4.</span> <span class="nav-text">Set up EKS</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisite"><span class="nav-number">2.</span> <span class="nav-text">Prerequisite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Initialize-project"><span class="nav-number">3.</span> <span class="nav-text">Initialize project</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-up-EKS"><span class="nav-number">4.</span> <span class="nav-text">Set up EKS</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
 
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Sean Zheng</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        <a href="/archives/">
+          <a href="/archives/">
+        
           <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-          <a href="/tags/">
+            <a href="/tags/">
+          
         <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
@@ -194,8 +263,7 @@
 
 
 
-        </div>
-      </div>
+      </section>
     </div>
   </aside>
   <div class="sidebar-dimmer"></div>
@@ -204,7 +272,7 @@
     </header>
 
     
-  <div class="back-to-top" role="button" aria-label="Back to top">
+  <div class="back-to-top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -218,7 +286,9 @@
 
 
     <div class="main-inner post posts-expand">
+      
 
+      
 
   
 
@@ -276,12 +346,12 @@
         <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>We can use <code>terraform</code> to set up a lot of infrastructure configuration. So I will set up <code>EKS</code> via <code>terraform</code> today.</p>
 <h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p><a target="_blank" rel="noopener" href="https://www.terraform.io/">Terraform</a><br><a target="_blank" rel="noopener" href="https://aws.amazon.com/">AWS</a></p>
 <h2 id="Initialize-project"><a href="#Initialize-project" class="headerlink" title="Initialize project"></a>Initialize project</h2><p>Write <code>main.tf</code> and <code>variables.tf</code> files</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># main.tf</span><br><span class="line">terraform &#123;</span><br><span class="line">  required_providers &#123;</span><br><span class="line">    aws = &#123;</span><br><span class="line">      source = &quot;hashicorp/aws&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">provider &quot;aws&quot; &#123;</span><br><span class="line">  region     = &quot;us-east-2&quot;</span><br><span class="line">  access_key = var.aws_access_key</span><br><span class="line">  secret_key = var.aws_secret_key</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># main.tf</span><br><span class="line">terraform &#123;</span><br><span class="line">  required_providers &#123;</span><br><span class="line">    aws &#x3D; &#123;</span><br><span class="line">      source &#x3D; &quot;hashicorp&#x2F;aws&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">provider &quot;aws&quot; &#123;</span><br><span class="line">  region     &#x3D; &quot;us-east-2&quot;</span><br><span class="line">  access_key &#x3D; var.aws_access_key</span><br><span class="line">  secret_key &#x3D; var.aws_secret_key</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># variables.tf</span><br><span class="line">variable &quot;aws_access_key&quot; &#123;</span><br><span class="line">  type = string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">variable &quot;aws_secret_key&quot; &#123;</span><br><span class="line">  type = string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># variables.tf</span><br><span class="line">variable &quot;aws_access_key&quot; &#123;</span><br><span class="line">  type &#x3D; string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">variable &quot;aws_secret_key&quot; &#123;</span><br><span class="line">  type &#x3D; string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Then you can run <code>terraform init</code> to initialize your project.</p>
-<h2 id="Set-up-EKS"><a href="#Set-up-EKS" class="headerlink" title="Set up EKS"></a>Set up EKS</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"># eks.tf</span><br><span class="line">resource &quot;aws_iam_role&quot; &quot;eks_cluster&quot; &#123;</span><br><span class="line">  name = &quot;eks-cluster&quot;</span><br><span class="line"></span><br><span class="line">  assume_role_policy = jsondecode(&#123;</span><br><span class="line">    &quot;Version&quot; : &quot;2012-10-17&quot;,</span><br><span class="line">    &quot;Statement&quot; : [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;Effect&quot; : &quot;Allow&quot;,</span><br><span class="line">        &quot;Principal&quot; : &#123;</span><br><span class="line">          &quot;Service&quot; : &quot;eks.amazonaws.com&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;Action&quot; : &quot;sts:AssumeRole&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;AmazonEKSClusterPolicy&quot; &#123;</span><br><span class="line">  policy_arn = &quot;arn:aws:iam::aws:policy/AmazonEKSClusterPolicy&quot;</span><br><span class="line">  role       = aws_iam_role.eks_cluster.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;AmazonEKSServicePolicy&quot; &#123;</span><br><span class="line">  policy_arn = &quot;arn:aws:iam::aws:policy/AmazonEKSServicePolicy&quot;</span><br><span class="line">  role       = aws_iam_role.eks_cluster.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_eks_cluster&quot; &quot;aws_eks&quot; &#123;</span><br><span class="line">  name     = &quot;my-cluster&quot;</span><br><span class="line">  role_arn = aws_iam_role.eks_cluster.arn</span><br><span class="line"></span><br><span class="line">  vpc_config &#123;</span><br><span class="line">    # change this to your subnet ids</span><br><span class="line">    subnet_ids = [&quot;subnet-03425fce64e1d9cc5&quot;, &quot;subnet-01765ab9b3f13dace&quot;]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  tags = &#123;</span><br><span class="line">    name = &quot;my-cluster&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role&quot; &quot;eks_nodes&quot; &#123;</span><br><span class="line">  name = &quot;eks-node-group&quot;</span><br><span class="line"></span><br><span class="line">  assume_role_policy = jsondecode(&#123;</span><br><span class="line">    &quot;Version&quot; : &quot;2012-10-17&quot;,</span><br><span class="line">    &quot;Statement&quot; : [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;Effect&quot; : &quot;Allow&quot;,</span><br><span class="line">        &quot;Principal&quot; : &#123;</span><br><span class="line">          &quot;Service&quot; : &quot;ec2.amazonaws.com&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;Action&quot; : &quot;sts:AssumeRole&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;CloudWatchAgentServerPolicy&quot; &#123;</span><br><span class="line">  policy_arn = &quot;arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy&quot;</span><br><span class="line">  role       = aws_iam_role.eks_nodes.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;AmazonEKSWorkerNodePolicy&quot; &#123;</span><br><span class="line">  policy_arn = &quot;arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy&quot;</span><br><span class="line">  role       = aws_iam_role.eks_nodes.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;AmazonEKS_CNI_Policy&quot; &#123;</span><br><span class="line">  policy_arn = &quot;arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy&quot;</span><br><span class="line">  role       = aws_iam_role.eks_nodes.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;AmazonEC2ContainerRegistryReadOnly&quot; &#123;</span><br><span class="line">  policy_arn = &quot;arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly&quot;</span><br><span class="line">  role       = aws_iam_role.eks_nodes.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_eks_node_group&quot; &quot;node&quot; &#123;</span><br><span class="line">  cluster_name    = aws_eks_cluster.aws_eks.name</span><br><span class="line">  node_group_name = &quot;node&quot;</span><br><span class="line">  node_role_arn   = aws_iam_role.eks_nodes.arn</span><br><span class="line">  # change this to your subnet ids</span><br><span class="line">  subnet_ids      = [&quot;subnet-03425fce64e1d9cc5&quot;, &quot;subnet-01765ab9b3f13dace&quot;]</span><br><span class="line">  # you can change this to you want instance type</span><br><span class="line">  instance_types  = [&quot;t3.xlarge&quot;]</span><br><span class="line"></span><br><span class="line">  # you can change desired_size for default node count</span><br><span class="line">  scaling_config &#123;</span><br><span class="line">    desired_size = 3</span><br><span class="line">    max_size     = 5</span><br><span class="line">    min_size     = 1</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.</span><br><span class="line">  # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.</span><br><span class="line">  depends_on = [</span><br><span class="line">    aws_iam_role_policy_attachment.CloudWatchAgentServerPolicy,</span><br><span class="line">    aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,</span><br><span class="line">    aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,</span><br><span class="line">    aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Set-up-EKS"><a href="#Set-up-EKS" class="headerlink" title="Set up EKS"></a>Set up EKS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"># eks.tf</span><br><span class="line">resource &quot;aws_iam_role&quot; &quot;eks_cluster&quot; &#123;</span><br><span class="line">  name &#x3D; &quot;eks-cluster&quot;</span><br><span class="line"></span><br><span class="line">  assume_role_policy &#x3D; jsondecode(&#123;</span><br><span class="line">    &quot;Version&quot; : &quot;2012-10-17&quot;,</span><br><span class="line">    &quot;Statement&quot; : [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;Effect&quot; : &quot;Allow&quot;,</span><br><span class="line">        &quot;Principal&quot; : &#123;</span><br><span class="line">          &quot;Service&quot; : &quot;eks.amazonaws.com&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;Action&quot; : &quot;sts:AssumeRole&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;AmazonEKSClusterPolicy&quot; &#123;</span><br><span class="line">  policy_arn &#x3D; &quot;arn:aws:iam::aws:policy&#x2F;AmazonEKSClusterPolicy&quot;</span><br><span class="line">  role       &#x3D; aws_iam_role.eks_cluster.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;AmazonEKSServicePolicy&quot; &#123;</span><br><span class="line">  policy_arn &#x3D; &quot;arn:aws:iam::aws:policy&#x2F;AmazonEKSServicePolicy&quot;</span><br><span class="line">  role       &#x3D; aws_iam_role.eks_cluster.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_eks_cluster&quot; &quot;aws_eks&quot; &#123;</span><br><span class="line">  name     &#x3D; &quot;my-cluster&quot;</span><br><span class="line">  role_arn &#x3D; aws_iam_role.eks_cluster.arn</span><br><span class="line"></span><br><span class="line">  vpc_config &#123;</span><br><span class="line">    # change this to your subnet ids</span><br><span class="line">    subnet_ids &#x3D; [&quot;subnet-03425fce64e1d9cc5&quot;, &quot;subnet-01765ab9b3f13dace&quot;]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  tags &#x3D; &#123;</span><br><span class="line">    name &#x3D; &quot;my-cluster&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role&quot; &quot;eks_nodes&quot; &#123;</span><br><span class="line">  name &#x3D; &quot;eks-node-group&quot;</span><br><span class="line"></span><br><span class="line">  assume_role_policy &#x3D; jsondecode(&#123;</span><br><span class="line">    &quot;Version&quot; : &quot;2012-10-17&quot;,</span><br><span class="line">    &quot;Statement&quot; : [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;Effect&quot; : &quot;Allow&quot;,</span><br><span class="line">        &quot;Principal&quot; : &#123;</span><br><span class="line">          &quot;Service&quot; : &quot;ec2.amazonaws.com&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;Action&quot; : &quot;sts:AssumeRole&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;CloudWatchAgentServerPolicy&quot; &#123;</span><br><span class="line">  policy_arn &#x3D; &quot;arn:aws:iam::aws:policy&#x2F;CloudWatchAgentServerPolicy&quot;</span><br><span class="line">  role       &#x3D; aws_iam_role.eks_nodes.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;AmazonEKSWorkerNodePolicy&quot; &#123;</span><br><span class="line">  policy_arn &#x3D; &quot;arn:aws:iam::aws:policy&#x2F;AmazonEKSWorkerNodePolicy&quot;</span><br><span class="line">  role       &#x3D; aws_iam_role.eks_nodes.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;AmazonEKS_CNI_Policy&quot; &#123;</span><br><span class="line">  policy_arn &#x3D; &quot;arn:aws:iam::aws:policy&#x2F;AmazonEKS_CNI_Policy&quot;</span><br><span class="line">  role       &#x3D; aws_iam_role.eks_nodes.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_iam_role_policy_attachment&quot; &quot;AmazonEC2ContainerRegistryReadOnly&quot; &#123;</span><br><span class="line">  policy_arn &#x3D; &quot;arn:aws:iam::aws:policy&#x2F;AmazonEC2ContainerRegistryReadOnly&quot;</span><br><span class="line">  role       &#x3D; aws_iam_role.eks_nodes.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;aws_eks_node_group&quot; &quot;node&quot; &#123;</span><br><span class="line">  cluster_name    &#x3D; aws_eks_cluster.aws_eks.name</span><br><span class="line">  node_group_name &#x3D; &quot;node&quot;</span><br><span class="line">  node_role_arn   &#x3D; aws_iam_role.eks_nodes.arn</span><br><span class="line">  # change this to your subnet ids</span><br><span class="line">  subnet_ids      &#x3D; [&quot;subnet-03425fce64e1d9cc5&quot;, &quot;subnet-01765ab9b3f13dace&quot;]</span><br><span class="line">  # you can change this to you want instance type</span><br><span class="line">  instance_types  &#x3D; [&quot;t3.xlarge&quot;]</span><br><span class="line"></span><br><span class="line">  # you can change desired_size for default node count</span><br><span class="line">  scaling_config &#123;</span><br><span class="line">    desired_size &#x3D; 3</span><br><span class="line">    max_size     &#x3D; 5</span><br><span class="line">    min_size     &#x3D; 1</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.</span><br><span class="line">  # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.</span><br><span class="line">  depends_on &#x3D; [</span><br><span class="line">    aws_iam_role_policy_attachment.CloudWatchAgentServerPolicy,</span><br><span class="line">    aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,</span><br><span class="line">    aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,</span><br><span class="line">    aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Then you can run <code>terraform plan</code> check something to change.<br>If any change is ok then you can run <code>terraform apply</code> to set up infrastructure.</p>
 
@@ -324,14 +394,41 @@
 
 
 
-</div>
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
+      
 
+      
 
 <div class="copyright">
+  
   &copy; 2020 – 
   <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
@@ -344,29 +441,129 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
-
-  
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.8/dist/mermaid.min.js","integrity":"sha256-QmSAc2kIaUjleIJ46X7qPW2zrpCbXlMz3YIGgWpQ1Jo="}}</script>
-  <script src="/js/third-party/tags/mermaid.js"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
 
   
 
-  <script src="https://cdn.jsdelivr.net/npm/firebase@9.6.1/firebase-app-compat.js" integrity="sha256-JsxtczVneqccOYjvdg7KAeYkwWAFqzh0koxVYAe2hSk=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/firebase@9.6.1/firebase-firestore-compat.js" integrity="sha256-XxQ63CdYZ3FP1cHDOjaCViOXFcz7wFIfMHsb6UQVWH0=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="firestore" type="application/json">{"enable":true,"collection":"articles","apiKey":"AIzaSyBIvO2CqNA43-Nsq26ETOIe44q6VomiaeI","projectId":"blackhorseya-blog"}</script>
-  <script src="/js/third-party/statistics/firestore.js"></script>
 
 
 
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.0/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : '[object Object]',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+
+  
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/firebase@7.21.1/firebase-app.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/firebase@7.21.1/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBIvO2CqNA43-Nsq26ETOIe44q6VomiaeI',
+      projectId: 'blackhorseya-blog'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        let count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      const db = firebase.firestore();
+      const articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) {
+        // Fix issue #118
+        // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+        const title = document.querySelector('.post-title').textContent.trim();
+        const doc = articles.doc(title);
+        let increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) {
+        const promises = [...document.querySelectorAll('.post-title')].map(element => {
+          const title = element.textContent.trim();
+          const doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          const metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+  
+
+  
 
 </body>
 </html>

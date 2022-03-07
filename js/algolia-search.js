@@ -1,4 +1,4 @@
-/* global instantsearch, algoliasearch, CONFIG, pjax */
+/* global instantsearch, algoliasearch, CONFIG */
 
 document.addEventListener('DOMContentLoaded', () => {
   const { indexName, appID, apiKey, hits } = CONFIG.algolia;
@@ -13,11 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  if (typeof pjax === 'object') {
-    search.on('render', () => {
-      pjax.refresh(document.querySelector('.algolia-hits'));
-    });
-  }
+  window.pjax && search.on('render', () => {
+    window.pjax.refresh(document.querySelector('.algolia-hits'));
+  });
 
   // Registering Widgets
   search.addWidgets([
@@ -45,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/\$\{hits}/, data.nbHits)
             .replace(/\$\{time}/, data.processingTimeMS);
           return `<span>${stats}</span>
-            <img src="${CONFIG.images}/logo-algolia-nebula-blue-full.svg" alt="Algolia">`;
+            <img src="${CONFIG.root}images/logo-algolia-nebula-blue-full.svg" alt="Algolia">`;
         }
       },
       cssClasses: {
@@ -69,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return result;
         },
         empty: data => {
-          return `<div class="algolia-hits-empty">
+          return `<div id="algolia-hits-empty">
               ${CONFIG.i18n.empty.replace(/\$\{query}/, data.query)}
             </div>`;
         }
