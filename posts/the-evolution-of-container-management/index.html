@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.1">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/logo512.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/logo512.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/logo192.png">
@@ -14,14 +17,10 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.seancheng.space","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-
-  <meta name="description" content="一個從 Docker 發展成 Kubernetes 的故事">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.seancheng.space","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="一個從 Docker 發展成 Kubernetes 的故事">
 <meta property="og:type" content="article">
 <meta property="og:title" content="The evolution of container management">
 <meta property="og:url" content="https://blog.seancheng.space/posts/the-evolution-of-container-management/index.html">
@@ -43,68 +42,22 @@
 <link rel="canonical" href="https://blog.seancheng.space/posts/the-evolution-of-container-management/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>The evolution of container management | Sean's blog</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://blog.seancheng.space/posts/the-evolution-of-container-management/","path":"posts/the-evolution-of-container-management/","title":"The evolution of container management"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>The evolution of container management | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-157746412-1');
-      }
-    </script>
-
-
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-157746412-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
 
 
 
 
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -114,7 +67,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -125,7 +78,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Sean's blog</h1>
+      <p class="site-title">Sean's blog</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Software Engineer</p>
@@ -142,31 +95,11 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">59</span></a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">0</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a>
-
-  </li>
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">59</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">0</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -177,8 +110,7 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
@@ -187,7 +119,7 @@
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -203,7 +135,7 @@
 </div>
         
   
-  <div class="toggle sidebar-toggle">
+  <div class="toggle sidebar-toggle" role="button">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -221,29 +153,28 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E5%BB%BA%E6%99%82%E4%BB%A3"><span class="nav-number">1.</span> <span class="nav-text">封建時代</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">1.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache"><span class="nav-number">1.2.</span> <span class="nav-text">Apache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cons"><span class="nav-number">1.3.</span> <span class="nav-text">Cons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%8E%E5%A0%A1%E6%99%82%E4%BB%A3"><span class="nav-number">2.</span> <span class="nav-text">城堡時代</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-swarm"><span class="nav-number">2.1.</span> <span class="nav-text">Docker swarm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Init-docker-swarm"><span class="nav-number">2.1.1.</span> <span class="nav-text">Init docker swarm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-a-network-for-ingress"><span class="nav-number">2.1.2.</span> <span class="nav-text">Create a network for ingress</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-a-nginx-service"><span class="nav-number">2.1.3.</span> <span class="nav-text">Create a nginx service</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Configuration"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">Configuration</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Traefik"><span class="nav-number">2.2.</span> <span class="nav-text">Traefik</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Configuration-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">Configuration</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cons-1"><span class="nav-number">2.3.</span> <span class="nav-text">Cons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%9D%E7%8E%8B%E6%99%82%E4%BB%A3"><span class="nav-number">3.</span> <span class="nav-text">帝王時代</span></a></li></ol></div>
-      </section>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E5%BB%BA%E6%99%82%E4%BB%A3"><span class="nav-number">1.</span> <span class="nav-text">封建時代</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">1.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache"><span class="nav-number">1.2.</span> <span class="nav-text">Apache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cons"><span class="nav-number">1.3.</span> <span class="nav-text">Cons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%8E%E5%A0%A1%E6%99%82%E4%BB%A3"><span class="nav-number">2.</span> <span class="nav-text">城堡時代</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-swarm"><span class="nav-number">2.1.</span> <span class="nav-text">Docker swarm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Init-docker-swarm"><span class="nav-number">2.1.1.</span> <span class="nav-text">Init docker swarm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-a-network-for-ingress"><span class="nav-number">2.1.2.</span> <span class="nav-text">Create a network for ingress</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-a-nginx-service"><span class="nav-number">2.1.3.</span> <span class="nav-text">Create a nginx service</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Configuration"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">Configuration</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Traefik"><span class="nav-number">2.2.</span> <span class="nav-text">Traefik</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Configuration-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">Configuration</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cons-1"><span class="nav-number">2.3.</span> <span class="nav-text">Cons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%9D%E7%8E%8B%E6%99%82%E4%BB%A3"><span class="nav-number">3.</span> <span class="nav-text">帝王時代</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Sean Zheng</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
+        <a href="/archives/">
           <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
+          <a href="/tags/">
         <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
@@ -263,7 +194,8 @@
 
 
 
-      </section>
+        </div>
+      </div>
     </div>
   </aside>
   <div class="sidebar-dimmer"></div>
@@ -272,7 +204,7 @@
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button" aria-label="Back to top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -286,9 +218,7 @@
 
 
     <div class="main-inner post posts-expand">
-      
 
-      
 
   
 
@@ -351,7 +281,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 8080:80 --name=test-nginx nginx:alpine</span><br></pre></td></tr></table></figure>
 
 <h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h3><p>在 ingress instance 上運行 <code>Apache</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"># rewrite http to https</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName ngx.seancheng.space</span><br><span class="line"></span><br><span class="line">    # Logging</span><br><span class="line">    LogLevel warn</span><br><span class="line">    CustomLog &quot;|&#x2F;usr&#x2F;sbin&#x2F;rotatelogs -l &#x2F;var&#x2F;log&#x2F;httpd&#x2F;ngx.seancheng.space-access-%Y%m%d.log 604800&quot; combined</span><br><span class="line">    ErrorLog &quot;|&#x2F;usr&#x2F;sbin&#x2F;rotatelogs -l &#x2F;var&#x2F;log&#x2F;httpd&#x2F;ngx.seancheng.space-error-%Y%m%d.log 604800&quot;</span><br><span class="line"></span><br><span class="line">    RewriteEngine On</span><br><span class="line">    RewriteCond %&#123;HTTPS&#125; off</span><br><span class="line">    RewriteRule (.*) https:&#x2F;&#x2F;%&#123;SERVER_NAME&#125;$1 [R,L]</span><br><span class="line">    RequestHeader set X-Forwarded-Proto &quot;https&quot;</span><br><span class="line">    RequestHeader set X-Forwarded-Port &quot;443&quot;</span><br><span class="line">&lt;&#x2F;Virtualhost&gt;</span><br><span class="line"></span><br><span class="line"># forward https to nginx&#39;s instance</span><br><span class="line">&lt;VirtualHost *:443&gt;</span><br><span class="line">    ServerName ngx.seancheng.space</span><br><span class="line"></span><br><span class="line">    # Logging</span><br><span class="line">    LogLevel warn</span><br><span class="line">    CustomLog &quot;|&#x2F;usr&#x2F;sbin&#x2F;rotatelogs -l &#x2F;var&#x2F;log&#x2F;httpd&#x2F;ngx.seancheng.space-ssl-access-%Y%m%d.log 604800&quot; combined</span><br><span class="line">    ErrorLog &quot;|&#x2F;usr&#x2F;sbin&#x2F;rotatelogs -l &#x2F;var&#x2F;log&#x2F;httpd&#x2F;ngx.seancheng.space-ssl-error-%Y%m%d.log 604800&quot;</span><br><span class="line"></span><br><span class="line">    # SSL Certification</span><br><span class="line">    ## using cf origin wildcard certificate</span><br><span class="line">    SSLEngine On</span><br><span class="line">    SSLCertificateFile &#x2F;root&#x2F;cf&#x2F;seancheng.space&#x2F;origin.crt</span><br><span class="line">    SSLCertificateKeyFile &#x2F;root&#x2F;cf&#x2F;seancheng.space&#x2F;private.key</span><br><span class="line"></span><br><span class="line">    # Headers</span><br><span class="line">    Header always set Strict-Transport-Security &quot;max-age&#x3D;63072000;includeSubdomains;&quot;</span><br><span class="line">    Header always set X-Frame-Options DENY</span><br><span class="line">    Header set X-Content-Type-Options &quot;nosniff&quot;</span><br><span class="line">    RequestHeader set X-Forwarded-Proto &quot;https&quot;</span><br><span class="line">    RequestHeader set X-Forwarded-Port &quot;443&quot;</span><br><span class="line"></span><br><span class="line">    AllowEncodedSlashes NoDecode</span><br><span class="line">    &lt;IfModule mod_headers.c&gt;</span><br><span class="line">        Header set X-XSS-Protection &quot;1; mode&#x3D;block&quot;</span><br><span class="line">    &lt;&#x2F;IfModule&gt;</span><br><span class="line"></span><br><span class="line">    ProxyRequests Off</span><br><span class="line">    &lt;Proxy *&gt;</span><br><span class="line">        Order allow,deny</span><br><span class="line">        Allow from all</span><br><span class="line">    &lt;&#x2F;Proxy&gt;</span><br><span class="line"></span><br><span class="line">    ProxyPreserveHost On</span><br><span class="line">    ProxyPass &#x2F; http:&#x2F;&#x2F;192.168.28.240:8080&#x2F;</span><br><span class="line">    ProxyPassReverse &#x2F; http:&#x2F;&#x2F;192.168.28.240:8080&#x2F;</span><br><span class="line">&lt;&#x2F;VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"># rewrite http to https</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName ngx.seancheng.space</span><br><span class="line"></span><br><span class="line">    # Logging</span><br><span class="line">    LogLevel warn</span><br><span class="line">    CustomLog &quot;|/usr/sbin/rotatelogs -l /var/log/httpd/ngx.seancheng.space-access-%Y%m%d.log 604800&quot; combined</span><br><span class="line">    ErrorLog &quot;|/usr/sbin/rotatelogs -l /var/log/httpd/ngx.seancheng.space-error-%Y%m%d.log 604800&quot;</span><br><span class="line"></span><br><span class="line">    RewriteEngine On</span><br><span class="line">    RewriteCond %&#123;HTTPS&#125; off</span><br><span class="line">    RewriteRule (.*) https://%&#123;SERVER_NAME&#125;$1 [R,L]</span><br><span class="line">    RequestHeader set X-Forwarded-Proto &quot;https&quot;</span><br><span class="line">    RequestHeader set X-Forwarded-Port &quot;443&quot;</span><br><span class="line">&lt;/Virtualhost&gt;</span><br><span class="line"></span><br><span class="line"># forward https to nginx&#x27;s instance</span><br><span class="line">&lt;VirtualHost *:443&gt;</span><br><span class="line">    ServerName ngx.seancheng.space</span><br><span class="line"></span><br><span class="line">    # Logging</span><br><span class="line">    LogLevel warn</span><br><span class="line">    CustomLog &quot;|/usr/sbin/rotatelogs -l /var/log/httpd/ngx.seancheng.space-ssl-access-%Y%m%d.log 604800&quot; combined</span><br><span class="line">    ErrorLog &quot;|/usr/sbin/rotatelogs -l /var/log/httpd/ngx.seancheng.space-ssl-error-%Y%m%d.log 604800&quot;</span><br><span class="line"></span><br><span class="line">    # SSL Certification</span><br><span class="line">    ## using cf origin wildcard certificate</span><br><span class="line">    SSLEngine On</span><br><span class="line">    SSLCertificateFile /root/cf/seancheng.space/origin.crt</span><br><span class="line">    SSLCertificateKeyFile /root/cf/seancheng.space/private.key</span><br><span class="line"></span><br><span class="line">    # Headers</span><br><span class="line">    Header always set Strict-Transport-Security &quot;max-age=63072000;includeSubdomains;&quot;</span><br><span class="line">    Header always set X-Frame-Options DENY</span><br><span class="line">    Header set X-Content-Type-Options &quot;nosniff&quot;</span><br><span class="line">    RequestHeader set X-Forwarded-Proto &quot;https&quot;</span><br><span class="line">    RequestHeader set X-Forwarded-Port &quot;443&quot;</span><br><span class="line"></span><br><span class="line">    AllowEncodedSlashes NoDecode</span><br><span class="line">    &lt;IfModule mod_headers.c&gt;</span><br><span class="line">        Header set X-XSS-Protection &quot;1; mode=block&quot;</span><br><span class="line">    &lt;/IfModule&gt;</span><br><span class="line"></span><br><span class="line">    ProxyRequests Off</span><br><span class="line">    &lt;Proxy *&gt;</span><br><span class="line">        Order allow,deny</span><br><span class="line">        Allow from all</span><br><span class="line">    &lt;/Proxy&gt;</span><br><span class="line"></span><br><span class="line">    ProxyPreserveHost On</span><br><span class="line">    ProxyPass / http://192.168.28.240:8080/</span><br><span class="line">    ProxyPassReverse / http://192.168.28.240:8080/</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
 
 <h3 id="Cons"><a href="#Cons" class="headerlink" title="Cons"></a>Cons</h3><ol>
 <li>container 不能擴容，因為 8080 port 已被佔用，雖然可以不指定 expose’s port，但是就會變得要用另外的方法知道 expose’s port</li>
@@ -419,41 +349,14 @@
 
 
 
-      
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-    </div>
+</div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
-      
 
-      
 
 <div class="copyright">
-  
   &copy; 2020 – 
   <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
@@ -466,129 +369,29 @@
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
 
   
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-<script>
-if (document.querySelectorAll('.mermaid').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.0/dist/mermaid.min.js', () => {
-    mermaid.init({
-      theme    : '[object Object]',
-      logLevel : 3,
-      flowchart: { curve     : 'linear' },
-      gantt    : { axisFormat: '%m/%d/%Y' },
-      sequence : { actorMargin: 50 }
-    }, '.mermaid');
-  }, window.mermaid);
-}
-</script>
-
-
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.8/dist/mermaid.min.js","integrity":"sha256-QmSAc2kIaUjleIJ46X7qPW2zrpCbXlMz3YIGgWpQ1Jo="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
 
 
 
   
 
+  <script src="https://cdn.jsdelivr.net/npm/firebase@9.6.1/firebase-app-compat.js" integrity="sha256-JsxtczVneqccOYjvdg7KAeYkwWAFqzh0koxVYAe2hSk=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/firebase@9.6.1/firebase-firestore-compat.js" integrity="sha256-XxQ63CdYZ3FP1cHDOjaCViOXFcz7wFIfMHsb6UQVWH0=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="firestore" type="application/json">{"enable":true,"collection":"articles","apiKey":"AIzaSyBIvO2CqNA43-Nsq26ETOIe44q6VomiaeI","projectId":"blackhorseya-blog"}</script>
+  <script src="/js/third-party/statistics/firestore.js"></script>
 
 
 
-  <script src="//cdn.jsdelivr.net/npm/firebase@7.21.1/firebase-app.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/firebase@7.21.1/firebase-firestore.js"></script>
-  <script>
-    firebase.initializeApp({
-      apiKey   : 'AIzaSyBIvO2CqNA43-Nsq26ETOIe44q6VomiaeI',
-      projectId: 'blackhorseya-blog'
-    });
-
-    function getCount(doc, increaseCount) {
-      // IncreaseCount will be false when not in article page
-      return doc.get().then(d => {
-        let count = 0;
-        if (!d.exists) { // Has no data, initialize count
-          if (increaseCount) {
-            doc.set({
-              count: 1
-            });
-            count = 1;
-          }
-        } else { // Has data
-          count = d.data().count;
-          if (increaseCount) {
-            // If first view this article
-            doc.set({ // Increase count
-              count: count + 1
-            });
-            count++;
-          }
-        }
-
-        return count;
-      });
-    }
-
-    function appendCountTo(el) {
-      return count => {
-        el.innerText = count;
-      }
-    }
-  </script>
-  <script>
-    (function() {
-      const db = firebase.firestore();
-      const articles = db.collection('articles');
-
-      if (CONFIG.page.isPost) {
-        // Fix issue #118
-        // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
-        const title = document.querySelector('.post-title').textContent.trim();
-        const doc = articles.doc(title);
-        let increaseCount = CONFIG.hostname === location.hostname;
-        if (localStorage.getItem(title)) {
-          increaseCount = false;
-        } else {
-          // Mark as visited
-          localStorage.setItem(title, true);
-        }
-        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
-      } else if (CONFIG.page.isHome) {
-        const promises = [...document.querySelectorAll('.post-title')].map(element => {
-          const title = element.textContent.trim();
-          const doc = articles.doc(title);
-          return getCount(doc);
-        });
-        Promise.all(promises).then(counts => {
-          const metas = document.querySelectorAll('.firestore-visitors-count');
-          counts.forEach((val, idx) => {
-            appendCountTo(metas[idx])(val);
-          });
-        });
-      }
-    })();
-  </script>
-
-
-
-
-  
-
-  
 
 </body>
 </html>
