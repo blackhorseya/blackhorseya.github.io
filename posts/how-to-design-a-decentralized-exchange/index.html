@@ -288,24 +288,24 @@
 <h2 id="Design-Overview"><a href="#Design-Overview" class="headerlink" title="Design Overview"></a>Design Overview</h2><p>I prefer to use Domain-Driven Design(DDD) to differentiate each microservice.</p>
 <p>Step 1. Roughly distinguish the various components and find the core component.</p>
 <pre class="mermaid">flowchart TB
-  subgraph boundary ["Boundary"]
-    subgraph trading ["Trading"]
+    subgraph boundary ["Boundary"]
+        subgraph trading ["Trading"]
+        end
+
+        subgraph user ["User"]
+        end
+
+        subgraph product ["Product"]
+        end
+
+        subgraph chia ["Chia"]
+        end
+
+        subgraph pubsub ["Pubsub"]
+        end
     end
 
-    subgraph user ["User"]
-    end
-
-    subgraph product ["Product"]
-    end
-
-    subgraph chia ["Chia"]
-    end
-
-    subgraph pubsub ["Pubsub"]
-    end
-  end
-
-  style trading fill:#79c4f2</pre>
+    style trading fill:#79c4f2</pre>
 
 <p>Step 2. Write the functions of each component.</p>
 <pre class="mermaid">flowchart TB
