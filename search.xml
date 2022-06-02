@@ -83,6 +83,50 @@
       </tags>
   </entry>
   <entry>
+    <title>How to attach and mount an EBS volume to EC2</title>
+    <url>/posts/how-to-attach-and-mount-an-ebs-volume-to-ec2/</url>
+    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Why I need to attach and mount an <code>EBS</code> volume to <code>EC2</code>? Because sometimes I need to download large file. if only wait for download from blockchain is very slowly.</p>
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><h3 id="Attach"><a href="#Attach" class="headerlink" title="Attach"></a>Attach</h3><ol>
+<li>Select the volume, right-click and select the <code>attach volume</code> option.</li>
+<li>Select the <code>EC2</code> instance from the instance text box as shown below.</li>
+<li>Now, login to your <code>EC2</code> instance and list the available disks using the following command.</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Check if then volume has any data using the following command.</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo file -s /dev/xvdf</span><br></pre></td></tr></table></figure>
+
+<h3 id="Mount"><a href="#Mount" class="headerlink" title="Mount"></a>Mount</h3><ol>
+<li>Create a directory of your choice to mount our new <code>ext4</code> volume.</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /mnt/data</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Mount the volume to <code>/mnt/data</code> directory using the following command.</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mount /dev/xvdf /mnt/data</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><code>cd</code> into <code>/mnt/data</code> directory and check the disk space to validate the volume mount.</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">df -h .</span><br></pre></td></tr></table></figure>
+
+<h3 id="Unmount"><a href="#Unmount" class="headerlink" title="Unmount"></a>Unmount</h3><p>To unmount the volume, use the <code>umount</code> command as shown below.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">umount /dev/xvdf</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>I think the solution is a wrong way but actually is very efficient.<br>So I have another solution on kubernetes. You can back up the large file like sqlite to <code>s3</code> bucket and then using <code>Init Container Pattern</code> method to download file from <code>s3</code>. It’s a pretty solution. haha.</p>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>aws</tag>
+        <tag>ebs</tag>
+        <tag>ec2</tag>
+        <tag>kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to collect container log using filebeat</title>
     <url>/posts/how-to-collect-container-log-using-filebeat/</url>
     <content><![CDATA[<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><h4 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull docker.elastic.co/beats/filebeat:7.9.2</span><br></pre></td></tr></table></figure>
@@ -127,10 +171,10 @@
 <h2 id="Test-kubeconfig"><a href="#Test-kubeconfig" class="headerlink" title="Test kubeconfig"></a>Test kubeconfig</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl --kubeconfig=dev.conf cluster-info</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
+        <tag>howto</tag>
+        <tag>kubernetes</tag>
         <tag>kubeconfig</tag>
         <tag>service-account</tag>
-        <tag>kubernetes</tag>
-        <tag>howto</tag>
       </tags>
   </entry>
   <entry>
@@ -394,8 +438,8 @@
 <h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p><img src="/posts/how-to-install-kubernetes-on-raspberry/cluster-pi.jpeg" alt="cluster-pi"></p>
 ]]></content>
       <tags>
-        <tag>kubernetes</tag>
         <tag>howto</tag>
+        <tag>kubernetes</tag>
         <tag>raspberry</tag>
       </tags>
   </entry>
@@ -444,10 +488,10 @@
 <p>Then you can run <code>terraform plan</code> check something to change.<br>If any change is ok then you can run <code>terraform apply</code> to set up infrastructure.</p>
 ]]></content>
       <tags>
-        <tag>kubernetes</tag>
         <tag>howto</tag>
-        <tag>setup</tag>
         <tag>aws</tag>
+        <tag>kubernetes</tag>
+        <tag>setup</tag>
         <tag>terraform</tag>
         <tag>eks</tag>
       </tags>
@@ -470,8 +514,8 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auth unlock</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>kubernetes</tag>
         <tag>howto</tag>
+        <tag>kubernetes</tag>
         <tag>setup</tag>
         <tag>phabricator</tag>
       </tags>
@@ -580,8 +624,8 @@
 
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>]]></content>
       <tags>
-        <tag>kubernetes</tag>
         <tag>howto</tag>
+        <tag>kubernetes</tag>
         <tag>setup</tag>
         <tag>external-dns</tag>
       </tags>
@@ -598,8 +642,8 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># gke.tf</span><br><span class="line"></span><br><span class="line">resource &quot;google_service_account&quot; &quot;sean-side-gke-default-sa&quot; &#123;</span><br><span class="line">  account_id   = &quot;sean-side-gke-default-sa&quot;</span><br><span class="line">  display_name = &quot;GKE default service account&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;google_container_cluster&quot; &quot;sean-side-prod-cluster&quot; &#123;</span><br><span class="line">  name                     = &quot;sean-side-prod-cluster&quot;</span><br><span class="line">  location                 = &quot;asia-east1-c&quot;</span><br><span class="line">  remove_default_node_pool = true</span><br><span class="line">  initial_node_count       = 1</span><br><span class="line"></span><br><span class="line">  timeouts &#123;</span><br><span class="line">    create = &quot;30m&quot;</span><br><span class="line">    update = &quot;40m&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;google_container_node_pool&quot; &quot;sean-side-prod-nodes&quot; &#123;</span><br><span class="line">  name       = &quot;sean-side-prod-nodes&quot;</span><br><span class="line">  location   = &quot;asia-east1-c&quot;</span><br><span class="line">  cluster    = google_container_cluster.sean-side-prod-cluster.name</span><br><span class="line">  node_count = 2</span><br><span class="line"></span><br><span class="line">  autoscaling &#123;</span><br><span class="line">    max_node_count = 3</span><br><span class="line">    min_node_count = 1</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  node_config &#123;</span><br><span class="line">    preemptible  = true</span><br><span class="line">    machine_type = &quot;e2-medium&quot;</span><br><span class="line"></span><br><span class="line">    service_account = google_service_account.sean-side-gke-default-sa.email</span><br><span class="line">    oauth_scopes = [</span><br><span class="line">      &quot;https://www.googleapis.com/auth/cloud-platform&quot;</span><br><span class="line">    ]</span><br><span class="line">    labels = &#123;</span><br><span class="line">      env  = &quot;prod&quot;</span><br><span class="line">      proj = &quot;side&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>kubernetes</tag>
         <tag>howto</tag>
+        <tag>kubernetes</tag>
         <tag>setup</tag>
         <tag>terraform</tag>
         <tag>GCP</tag>
@@ -629,8 +673,8 @@
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">adminUser:</span></span><br><span class="line">  <span class="attr">organization:</span> <span class="string">&quot;my-org&quot;</span></span><br><span class="line">  <span class="attr">bucket:</span> <span class="string">&quot;my-bucket&quot;</span></span><br><span class="line">  <span class="attr">user:</span> <span class="string">&quot;admin&quot;</span></span><br><span class="line">  <span class="attr">retention_policy:</span> <span class="string">&quot;0s&quot;</span></span><br><span class="line">  <span class="comment">## Leave empty to generate a random password and token.</span></span><br><span class="line">  <span class="comment">## Or fill any of these values to use fixed values.</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">&quot;&lt;&lt;password&gt;&gt;&quot;</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">&quot;&lt;&lt;token&gt;&gt;&quot;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>kubernetes</tag>
         <tag>howto</tag>
+        <tag>kubernetes</tag>
         <tag>setup</tag>
         <tag>influxdb</tag>
       </tags>
@@ -710,8 +754,8 @@
 <h3 id="執行-helm-install"><a href="#執行-helm-install" class="headerlink" title="執行 helm install"></a>執行 helm install</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ns=monitoring</span><br><span class="line">name=ops</span><br><span class="line">repo=prometheus-community/kube-prometheus-stack</span><br><span class="line">value=values.yaml</span><br><span class="line"></span><br><span class="line">helm --namespace=$(ns) upgrade --install $(name) $(repo) -f $(value)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>kubernetes</tag>
         <tag>howto</tag>
+        <tag>kubernetes</tag>
         <tag>setup</tag>
         <tag>prometheus</tag>
       </tags>
@@ -1553,8 +1597,8 @@
 </ol>
 ]]></content>
       <tags>
-        <tag>kubernetes</tag>
         <tag>howto</tag>
+        <tag>kubernetes</tag>
         <tag>helm</tag>
       </tags>
   </entry>
