@@ -20,28 +20,33 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.seancheng.space","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="紀錄如何使用 kubeconfig">
+<meta name="description" content="Create a Helm chart with GitHub pages">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to use kubeconfig">
-<meta property="og:url" content="https://blog.seancheng.space/posts/how-to-use-kubeconfig/index.html">
+<meta property="og:title" content="How to create a public Helm chart repository with GitHub pages">
+<meta property="og:url" content="https://blog.seancheng.space/posts/how-to-create-a-public-helm-chart-repository-with-github-pages/index.html">
 <meta property="og:site_name" content="Sean&#39;s blog">
-<meta property="og:description" content="紀錄如何使用 kubeconfig">
+<meta property="og:description" content="Create a Helm chart with GitHub pages">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-14T03:34:54.000Z">
-<meta property="article:modified_time" content="2020-10-14T03:34:54.000Z">
+<meta property="og:image" content="https://blog.seancheng.space/posts/how-to-create-a-public-helm-chart-repository-with-github-pages/new-repo.png">
+<meta property="og:image" content="https://blog.seancheng.space/posts/how-to-create-a-public-helm-chart-repository-with-github-pages/github-pages-setting.png">
+<meta property="article:published_time" content="2022-06-06T01:04:15.000Z">
+<meta property="article:modified_time" content="2022-06-06T01:04:15.000Z">
 <meta property="article:author" content="Sean Zheng">
-<meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="howto">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="helm">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.seancheng.space/posts/how-to-create-a-public-helm-chart-repository-with-github-pages/new-repo.png">
 
 
-<link rel="canonical" href="https://blog.seancheng.space/posts/how-to-use-kubeconfig/">
+<link rel="canonical" href="https://blog.seancheng.space/posts/how-to-create-a-public-helm-chart-repository-with-github-pages/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://blog.seancheng.space/posts/how-to-use-kubeconfig/","path":"posts/how-to-use-kubeconfig/","title":"How to use kubeconfig"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://blog.seancheng.space/posts/how-to-create-a-public-helm-chart-repository-with-github-pages/","path":"posts/how-to-create-a-public-helm-chart-repository-with-github-pages/","title":"How to create a public Helm chart repository with GitHub pages"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>How to use kubeconfig | Sean's blog</title>
+<title>How to create a public Helm chart repository with GitHub pages | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-157746412-1","only_pageview":false}</script>
@@ -151,7 +156,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-Environment"><span class="nav-number">1.</span> <span class="nav-text">Configure Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Switch-kubeconfig"><span class="nav-number">2.</span> <span class="nav-text">Switch kubeconfig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Switch-context"><span class="nav-number">3.</span> <span class="nav-text">Switch context</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Merge-Multiple-Configs"><span class="nav-number">4.</span> <span class="nav-text">Merge Multiple Configs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-context"><span class="nav-number">5.</span> <span class="nav-text">Configure context</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List-contexts"><span class="nav-number">5.1.</span> <span class="nav-text">List contexts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Switch-context-1"><span class="nav-number">5.2.</span> <span class="nav-text">Switch context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Switch-namespace"><span class="nav-number">5.3.</span> <span class="nav-text">Switch namespace</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Guide"><span class="nav-number">2.</span> <span class="nav-text">Guide</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">3.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-Helm-chart"><span class="nav-number">3.1.</span> <span class="nav-text">Create a new Helm chart</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-your-repo"><span class="nav-number">3.2.</span> <span class="nav-text">Add your repo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -223,7 +228,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-use-kubeconfig/">
+    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-create-a-public-helm-chart-repository-with-github-pages/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -236,7 +241,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          How to use kubeconfig
+          How to create a public Helm chart repository with GitHub pages
         </h1>
 
         <div class="post-meta-container">
@@ -247,7 +252,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2020-10-14 11:34:54" itemprop="dateCreated datePublished" datetime="2020-10-14T11:34:54+08:00">2020-10-14</time>
+      <time title="Created: 2022-06-06 09:04:15" itemprop="dateCreated datePublished" datetime="2022-06-06T09:04:15+08:00">2022-06-06</time>
     </span>
 
   
@@ -260,7 +265,7 @@
     </span>
 </div>
 
-            <div class="post-description">紀錄如何使用 kubeconfig</div>
+            <div class="post-description">Create a Helm chart with GitHub pages</div>
         </div>
       </header>
 
@@ -268,21 +273,31 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Configure-Environment"><a href="#Configure-Environment" class="headerlink" title="Configure Environment"></a>Configure Environment</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> KUBECONFIG=<span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>When you create a Helm chart, you need a repository to store the chart. so you can store Helm chart in GitHub pages.</p>
+<h2 id="Guide"><a href="#Guide" class="headerlink" title="Guide"></a>Guide</h2><p>Create a repository called <code>helm-charts</code> and set <code>Public</code> on <code>GitHub</code></p>
+<p><img src="new-repo.png" alt="new repo"></p>
+<p>Clone source code</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:blackhorseya/helm-charts.git &amp;&amp; cd helm-charts</span><br></pre></td></tr></table></figure>
 
-<h2 id="Switch-kubeconfig"><a href="#Switch-kubeconfig" class="headerlink" title="Switch kubeconfig"></a>Switch kubeconfig</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl --kubeconfig ...</span><br></pre></td></tr></table></figure>
+<p>Write down <code>README.md</code> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;# Kubernetes Helm Charts&quot; &gt; README.md</span><br></pre></td></tr></table></figure>
 
-<h2 id="Switch-context"><a href="#Switch-context" class="headerlink" title="Switch context"></a>Switch context</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl --context ...</span><br></pre></td></tr></table></figure>
+<p>Create a branch called <code>gh-pages</code>, this is <strong>important</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -b gh-pages</span><br></pre></td></tr></table></figure>
 
-<h2 id="Merge-Multiple-Configs"><a href="#Merge-Multiple-Configs" class="headerlink" title="Merge Multiple Configs"></a>Merge Multiple Configs</h2><p>你可能會有很多個 <code>kubeconfig</code>，雖然 <code>kubectl</code> 有提供 <code>flag</code>，但是頻繁的切換還是有點麻煩，<a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#merging-kubeconfig-files">官方文件</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KUBECONFIG=<span class="variable">$KUBECONFIG</span>:<span class="variable">$&#123;CONFIG_FILE&#125;</span> kubectl config view --flatten &gt; <span class="variable">$&#123;HOME&#125;</span>/.kube/config</span><br></pre></td></tr></table></figure>
+<p>Update GitHub pages setting, set <code>Source</code> to <code>gh-pages</code> branch.</p>
+<p><img src="github-pages-setting.png" alt="github pages setting"></p>
+<p>Create GitHub action workflows <code>mkdir -p .github/workflows</code> and <code>touch .github/workflows/release.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Release</span> <span class="string">Charts</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">release:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">fetch-depth:</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Configure</span> <span class="string">Git</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          git config user.name &quot;$GITHUB_ACTOR&quot;</span></span><br><span class="line"><span class="string">          git config user.email &quot;$GITHUB_ACTOR@users.noreply.github.com&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Add</span> <span class="string">dependency</span> <span class="string">chart</span> <span class="string">repos</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          helm repo add bitnami https://charts.bitnami.com/bitnami</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Run</span> <span class="string">chart-releaser</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">helm/chart-releaser-action@v1.4.0</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">CR_TOKEN:</span> <span class="string">&quot;$<span class="template-variable">&#123;&#123; secrets.GITHUB_TOKEN &#125;&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Configure-context"><a href="#Configure-context" class="headerlink" title="Configure context"></a>Configure context</h2><p>你可以設定當前 <code>namespace</code> 和 <code>context</code> 來切換使用</p>
-<h3 id="List-contexts"><a href="#List-contexts" class="headerlink" title="List contexts"></a>List contexts</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config get-contexts</span><br></pre></td></tr></table></figure>
+<p>Now, you can create your helm chart in <code>charts</code> folder.</p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><h3 id="Create-a-new-Helm-chart"><a href="#Create-a-new-Helm-chart" class="headerlink" title="Create a new Helm chart"></a>Create a new Helm chart</h3><p>Create <code>sample</code> Helm chart on <code>main</code> branch.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">helm create charts/sample</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#x27;feat: added sample helm chart&#x27;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 
-<h3 id="Switch-context-1"><a href="#Switch-context-1" class="headerlink" title="Switch context"></a>Switch context</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config use-context <span class="variable">$&#123;CONTEXT_NAME&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Add-your-repo"><a href="#Add-your-repo" class="headerlink" title="Add your repo"></a>Add your repo</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo add blackhorseya https://blackhorseya.github.io/helm-charts</span><br></pre></td></tr></table></figure>
 
-<h3 id="Switch-namespace"><a href="#Switch-namespace" class="headerlink" title="Switch namespace"></a>Switch namespace</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config set-context $(kubectl config current-context) --namespace <span class="variable">$&#123;NAMESPACE&#125;</span></span><br></pre></td></tr></table></figure>
+<p>You can then run <code>helm search repo blackhorseya</code> to see the charts.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://helm.sh/docs/howto/chart_releaser_action/">chart releaser action</a></p>
 
     </div>
 
@@ -292,21 +307,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+              <a href="/tags/howto/" rel="tag"># howto</a>
+              <a href="/tags/github/" rel="tag"># github</a>
+              <a href="/tags/helm/" rel="tag"># helm</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/installing-kubernetes-on-premise-with-kubespray/" rel="prev" title="Installing kubernetes on-premise with kubespray">
-                  <i class="fa fa-chevron-left"></i> Installing kubernetes on-premise with kubespray
+                <a href="/posts/how-to-attach-and-mount-an-ebs-volume-to-ec2/" rel="prev" title="How to attach and mount an EBS volume to EC2">
+                  <i class="fa fa-chevron-left"></i> How to attach and mount an EBS volume to EC2
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/what-is-trunk-based-development/" rel="next" title="What is trunk-based development">
-                  What is trunk-based development <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

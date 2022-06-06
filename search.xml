@@ -147,6 +147,41 @@
       </tags>
   </entry>
   <entry>
+    <title>How to create a public Helm chart repository with GitHub pages</title>
+    <url>/posts/how-to-create-a-public-helm-chart-repository-with-github-pages/</url>
+    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>When you create a Helm chart, you need a repository to store the chart. so you can store Helm chart in GitHub pages.</p>
+<h2 id="Guide"><a href="#Guide" class="headerlink" title="Guide"></a>Guide</h2><p>Create a repository called <code>helm-charts</code> and set <code>Public</code> on <code>GitHub</code></p>
+<p><img src="new-repo.png" alt="new repo"></p>
+<p>Clone source code</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:blackhorseya/helm-charts.git &amp;&amp; cd helm-charts</span><br></pre></td></tr></table></figure>
+
+<p>Write down <code>README.md</code> </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;# Kubernetes Helm Charts&quot; &gt; README.md</span><br></pre></td></tr></table></figure>
+
+<p>Create a branch called <code>gh-pages</code>, this is <strong>important</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git branch -b gh-pages</span><br></pre></td></tr></table></figure>
+
+<p>Update GitHub pages setting, set <code>Source</code> to <code>gh-pages</code> branch.</p>
+<p><img src="github-pages-setting.png" alt="github pages setting"></p>
+<p>Create GitHub action workflows <code>mkdir -p .github/workflows</code> and <code>touch .github/workflows/release.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Release</span> <span class="string">Charts</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">release:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">fetch-depth:</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Configure</span> <span class="string">Git</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          git config user.name &quot;$GITHUB_ACTOR&quot;</span></span><br><span class="line"><span class="string">          git config user.email &quot;$GITHUB_ACTOR@users.noreply.github.com&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Add</span> <span class="string">dependency</span> <span class="string">chart</span> <span class="string">repos</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          helm repo add bitnami https://charts.bitnami.com/bitnami</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Run</span> <span class="string">chart-releaser</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">helm/chart-releaser-action@v1.4.0</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">CR_TOKEN:</span> <span class="string">&quot;$<span class="template-variable">&#123;&#123; secrets.GITHUB_TOKEN &#125;&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Now, you can create your helm chart in <code>charts</code> folder.</p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><h3 id="Create-a-new-Helm-chart"><a href="#Create-a-new-Helm-chart" class="headerlink" title="Create a new Helm chart"></a>Create a new Helm chart</h3><p>Create <code>sample</code> Helm chart on <code>main</code> branch.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm create charts/sample</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#x27;feat: added sample helm chart&#x27;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<h3 id="Add-your-repo"><a href="#Add-your-repo" class="headerlink" title="Add your repo"></a>Add your repo</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">helm repo add blackhorseya https://blackhorseya.github.io/helm-charts</span><br></pre></td></tr></table></figure>
+
+<p>You can then run <code>helm search repo blackhorseya</code> to see the charts.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://helm.sh/docs/howto/chart_releaser_action/">chart releaser action</a></p>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>github</tag>
+        <tag>helm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to create a service account and kubeconfig</title>
     <url>/posts/how-to-create-a-service-account-and-kubeconfig/</url>
     <content><![CDATA[<h2 id="Create-a-service-account"><a href="#Create-a-service-account" class="headerlink" title="Create a service account"></a>Create a service account</h2><h3 id="Command-line"><a href="#Command-line" class="headerlink" title="Command line"></a>Command line</h3><ol>
@@ -1174,8 +1209,8 @@
 ]]></content>
       <tags>
         <tag>howto</tag>
-        <tag>setup</tag>
         <tag>helm</tag>
+        <tag>setup</tag>
         <tag>s3</tag>
       </tags>
   </entry>
