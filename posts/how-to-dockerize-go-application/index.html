@@ -20,23 +20,30 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.seancheng.space","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sean&#39;s blog">
-<meta property="og:url" content="https://blog.seancheng.space/tags/setup/index.html">
+<meta name="description" content="How to dockerize Go application">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to dockerize Go application">
+<meta property="og:url" content="https://blog.seancheng.space/posts/how-to-dockerize-go-application/index.html">
 <meta property="og:site_name" content="Sean&#39;s blog">
+<meta property="og:description" content="How to dockerize Go application">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-06-11T18:20:14.000Z">
+<meta property="article:modified_time" content="2022-06-11T18:20:14.000Z">
 <meta property="article:author" content="Sean Zheng">
+<meta property="article:tag" content="howto">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.seancheng.space/tags/setup/">
+<link rel="canonical" href="https://blog.seancheng.space/posts/how-to-dockerize-go-application/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"tags/setup/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://blog.seancheng.space/posts/how-to-dockerize-go-application/","path":"posts/how-to-dockerize-go-application/","title":"How to dockerize Go application"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Tag: setup | Sean's blog</title>
+<title>How to dockerize Go application | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-157746412-1","only_pageview":false}</script>
@@ -133,7 +140,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -146,6 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Guide"><span class="nav-number">2.</span> <span class="nav-text">Guide</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">3.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -206,239 +214,112 @@
 </noscript>
 
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">setup
-          <small>Tag</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/how-to-dockerize-go-application/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sean Zheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          How to dockerize Go application
         </h1>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
-    </div>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-02-26T08:37:08+08:00"
-              content="2022-02-26">
-          02-26
-        </time>
-      </div>
+      <time title="Created: 2022-06-12 02:20:14" itemprop="dateCreated datePublished" datetime="2022-06-12T02:20:14+08:00">2022-06-12</time>
+    </span>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-set-up-influxdb-on-kubernetes/" itemprop="url">
-            <span itemprop="name">How to set up influxdb on kubernetes</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-02-24T04:43:16+08:00"
-              content="2022-02-24">
-          02-24
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-set-up-EKS-via-terraform/" itemprop="url">
-            <span itemprop="name">how to set up EKS via terraform</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-02-20T05:31:16+08:00"
-              content="2022-02-20">
-          02-20
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-set-up-private-repo-in-golang/" itemprop="url">
-            <span itemprop="name">how to set up private repo in golang</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-02-01T21:10:16+08:00"
-              content="2022-02-01">
-          02-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-use-s3-as-helm-chart-registry/" itemprop="url">
-            <span itemprop="name">how to use s3 as helm chart registry</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-09-16T09:55:30+08:00"
-              content="2021-09-16">
-          09-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-set-up-gke-via-terraform/" itemprop="url">
-            <span itemprop="name">How to set up GKE via terraform</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-09-16T00:57:07+08:00"
-              content="2021-09-16">
-          09-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-set-up-prometheus-on-kubernetes/" itemprop="url">
-            <span itemprop="name">How to set up prometheus on kubernetes</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-08-08T10:31:54+08:00"
-              content="2021-08-08">
-          08-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-use-github-action-with-golang/" itemprop="url">
-            <span itemprop="name">How to use Github action with golang</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-22T18:24:26+08:00"
-              content="2020-10-22">
-          10-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-set-up-squid-proxy-server/" itemprop="url">
-            <span itemprop="name">How to set up Squid proxy server</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-19T00:00:00+08:00"
-              content="2020-10-19">
-          10-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-set-up-a-blog-using-hexo-and-github/" itemprop="url">
-            <span itemprop="name">How to set up a blog using Hexo and Github</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-18T00:00:00+08:00"
-              content="2020-10-18">
-          10-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-set-up-external-dns/" itemprop="url">
-            <span itemprop="name">How to set up external-dns</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-    </div>
-  </div>
   
-  
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/tags/setup/page/2/">2</a><a class="extend next" rel="next" href="/tags/setup/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+    <span class="post-meta-item" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="firestore-visitors-count"></span>
+    </span>
+</div>
+
+            <div class="post-description">How to dockerize Go application</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>When you develop an application then you need to dockerize your application.</p>
+<h2 id="Guide"><a href="#Guide" class="headerlink" title="Guide"></a>Guide</h2><p>Create an application, say <code>Hello world</code> under <code>./cmd/test/main.go</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod init test</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;Hello world&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Create <code>Dockerfile</code> to dockerize application.</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> golang:alpine AS builder</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /src</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> go.mod go.sum ./</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> go mod download</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> ./cmd ./cmd</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> go build -o app ./cmd/<span class="built_in">test</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> alpine:<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> --from=builder /src/app ./</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> ./app</span></span><br></pre></td></tr></table></figure>
+
+<p>Build docker image following command.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t test:latest .</span><br></pre></td></tr></table></figure>
+
+<p>Run docker image following command.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm test:latest</span><br></pre></td></tr></table></figure>
+
+<p>Then should print <code>Hello world</code> on terminal.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The multiple stage is <strong>important</strong> in <code>Dockerfile</code>. It can optimize size of docker image.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/howto/" rel="tag"># howto</a>
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/golang/" rel="tag"># golang</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/how-to-create-a-public-helm-chart-repository-with-github-pages/" rel="prev" title="How to create a public Helm chart repository with GitHub pages">
+                  <i class="fa fa-chevron-left"></i> How to create a public Helm chart repository with GitHub pages
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
 
 </div>
   </main>

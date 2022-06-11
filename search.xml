@@ -421,6 +421,33 @@
       </tags>
   </entry>
   <entry>
+    <title>How to dockerize Go application</title>
+    <url>/posts/how-to-dockerize-go-application/</url>
+    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>When you develop an application then you need to dockerize your application.</p>
+<h2 id="Guide"><a href="#Guide" class="headerlink" title="Guide"></a>Guide</h2><p>Create an application, say <code>Hello world</code> under <code>./cmd/test/main.go</code>.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">go mod init test</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;Hello world&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Create <code>Dockerfile</code> to dockerize application.</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> golang:alpine AS builder</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /src</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> go.mod go.sum ./</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> go mod download</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> ./cmd ./cmd</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> go build -o app ./cmd/<span class="built_in">test</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> alpine:<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> --from=builder /src/app ./</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> ./app</span></span><br></pre></td></tr></table></figure>
+
+<p>Build docker image following command.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker build -t test:latest .</span><br></pre></td></tr></table></figure>
+
+<p>Run docker image following command.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it --rm test:latest</span><br></pre></td></tr></table></figure>
+
+<p>Then should print <code>Hello world</code> on terminal.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The multiple stage is <strong>important</strong> in <code>Dockerfile</code>. It can optimize size of docker image.</p>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>docker</tag>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to install jenkins on kubernetes</title>
     <url>/posts/how-to-install-jenkins-on-kubernetes/</url>
     <content><![CDATA[<div class="note primary"><ul>
@@ -766,8 +793,8 @@
 ]]></content>
       <tags>
         <tag>howto</tag>
-        <tag>setup</tag>
         <tag>golang</tag>
+        <tag>setup</tag>
       </tags>
   </entry>
   <entry>
@@ -1021,8 +1048,8 @@
 ]]></content>
       <tags>
         <tag>howto</tag>
-        <tag>setup</tag>
         <tag>golang</tag>
+        <tag>setup</tag>
         <tag>github action</tag>
       </tags>
   </entry>
