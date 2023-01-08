@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.1">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/logo512.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/logo512.png">
@@ -17,10 +15,11 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.seancheng.space","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="How to write beautiful and standard golang project layout">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.seancheng.space","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="How to write beautiful and standard golang project layout">
 <meta property="og:type" content="article">
 <meta property="og:title" content="how to write golang project layout">
 <meta property="og:url" content="https://blog.seancheng.space/posts/how-to-write-golang-project-layout/index.html">
@@ -51,6 +50,12 @@
 
 
 
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -60,8 +65,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
@@ -81,7 +86,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -90,12 +95,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
-        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">0</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">44</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">0</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">44</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -128,15 +128,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -152,16 +146,16 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-layout"><span class="nav-number">2.</span> <span class="nav-text">Project layout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Go-Directories"><span class="nav-number">2.1.</span> <span class="nav-text">Go Directories</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cmd"><span class="nav-number">2.1.1.</span> <span class="nav-text">&#x2F;cmd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#internal"><span class="nav-number">2.1.2.</span> <span class="nav-text">&#x2F;internal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pkg"><span class="nav-number">2.1.3.</span> <span class="nav-text">&#x2F;pkg</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pb"><span class="nav-number">2.1.4.</span> <span class="nav-text">&#x2F;pb</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-application-directories"><span class="nav-number">2.2.</span> <span class="nav-text">Service application directories</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#api"><span class="nav-number">2.2.1.</span> <span class="nav-text">&#x2F;api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web"><span class="nav-number">2.2.2.</span> <span class="nav-text">&#x2F;web</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-application-directories"><span class="nav-number">2.3.</span> <span class="nav-text">Common application directories</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#configs"><span class="nav-number">2.3.1.</span> <span class="nav-text">&#x2F;configs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scripts"><span class="nav-number">2.3.2.</span> <span class="nav-text">&#x2F;scripts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#deployments"><span class="nav-number">2.3.3.</span> <span class="nav-text">&#x2F;deployments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test"><span class="nav-number">2.3.4.</span> <span class="nav-text">&#x2F;test</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-directories"><span class="nav-number">2.4.</span> <span class="nav-text">Other directories</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#docs"><span class="nav-number">2.4.1.</span> <span class="nav-text">&#x2F;docs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#examples"><span class="nav-number">2.4.2.</span> <span class="nav-text">&#x2F;examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-layout"><span class="nav-number">2.</span> <span class="nav-text">Project layout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Go-Directories"><span class="nav-number">2.1.</span> <span class="nav-text">Go Directories</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-cmd"><span class="nav-number">2.1.1.</span> <span class="nav-text">&#x2F;cmd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-internal"><span class="nav-number">2.1.2.</span> <span class="nav-text">&#x2F;internal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-pkg"><span class="nav-number">2.1.3.</span> <span class="nav-text">&#x2F;pkg</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-pb"><span class="nav-number">2.1.4.</span> <span class="nav-text">&#x2F;pb</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-application-directories"><span class="nav-number">2.2.</span> <span class="nav-text">Service application directories</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-api"><span class="nav-number">2.2.1.</span> <span class="nav-text">&#x2F;api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-web"><span class="nav-number">2.2.2.</span> <span class="nav-text">&#x2F;web</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-application-directories"><span class="nav-number">2.3.</span> <span class="nav-text">Common application directories</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-configs"><span class="nav-number">2.3.1.</span> <span class="nav-text">&#x2F;configs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-scripts"><span class="nav-number">2.3.2.</span> <span class="nav-text">&#x2F;scripts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-deployments"><span class="nav-number">2.3.3.</span> <span class="nav-text">&#x2F;deployments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-test"><span class="nav-number">2.3.4.</span> <span class="nav-text">&#x2F;test</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-directories"><span class="nav-number">2.4.</span> <span class="nav-text">Other directories</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-docs"><span class="nav-number">2.4.1.</span> <span class="nav-text">&#x2F;docs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-examples"><span class="nav-number">2.4.2.</span> <span class="nav-text">&#x2F;examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Sean Zheng</p>
   <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
@@ -176,42 +170,27 @@
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/blackhorseya" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;blackhorseya" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+        <a href="https://github.com/blackhorseya" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;blackhorseya" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:blackhorseya@gmail.com" title="E-Mail → mailto:blackhorseya@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+        <a href="mailto:blackhorseya@gmail.com" title="E-Mail → mailto:blackhorseya@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/chengchincheng/" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chengchincheng&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+        <a href="https://www.linkedin.com/in/chengchincheng/" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chengchincheng&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
       </span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="Back to top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
+  </aside>
 
-  <a href="https://github.com/blackhorseya" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -229,11 +208,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Sean Zheng">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Sean's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="how to write golang project layout | Sean's blog">
+      <meta itemprop="description" content="How to write beautiful and standard golang project layout">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -270,24 +254,24 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Project layout is <strong>important</strong> in <code>golang</code> because each folder is a package. So I will follow up <a target="_blank" rel="noopener" href="https://github.com/golang-standards/project-layout">golang project layout</a> and <a target="_blank" rel="noopener" href="https://github.com/sdgmf/go-project-sample">go project sample</a> two projects integrate to my project layout.</p>
-<h2 id="Project-layout"><a href="#Project-layout" class="headerlink" title="Project layout"></a>Project layout</h2><h3 id="Go-Directories"><a href="#Go-Directories" class="headerlink" title="Go Directories"></a>Go Directories</h3><h4 id="cmd"><a href="#cmd" class="headerlink" title="/cmd"></a>/cmd</h4><p>Main applications for this project. (e.g., <code>/cmd/todo-app</code>)</p>
-<h4 id="internal"><a href="#internal" class="headerlink" title="/internal"></a>/internal</h4><p>Private application and library code. (e.go., <code>/internal/app/todo</code>, <code>internal/pkg/lib</code>).</p>
-<h4 id="pkg"><a href="#pkg" class="headerlink" title="/pkg"></a>/pkg</h4><p>Library code that’s ok to use by external application (e.g., <code>pkg/utils</code>).</p>
-<h4 id="pb"><a href="#pb" class="headerlink" title="/pb"></a>/pb</h4><p>It’s protobuf for this project.</p>
+<h2 id="Project-layout"><a href="#Project-layout" class="headerlink" title="Project layout"></a>Project layout</h2><h3 id="Go-Directories"><a href="#Go-Directories" class="headerlink" title="Go Directories"></a>Go Directories</h3><h4 id="x2F-cmd"><a href="#x2F-cmd" class="headerlink" title="&#x2F;cmd"></a>&#x2F;cmd</h4><p>Main applications for this project. (e.g., <code>/cmd/todo-app</code>)</p>
+<h4 id="x2F-internal"><a href="#x2F-internal" class="headerlink" title="&#x2F;internal"></a>&#x2F;internal</h4><p>Private application and library code. (e.go., <code>/internal/app/todo</code>, <code>internal/pkg/lib</code>).</p>
+<h4 id="x2F-pkg"><a href="#x2F-pkg" class="headerlink" title="&#x2F;pkg"></a>&#x2F;pkg</h4><p>Library code that’s ok to use by external application (e.g., <code>pkg/utils</code>).</p>
+<h4 id="x2F-pb"><a href="#x2F-pb" class="headerlink" title="&#x2F;pb"></a>&#x2F;pb</h4><p>It’s protobuf for this project.</p>
 <p>You can generate <code>protobuf</code> in <code>Makefile</code>.</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: gen-pb</span></span><br><span class="line"><span class="section">gen-pb:</span></span><br><span class="line">	@protoc --go_out=paths=source_relative:. --go-grpc_out=paths=source_relative:. ./pb/*.proto</span><br><span class="line">	@echo Successfully generated proto</span><br></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: gen-pb</span></span><br><span class="line"><span class="section">gen-pb:</span></span><br><span class="line">	@protoc --go_out=paths=source_relative:. --go-grpc_out=paths=source_relative:. ./pb/*.proto</span><br><span class="line">	@echo Successfully generated proto</span><br></pre></td></tr></table></figure>
 
-<h3 id="Service-application-directories"><a href="#Service-application-directories" class="headerlink" title="Service application directories"></a>Service application directories</h3><h4 id="api"><a href="#api" class="headerlink" title="/api"></a>/api</h4><p>OpenAPI/Swagger specs.</p>
+<h3 id="Service-application-directories"><a href="#Service-application-directories" class="headerlink" title="Service application directories"></a>Service application directories</h3><h4 id="x2F-api"><a href="#x2F-api" class="headerlink" title="&#x2F;api"></a>&#x2F;api</h4><p>OpenAPI&#x2F;Swagger specs.</p>
 <p>You can generate <code>Swagger</code> spec in <code>Makefile</code>.</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: gen-swagger</span></span><br><span class="line"><span class="section">gen-swagger:</span></span><br><span class="line">	@swag init -g cmd/<span class="variable">$(APP_NAME)</span>/main.go --parseInternal -o api/docs</span><br></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: gen-swagger</span></span><br><span class="line"><span class="section">gen-swagger:</span></span><br><span class="line">	@swag init -g cmd/<span class="variable">$(APP_NAME)</span>/main.go --parseInternal -o api/docs</span><br></pre></td></tr></table></figure>
 
-<h4 id="web"><a href="#web" class="headerlink" title="/web"></a>/web</h4><p>Web application specific components: static web assets, server side templates and SPAs.</p>
-<h3 id="Common-application-directories"><a href="#Common-application-directories" class="headerlink" title="Common application directories"></a>Common application directories</h3><h4 id="configs"><a href="#configs" class="headerlink" title="/configs"></a>/configs</h4><p>Configuration file templates or default configs.</p>
-<h4 id="scripts"><a href="#scripts" class="headerlink" title="/scripts"></a>/scripts</h4><p>Scripts to perform various build, install, analysis, etc. operations.</p>
-<h4 id="deployments"><a href="#deployments" class="headerlink" title="/deployments"></a>/deployments</h4><p>IaaS, PaaS, system and container orchestration deployment configurations and templates (docker-compose, kubernetes/helm, mesos, terraform, bosh).</p>
-<h4 id="test"><a href="#test" class="headerlink" title="/test"></a>/test</h4><p>Additional external test apps and test data. For example, you can have <code>/test/testdata</code>.</p>
-<h3 id="Other-directories"><a href="#Other-directories" class="headerlink" title="Other directories"></a>Other directories</h3><h4 id="docs"><a href="#docs" class="headerlink" title="/docs"></a>/docs</h4><p>Design and user documents (in addition to your godoc generated documentation).</p>
-<h4 id="examples"><a href="#examples" class="headerlink" title="/examples"></a>/examples</h4><p>Examples for your applications and/or public libraries.</p>
+<h4 id="x2F-web"><a href="#x2F-web" class="headerlink" title="&#x2F;web"></a>&#x2F;web</h4><p>Web application specific components: static web assets, server side templates and SPAs.</p>
+<h3 id="Common-application-directories"><a href="#Common-application-directories" class="headerlink" title="Common application directories"></a>Common application directories</h3><h4 id="x2F-configs"><a href="#x2F-configs" class="headerlink" title="&#x2F;configs"></a>&#x2F;configs</h4><p>Configuration file templates or default configs.</p>
+<h4 id="x2F-scripts"><a href="#x2F-scripts" class="headerlink" title="&#x2F;scripts"></a>&#x2F;scripts</h4><p>Scripts to perform various build, install, analysis, etc. operations.</p>
+<h4 id="x2F-deployments"><a href="#x2F-deployments" class="headerlink" title="&#x2F;deployments"></a>&#x2F;deployments</h4><p>IaaS, PaaS, system and container orchestration deployment configurations and templates (docker-compose, kubernetes&#x2F;helm, mesos, terraform, bosh).</p>
+<h4 id="x2F-test"><a href="#x2F-test" class="headerlink" title="&#x2F;test"></a>&#x2F;test</h4><p>Additional external test apps and test data. For example, you can have <code>/test/testdata</code>.</p>
+<h3 id="Other-directories"><a href="#Other-directories" class="headerlink" title="Other directories"></a>Other directories</h3><h4 id="x2F-docs"><a href="#x2F-docs" class="headerlink" title="&#x2F;docs"></a>&#x2F;docs</h4><p>Design and user documents (in addition to your godoc generated documentation).</p>
+<h4 id="x2F-examples"><a href="#x2F-examples" class="headerlink" title="&#x2F;examples"></a>&#x2F;examples</h4><p>Examples for your applications and&#x2F;or public libraries.</p>
 <h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>You can view my complete open source repository.</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/blackhorseya/todo-app">Todo APP</a></p>
 
@@ -334,36 +318,53 @@
 
 
 <div class="copyright">
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2022</span>
+  &copy; 1992 – 
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Sean Zheng</span>
 </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
 
     </div>
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/blackhorseya" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
-  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.8/dist/mermaid.min.js","integrity":"sha256-QmSAc2kIaUjleIJ46X7qPW2zrpCbXlMz3YIGgWpQ1Jo="}}</script>
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js","integrity":"sha256-QdTG1YTLLTwD3b95jLqFxpQX9uYuJMNAtVZgwKX4oYU="}}</script>
   <script src="/js/third-party/tags/mermaid.js"></script>
 
 
 
   
 
-  <script src="https://cdn.jsdelivr.net/npm/firebase@9.6.1/firebase-app-compat.js" integrity="sha256-JsxtczVneqccOYjvdg7KAeYkwWAFqzh0koxVYAe2hSk=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/firebase@9.6.1/firebase-firestore-compat.js" integrity="sha256-XxQ63CdYZ3FP1cHDOjaCViOXFcz7wFIfMHsb6UQVWH0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.15.0/firebase-app-compat.js" integrity="sha256-A8uo1+X48MvWPwgPlvCnYuAImCUflgEhnkcrIB/o0h8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.15.0/firebase-firestore-compat.js" integrity="sha256-2vTXB2VWavgiIk/TK93CjOsIcPlVR5Rd4qq74a8UGU0=" crossorigin="anonymous"></script>
   <script class="next-config" data-name="firestore" type="application/json">{"enable":true,"collection":"articles","apiKey":"AIzaSyBIvO2CqNA43-Nsq26ETOIe44q6VomiaeI","projectId":"blackhorseya-blog"}</script>
   <script src="/js/third-party/statistics/firestore.js"></script>
 
