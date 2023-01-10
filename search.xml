@@ -441,8 +441,66 @@
 ]]></content>
       <tags>
         <tag>howto</tag>
-        <tag>golang</tag>
         <tag>docker</tag>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>how to implement domain driven design in golang</title>
+    <url>/posts/how-to-implement-domain-driven-design-in-golang/</url>
+    <content><![CDATA[<div class="note primary"><p>For example, I want to build a <strong>todo list</strong> application.</p>
+</div>
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>I want to design a product with frontend, backend, and infrastructure. So I want to build a microservice for the product. The first question is that I will need to know how to split a service, so I want to use Domain-Driven Design to break down each service.</p>
+<h2 id="Product-description"><a href="#Product-description" class="headerlink" title="Product description"></a>Product description</h2><h3 id="Functional"><a href="#Functional" class="headerlink" title="Functional"></a>Functional</h3><h4 id="Main"><a href="#Main" class="headerlink" title="Main"></a>Main</h4><ul>
+<li>add task by title</li>
+<li>list all tasks</li>
+<li>delete task</li>
+<li>modify task</li>
+</ul>
+<h2 id="Architecture-design"><a href="#Architecture-design" class="headerlink" title="Architecture design"></a>Architecture design</h2><p>Domain-Driven Design</p>
+<ul>
+<li><code>Account</code>: define a user</li>
+<li><code>Task</code>: as a representation of all tickets</li>
+</ul>
+<pre class="mermaid">graph
+    account
+    task</pre>
+
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><h3 id="Project-layout"><a href="#Project-layout" class="headerlink" title="Project layout"></a>Project layout</h3><p>I follow <a href="https://github.com/golang-standards/project-layout">Standard Go Project Layout</a></p>
+<h3 id="Layered-architecture"><a href="#Layered-architecture" class="headerlink" title="Layered architecture"></a>Layered architecture</h3><pre class="mermaid">graph
+    user:((user)) --> 
+    presentation:(presentation layer) -->
+    biz:(business layer) -->
+    repo:(repository layer) -->
+    data:[(data source)]</pre>
+
+<h4 id="Presentation-layer"><a href="#Presentation-layer" class="headerlink" title="Presentation layer"></a>Presentation layer</h4><p>The presentation layer is the highest layer of the software. It can be a Restful even Grpc, graphQL, and CLI.</p>
+<p>folder layout:</p>
+<pre class="mermaid">flowchart TD
+    root-->/cmd
+    /cmd-->/restful
+    /restful-->/account/main.go
+    /restful-->/task/main.go
+    /cmd-->/grpc
+    /grpc-->account1:["/account/main.go"]
+    /cmd-->/cronjob
+    /cmd-->/graphql</pre>
+
+<h4 id="Business-layer"><a href="#Business-layer" class="headerlink" title="Business layer"></a>Business layer</h4><p>As the name of this layer, most of the logic of the application will be placed in this layer. For example, if we have <code>TaskBiz</code> we expect that create, complete, and delete task happens there like in a real life. he Biz layer allows developers to design applications that support multiple user interfaces, this minimizes the chances of needless code duplication. Usually, this layer is divided into smaller pieces that are easy to manage.</p>
+<p>folder layout:</p>
+<pre class="mermaid">flowchart TD
+    root-->/internal/app/domain/account/biz/impl.go
+    root-->/pkg/entity/domain/account/biz/interface.go</pre>
+
+<h4 id="Repository-layer"><a href="#Repository-layer" class="headerlink" title="Repository layer"></a>Repository layer</h4><p>The repository layer is the layer that implements communication with the data source (usually a database). No matter if we’re fetching the data from the DB or saving&#x2F;modifying objects, it’s the place where SQL queries or ORM operations should be placed.</p>
+<p>folder layout: <code>internal/app/domain/account/biz/repo/interface.go</code></p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p><a href="https://github.com/blackhorseya/todo-app">Todo app</a></p>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>golang</tag>
+        <tag>DDD</tag>
       </tags>
   </entry>
   <entry>
