@@ -747,25 +747,6 @@
       </tags>
   </entry>
   <entry>
-    <title>How to set up GKE via terraform</title>
-    <url>/posts/how-to-set-up-gke-via-terraform/</url>
-    <content><![CDATA[<h2 id="前置條件"><a href="#前置條件" class="headerlink" title="前置條件"></a>前置條件</h2><ul>
-<li>terraform</li>
-<li>GCP</li>
-</ul>
-<h2 id="撰寫-terraform"><a href="#撰寫-terraform" class="headerlink" title="撰寫 terraform"></a>撰寫 terraform</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># main.tf</span><br><span class="line"></span><br><span class="line">terraform &#123;</span><br><span class="line">  required_providers &#123;</span><br><span class="line">    google = &#123;</span><br><span class="line">      source = &quot;hashicorp/google&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">provider &quot;google&quot; &#123;</span><br><span class="line">  credentials = file(&quot;sean-side-tf-admin-sa.json&quot;)</span><br><span class="line">  project     = &quot;sean-side&quot;</span><br><span class="line">  region      = &quot;asia-east1&quot;</span><br><span class="line">  zone        = &quot;asia-east1-c&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># gke.tf</span><br><span class="line"></span><br><span class="line">resource &quot;google_service_account&quot; &quot;sean-side-gke-default-sa&quot; &#123;</span><br><span class="line">  account_id   = &quot;sean-side-gke-default-sa&quot;</span><br><span class="line">  display_name = &quot;GKE default service account&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;google_container_cluster&quot; &quot;sean-side-prod-cluster&quot; &#123;</span><br><span class="line">  name                     = &quot;sean-side-prod-cluster&quot;</span><br><span class="line">  location                 = &quot;asia-east1-c&quot;</span><br><span class="line">  remove_default_node_pool = true</span><br><span class="line">  initial_node_count       = 1</span><br><span class="line"></span><br><span class="line">  timeouts &#123;</span><br><span class="line">    create = &quot;30m&quot;</span><br><span class="line">    update = &quot;40m&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;google_container_node_pool&quot; &quot;sean-side-prod-nodes&quot; &#123;</span><br><span class="line">  name       = &quot;sean-side-prod-nodes&quot;</span><br><span class="line">  location   = &quot;asia-east1-c&quot;</span><br><span class="line">  cluster    = google_container_cluster.sean-side-prod-cluster.name</span><br><span class="line">  node_count = 2</span><br><span class="line"></span><br><span class="line">  autoscaling &#123;</span><br><span class="line">    max_node_count = 3</span><br><span class="line">    min_node_count = 1</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  node_config &#123;</span><br><span class="line">    preemptible  = true</span><br><span class="line">    machine_type = &quot;e2-medium&quot;</span><br><span class="line"></span><br><span class="line">    service_account = google_service_account.sean-side-gke-default-sa.email</span><br><span class="line">    oauth_scopes = [</span><br><span class="line">      &quot;https://www.googleapis.com/auth/cloud-platform&quot;</span><br><span class="line">    ]</span><br><span class="line">    labels = &#123;</span><br><span class="line">      env  = &quot;prod&quot;</span><br><span class="line">      proj = &quot;side&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>howto</tag>
-        <tag>kubernetes</tag>
-        <tag>setup</tag>
-        <tag>terraform</tag>
-        <tag>GCP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>How to set up influxdb on kubernetes</title>
     <url>/posts/how-to-set-up-influxdb-on-kubernetes/</url>
     <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><a href="https://www.influxdata.com/">Influxdb</a> is a time series database. you can collect data into <code>influxdb</code> to show on <code>Grafana</code> dashboard. So I will write down I how to set up influxdb (v1, v2) on <code>Kubernetes</code>. But why not use <code>Prometheus</code> because it is a <code>pull based</code> time series database. If you want to collect very real-time data like business metrics clearly not suitable. </p>
@@ -1533,6 +1514,40 @@
       </tags>
   </entry>
   <entry>
+    <title>Pair programming with AI</title>
+    <url>/posts/pair-programming-with-ai/</url>
+    <content><![CDATA[<h2 id="What’s-pair-programming"><a href="#What’s-pair-programming" class="headerlink" title="What’s pair programming?"></a>What’s pair programming?</h2><p>Pair programming is a software development approach where two developers work together on the same codebase. In this approach, one developer writes the code while the other reviews it and provides feedback in real-time. The two developers switch roles periodically, so each one gets a chance to write code and review it. Pair programming is commonly used in agile software development as a way to improve code quality, promote collaboration, and share knowledge and skills. It is believed to increase efficiency, reduce errors, and enhance team communication and morale.</p>
+<p>In Pair programming, there are two roles involved in the development process:</p>
+<ul>
+<li><strong>Navigator</strong>: responsible for observing, planning, providing feedback, and directing the strategic aspects of the code being written.</li>
+<li><strong>Driver</strong>: responsible for writing the actual code.</li>
+</ul>
+<p><img src="https://miro.medium.com/v2/resize:fit:7676/1*sBJhFwmpfbftanqzxOeK_w.jpeg"></p>
+<h2 id="Pros-and-cons-of-pair-programming"><a href="#Pros-and-cons-of-pair-programming" class="headerlink" title="Pros and cons of pair programming"></a>Pros and cons of pair programming</h2><h3 id="Pros"><a href="#Pros" class="headerlink" title="Pros"></a>Pros</h3><ol>
+<li>Improved code quality: Pair programming helps improve the quality and readability of the code by allowing two developers to work together, discuss potential issues, and constantly review and check each other’s work. This method reduces errors and defects and enhances code quality.</li>
+<li>Increased knowledge sharing: Pair programming promotes knowledge and skill sharing by requiring developers to communicate and discuss technical issues, share best practices, and learn from each other. This method promotes knowledge sharing and skills transfer, benefiting the entire team.</li>
+<li>Enhanced team efficiency: Pair programming increases team efficiency by allowing two developers to work together and complete tasks faster, reducing errors and increasing productivity. It also promotes teamwork and communication, enhances team cohesion and morale, and makes the entire team more coordinated and efficient.</li>
+</ol>
+<blockquote>
+<p>They found that for a development-time cost of about 15%，pair programming improves design quality, reduces defects, reduces staffing risk, enhances technical skills, improves team communications and is considered more enjoyable at statistically significant levels.</p>
+</blockquote>
+<h3 id="Cons"><a href="#Cons" class="headerlink" title="Cons"></a>Cons</h3><ol>
+<li>Increased project time: Pair programming can lead to a longer project time, as it requires two developers to work on the same task, essentially doubling the time needed to complete a task. This can be a risk for projects that are time-sensitive and need to be completed quickly.</li>
+<li>Requires high levels of concentration: Pair programming requires a high level of concentration and focus from both developers, which can be mentally exhausting and draining. This can be a challenge for developers who have difficulty sustaining their focus for long periods of time.</li>
+</ol>
+<h2 id="Pair-programming-with-AI"><a href="#Pair-programming-with-AI" class="headerlink" title="Pair programming with AI"></a>Pair programming with AI</h2><p>Yes, with tools like <code>ChatGPT</code> and <code>Copilot</code>, it’s now possible to implement pair programming in a more efficient and effective way. These AI tools can assist developers in writing code, providing suggestions and feedback, and even completing repetitive tasks, freeing up time for developers to focus on more complex tasks. Additionally, these tools can enhance collaboration by providing a platform for developers to communicate, discuss technical issues, and share knowledge and expertise.</p>
+<p>For example, you can tell ChatGPT that you want to develop a todo-app website and ask for guidance on how to proceed. This is similar to using Google Maps to navigate while driving, where the map provides directions but the driver is still responsible for driving the car.</p>
+<p>Another example is when you are developing code, you can use Copilot to provide more accurate suggestions based on your comments, whether it’s for code or documentation.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Pair programming with AI is an approach to software development that involves leveraging artificial intelligence to improve efficiency and code quality. By working together with AI tools such as ChatGPT and Copilot, developers can receive more precise code suggestions and accelerate the development process. However, the challenge remains that AI cannot fully replace human creativity and experience. Therefore, developers need to learn how to collaborate with AI tools effectively to achieve optimal results.</p>
+]]></content>
+      <tags>
+        <tag>pair programming</tag>
+        <tag>chatgpt</tag>
+        <tag>copilot</tag>
+        <tag>openai</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>The evolution of container management</title>
     <url>/posts/the-evolution-of-container-management/</url>
     <content><![CDATA[<div class="note primary"><p>本文以 <code>世紀帝國2</code> 中的時代為例，<code>封建時代</code>、<code>城堡時代</code>、<code>帝王時代</code><br>為什麼沒有 <code>黑暗時代</code> 呢？因為會用 <code>Docker</code> 先贏一半</p>
@@ -1605,6 +1620,25 @@
       <tags>
         <tag>software</tag>
         <tag>development</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How to set up GKE via terraform</title>
+    <url>/posts/how-to-set-up-gke-via-terraform/</url>
+    <content><![CDATA[<h2 id="前置條件"><a href="#前置條件" class="headerlink" title="前置條件"></a>前置條件</h2><ul>
+<li>terraform</li>
+<li>GCP</li>
+</ul>
+<h2 id="撰寫-terraform"><a href="#撰寫-terraform" class="headerlink" title="撰寫 terraform"></a>撰寫 terraform</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># main.tf</span><br><span class="line"></span><br><span class="line">terraform &#123;</span><br><span class="line">  required_providers &#123;</span><br><span class="line">    google = &#123;</span><br><span class="line">      source = &quot;hashicorp/google&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">provider &quot;google&quot; &#123;</span><br><span class="line">  credentials = file(&quot;sean-side-tf-admin-sa.json&quot;)</span><br><span class="line">  project     = &quot;sean-side&quot;</span><br><span class="line">  region      = &quot;asia-east1&quot;</span><br><span class="line">  zone        = &quot;asia-east1-c&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># gke.tf</span><br><span class="line"></span><br><span class="line">resource &quot;google_service_account&quot; &quot;sean-side-gke-default-sa&quot; &#123;</span><br><span class="line">  account_id   = &quot;sean-side-gke-default-sa&quot;</span><br><span class="line">  display_name = &quot;GKE default service account&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;google_container_cluster&quot; &quot;sean-side-prod-cluster&quot; &#123;</span><br><span class="line">  name                     = &quot;sean-side-prod-cluster&quot;</span><br><span class="line">  location                 = &quot;asia-east1-c&quot;</span><br><span class="line">  remove_default_node_pool = true</span><br><span class="line">  initial_node_count       = 1</span><br><span class="line"></span><br><span class="line">  timeouts &#123;</span><br><span class="line">    create = &quot;30m&quot;</span><br><span class="line">    update = &quot;40m&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;google_container_node_pool&quot; &quot;sean-side-prod-nodes&quot; &#123;</span><br><span class="line">  name       = &quot;sean-side-prod-nodes&quot;</span><br><span class="line">  location   = &quot;asia-east1-c&quot;</span><br><span class="line">  cluster    = google_container_cluster.sean-side-prod-cluster.name</span><br><span class="line">  node_count = 2</span><br><span class="line"></span><br><span class="line">  autoscaling &#123;</span><br><span class="line">    max_node_count = 3</span><br><span class="line">    min_node_count = 1</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  node_config &#123;</span><br><span class="line">    preemptible  = true</span><br><span class="line">    machine_type = &quot;e2-medium&quot;</span><br><span class="line"></span><br><span class="line">    service_account = google_service_account.sean-side-gke-default-sa.email</span><br><span class="line">    oauth_scopes = [</span><br><span class="line">      &quot;https://www.googleapis.com/auth/cloud-platform&quot;</span><br><span class="line">    ]</span><br><span class="line">    labels = &#123;</span><br><span class="line">      env  = &quot;prod&quot;</span><br><span class="line">      proj = &quot;side&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>kubernetes</tag>
+        <tag>setup</tag>
+        <tag>terraform</tag>
+        <tag>GCP</tag>
       </tags>
   </entry>
   <entry>
