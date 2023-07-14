@@ -127,6 +127,22 @@
       </tags>
   </entry>
   <entry>
+    <title>how to build golang project using bazel</title>
+    <url>/posts/how-to-build-golang-project-using-bazel/</url>
+    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><p>Add <code>WORKSPACE</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">workspace(name = &quot;com_github_blackhorseya_irent&quot;)</span><br><span class="line"></span><br><span class="line">load(&quot;@bazel_tools//tools/build_defs/repo:http.bzl&quot;, &quot;http_archive&quot;)</span><br><span class="line"></span><br><span class="line">http_archive(</span><br><span class="line">    name = &quot;io_bazel_rules_go&quot;,</span><br><span class="line">    sha256 = &quot;56d8c5a5c91e1af73eca71a6fab2ced959b67c86d12ba37feedb0a2dfea441a6&quot;,</span><br><span class="line">    urls = [</span><br><span class="line">        &quot;https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.37.0/rules_go-v0.37.0.zip&quot;,</span><br><span class="line">        &quot;https://github.com/bazelbuild/rules_go/releases/download/v0.37.0/rules_go-v0.37.0.zip&quot;,</span><br><span class="line">    ],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">http_archive(</span><br><span class="line">    name = &quot;bazel_gazelle&quot;,</span><br><span class="line">    sha256 = &quot;448e37e0dbf61d6fa8f00aaa12d191745e14f07c31cabfa731f0c8e8a4f41b97&quot;,</span><br><span class="line">    urls = [</span><br><span class="line">        &quot;https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.28.0/bazel-gazelle-v0.28.0.tar.gz&quot;,</span><br><span class="line">        &quot;https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.28.0/bazel-gazelle-v0.28.0.tar.gz&quot;,</span><br><span class="line">    ],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">http_archive(</span><br><span class="line">    name = &quot;com_google_protobuf&quot;,</span><br><span class="line">    sha256 = &quot;d0f5f605d0d656007ce6c8b5a82df3037e1d8fe8b121ed42e536f569dec16113&quot;,</span><br><span class="line">    strip_prefix = &quot;protobuf-3.14.0&quot;,</span><br><span class="line">    urls = [</span><br><span class="line">        &quot;https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.14.0.tar.gz&quot;,</span><br><span class="line">        &quot;https://github.com/protocolbuffers/protobuf/archive/v3.14.0.tar.gz&quot;,</span><br><span class="line">    ],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">load(&quot;@io_bazel_rules_go//go:deps.bzl&quot;, &quot;go_register_toolchains&quot;, &quot;go_rules_dependencies&quot;)</span><br><span class="line">load(&quot;@bazel_gazelle//:deps.bzl&quot;, &quot;gazelle_dependencies&quot;)</span><br><span class="line">load(&quot;@com_google_protobuf//:protobuf_deps.bzl&quot;, &quot;protobuf_deps&quot;)</span><br><span class="line"></span><br><span class="line">go_rules_dependencies()</span><br><span class="line"></span><br><span class="line">go_register_toolchains(version = &quot;1.19.3&quot;)</span><br><span class="line"></span><br><span class="line">gazelle_dependencies()</span><br></pre></td></tr></table></figure>
+
+<p>Add <code>BUILD.bazel</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load(&quot;@bazel_gazelle//:def.bzl&quot;, &quot;gazelle&quot;)</span><br><span class="line"></span><br><span class="line"># gazelle:prefix github.com/blackhorseya/irent</span><br><span class="line"># gazelle:proto disable_global</span><br><span class="line"></span><br><span class="line">gazelle(name = &quot;gazelle&quot;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>golang</tag>
+        <tag>bazel</tag>
+        <tag>monorepo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to collect container log using filebeat</title>
     <url>/posts/how-to-collect-container-log-using-filebeat/</url>
     <content><![CDATA[<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><h4 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull docker.elastic.co/beats/filebeat:7.9.2</span><br></pre></td></tr></table></figure>
@@ -440,8 +456,8 @@
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The multiple stage is <strong>important</strong> in <code>Dockerfile</code>. It can optimize size of docker image.</p>
 ]]></content>
       <tags>
-        <tag>golang</tag>
         <tag>howto</tag>
+        <tag>golang</tag>
         <tag>docker</tag>
       </tags>
   </entry>
@@ -498,8 +514,8 @@
 <h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p><a href="https://github.com/blackhorseya/todo-app">Todo app</a></p>
 ]]></content>
       <tags>
-        <tag>golang</tag>
         <tag>howto</tag>
+        <tag>golang</tag>
         <tag>DDD</tag>
       </tags>
   </entry>
@@ -747,6 +763,25 @@
       </tags>
   </entry>
   <entry>
+    <title>How to set up GKE via terraform</title>
+    <url>/posts/how-to-set-up-gke-via-terraform/</url>
+    <content><![CDATA[<h2 id="前置條件"><a href="#前置條件" class="headerlink" title="前置條件"></a>前置條件</h2><ul>
+<li>terraform</li>
+<li>GCP</li>
+</ul>
+<h2 id="撰寫-terraform"><a href="#撰寫-terraform" class="headerlink" title="撰寫 terraform"></a>撰寫 terraform</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># main.tf</span><br><span class="line"></span><br><span class="line">terraform &#123;</span><br><span class="line">  required_providers &#123;</span><br><span class="line">    google = &#123;</span><br><span class="line">      source = &quot;hashicorp/google&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">provider &quot;google&quot; &#123;</span><br><span class="line">  credentials = file(&quot;sean-side-tf-admin-sa.json&quot;)</span><br><span class="line">  project     = &quot;sean-side&quot;</span><br><span class="line">  region      = &quot;asia-east1&quot;</span><br><span class="line">  zone        = &quot;asia-east1-c&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># gke.tf</span><br><span class="line"></span><br><span class="line">resource &quot;google_service_account&quot; &quot;sean-side-gke-default-sa&quot; &#123;</span><br><span class="line">  account_id   = &quot;sean-side-gke-default-sa&quot;</span><br><span class="line">  display_name = &quot;GKE default service account&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;google_container_cluster&quot; &quot;sean-side-prod-cluster&quot; &#123;</span><br><span class="line">  name                     = &quot;sean-side-prod-cluster&quot;</span><br><span class="line">  location                 = &quot;asia-east1-c&quot;</span><br><span class="line">  remove_default_node_pool = true</span><br><span class="line">  initial_node_count       = 1</span><br><span class="line"></span><br><span class="line">  timeouts &#123;</span><br><span class="line">    create = &quot;30m&quot;</span><br><span class="line">    update = &quot;40m&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;google_container_node_pool&quot; &quot;sean-side-prod-nodes&quot; &#123;</span><br><span class="line">  name       = &quot;sean-side-prod-nodes&quot;</span><br><span class="line">  location   = &quot;asia-east1-c&quot;</span><br><span class="line">  cluster    = google_container_cluster.sean-side-prod-cluster.name</span><br><span class="line">  node_count = 2</span><br><span class="line"></span><br><span class="line">  autoscaling &#123;</span><br><span class="line">    max_node_count = 3</span><br><span class="line">    min_node_count = 1</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  node_config &#123;</span><br><span class="line">    preemptible  = true</span><br><span class="line">    machine_type = &quot;e2-medium&quot;</span><br><span class="line"></span><br><span class="line">    service_account = google_service_account.sean-side-gke-default-sa.email</span><br><span class="line">    oauth_scopes = [</span><br><span class="line">      &quot;https://www.googleapis.com/auth/cloud-platform&quot;</span><br><span class="line">    ]</span><br><span class="line">    labels = &#123;</span><br><span class="line">      env  = &quot;prod&quot;</span><br><span class="line">      proj = &quot;side&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>howto</tag>
+        <tag>kubernetes</tag>
+        <tag>setup</tag>
+        <tag>terraform</tag>
+        <tag>GCP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to set up influxdb on kubernetes</title>
     <url>/posts/how-to-set-up-influxdb-on-kubernetes/</url>
     <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><a href="https://www.influxdata.com/">Influxdb</a> is a time series database. you can collect data into <code>influxdb</code> to show on <code>Grafana</code> dashboard. So I will write down I how to set up influxdb (v1, v2) on <code>Kubernetes</code>. But why not use <code>Prometheus</code> because it is a <code>pull based</code> time series database. If you want to collect very real-time data like business metrics clearly not suitable. </p>
@@ -827,8 +862,8 @@
 <figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> golang:alpine AS builder</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /src</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># because alpine default exclude git command so you must install git.</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk add --no-cache git</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> GITHUB_TOKEN</span><br><span class="line"><span class="keyword">ARG</span> YOUR_GITHUB_ORG</span><br><span class="line"></span><br><span class="line"><span class="comment"># setup GOPRIVATE env via go</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> go <span class="built_in">env</span> -w GOPRIVATE=<span class="string">&quot;github.com/<span class="variable">$&#123;YOUR_GITHUB_ORG&#125;</span>/*&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup git config</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> git config --global url.<span class="string">&quot;https://<span class="variable">$&#123;GITHUB_TOKEN&#125;</span>@github.com/<span class="variable">$&#123;YOUR_GITHUB_ORG&#125;</span>/&quot;</span>.insteadOf <span class="string">&quot;https://github.com/<span class="variable">$&#123;YOUR_GITHUB_ORG&#125;</span>/&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> go.mod go.sum ./</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> go mod download</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> cmd ./cmd</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> internal ./internal</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> api ./api</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> APP_NAME</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> go build -o app ./cmd/<span class="variable">$&#123;APP_NAME&#125;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> alpine:<span class="number">3</span> AS final</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk add --no-cache tzdata</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder /src/app ./</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> ./app</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>golang</tag>
         <tag>howto</tag>
+        <tag>golang</tag>
         <tag>setup</tag>
       </tags>
   </entry>
@@ -1071,8 +1106,8 @@
 <h2 id="How-to-write-testing"><a href="#How-to-write-testing" class="headerlink" title="How to write testing"></a>How to write testing</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> repoSuite <span class="keyword">struct</span> &#123;</span><br><span class="line">	suite.Suite</span><br><span class="line">	pool     *dockertest.Pool</span><br><span class="line">	resource *dockertest.Resource</span><br><span class="line">	client   *mongo.Client</span><br><span class="line">	repo     IRepo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *repoSuite)</span></span> SetupTest() &#123;</span><br><span class="line">	logger := zap.NewNop()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// new pool by dockertest</span></span><br><span class="line">	pool, err := dockertest.NewPool(<span class="string">&quot;&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	s.pool = pool</span><br><span class="line"></span><br><span class="line">	<span class="comment">// run resource by image name and env</span></span><br><span class="line">	resource, err := pool.Run(<span class="string">&quot;mongo&quot;</span>, <span class="string">&quot;4.4.10&quot;</span>, <span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	s.resource = resource</span><br><span class="line"></span><br><span class="line">	err = pool.Retry(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="type">error</span> &#123;</span><br><span class="line">		uri := fmt.Sprintf(<span class="string">&quot;mongodb://localhost:%s/&quot;</span>, resource.GetPort(<span class="string">&quot;27017/tcp&quot;</span>))</span><br><span class="line">		s.client, err = mongo.Connect(contextx.Background(), options.Client().ApplyURI(uri))</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> s.client.Ping(contextx.Background(), readpref.Primary())</span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	repo, err := CreateIRepo(logger, s.client)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	s.repo = repo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *repoSuite)</span></span> TearDownTest() &#123;</span><br><span class="line">	_ = s.client.Disconnect(contextx.Background())</span><br><span class="line"></span><br><span class="line">	<span class="comment">// purge container</span></span><br><span class="line">	_ = s.pool.Purge(s.resource)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestRepoSuite</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	suite.Run(t, <span class="built_in">new</span>(repoSuite))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test ping mongodb</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *repoSuite)</span></span> Test_impl_PingMongo() &#123;</span><br><span class="line">	<span class="keyword">type</span> args <span class="keyword">struct</span> &#123;</span><br><span class="line">		mock <span class="function"><span class="keyword">func</span><span class="params">()</span></span></span><br><span class="line">	&#125;</span><br><span class="line">	tests := []<span class="keyword">struct</span> &#123;</span><br><span class="line">		name    <span class="type">string</span></span><br><span class="line">		args    args</span><br><span class="line">		want    <span class="type">bool</span></span><br><span class="line">		wantErr <span class="type">bool</span></span><br><span class="line">	&#125;&#123;</span><br><span class="line">		&#123;</span><br><span class="line">			name:    <span class="string">&quot;ping then success&quot;</span>,</span><br><span class="line">			args:    args&#123;&#125;,</span><br><span class="line">			want:    <span class="literal">true</span>,</span><br><span class="line">			wantErr: <span class="literal">false</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, tt := <span class="keyword">range</span> tests &#123;</span><br><span class="line">		s.T().Run(tt.name, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">			<span class="keyword">if</span> tt.args.mock != <span class="literal">nil</span> &#123;</span><br><span class="line">				tt.args.mock()</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			got, err := s.repo.PingMongo(contextx.Background())</span><br><span class="line">			<span class="keyword">if</span> (err != <span class="literal">nil</span>) != tt.wantErr &#123;</span><br><span class="line">				t.Errorf(<span class="string">&quot;PingMongo() error = %v, wantErr %v&quot;</span>, err, tt.wantErr)</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> got != tt.want &#123;</span><br><span class="line">				t.Errorf(<span class="string">&quot;PingMongo() got = %v, want %v&quot;</span>, got, tt.want)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>golang</tag>
         <tag>howto</tag>
+        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
@@ -1082,8 +1117,8 @@
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Build</span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">test:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/setup-go@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">go-version:</span> <span class="string">&#x27;1.16&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/cache@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">~/go/pkg/mod</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">$&#123;&#123;</span> <span class="string">runner.os</span> <span class="string">&#125;&#125;-go-$&#123;&#123;</span> <span class="string">hashFiles(&#x27;**/go.sum&#x27;)</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            $&#123;&#123; runner.os &#125;&#125;-go-</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Lint</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          go get -u golang.org/x/lint/golint</span></span><br><span class="line"><span class="string">          make lint</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">report</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          make report</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Test</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          make test-unit</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">codecov/codecov-action@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.CODECOV_TOKEN</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>golang</tag>
         <tag>howto</tag>
+        <tag>golang</tag>
         <tag>setup</tag>
         <tag>github action</tag>
       </tags>
@@ -1210,8 +1245,8 @@
 <p><a href="https://user.seancheng.space/">Live Demo</a></p>
 ]]></content>
       <tags>
-        <tag>golang</tag>
         <tag>howto</tag>
+        <tag>golang</tag>
         <tag>oauth2</tag>
         <tag>auth0</tag>
       </tags>
@@ -1230,8 +1265,8 @@
 <figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: gen-pb</span></span><br><span class="line"><span class="section">gen-pb:</span></span><br><span class="line">	@protoc --go_out=plugins=grpc,paths=source_relative:. ./internal/pkg/entity/**/*.proto</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>golang</tag>
         <tag>howto</tag>
+        <tag>golang</tag>
         <tag>software</tag>
         <tag>development</tag>
         <tag>protobuf</tag>
@@ -1475,8 +1510,8 @@
 <p><a href="https://github.com/blackhorseya/todo-app">Todo APP</a></p>
 ]]></content>
       <tags>
-        <tag>golang</tag>
         <tag>howto</tag>
+        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
@@ -1620,25 +1655,6 @@
       <tags>
         <tag>software</tag>
         <tag>development</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to set up GKE via terraform</title>
-    <url>/posts/how-to-set-up-gke-via-terraform/</url>
-    <content><![CDATA[<h2 id="前置條件"><a href="#前置條件" class="headerlink" title="前置條件"></a>前置條件</h2><ul>
-<li>terraform</li>
-<li>GCP</li>
-</ul>
-<h2 id="撰寫-terraform"><a href="#撰寫-terraform" class="headerlink" title="撰寫 terraform"></a>撰寫 terraform</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># main.tf</span><br><span class="line"></span><br><span class="line">terraform &#123;</span><br><span class="line">  required_providers &#123;</span><br><span class="line">    google = &#123;</span><br><span class="line">      source = &quot;hashicorp/google&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">provider &quot;google&quot; &#123;</span><br><span class="line">  credentials = file(&quot;sean-side-tf-admin-sa.json&quot;)</span><br><span class="line">  project     = &quot;sean-side&quot;</span><br><span class="line">  region      = &quot;asia-east1&quot;</span><br><span class="line">  zone        = &quot;asia-east1-c&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># gke.tf</span><br><span class="line"></span><br><span class="line">resource &quot;google_service_account&quot; &quot;sean-side-gke-default-sa&quot; &#123;</span><br><span class="line">  account_id   = &quot;sean-side-gke-default-sa&quot;</span><br><span class="line">  display_name = &quot;GKE default service account&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;google_container_cluster&quot; &quot;sean-side-prod-cluster&quot; &#123;</span><br><span class="line">  name                     = &quot;sean-side-prod-cluster&quot;</span><br><span class="line">  location                 = &quot;asia-east1-c&quot;</span><br><span class="line">  remove_default_node_pool = true</span><br><span class="line">  initial_node_count       = 1</span><br><span class="line"></span><br><span class="line">  timeouts &#123;</span><br><span class="line">    create = &quot;30m&quot;</span><br><span class="line">    update = &quot;40m&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;google_container_node_pool&quot; &quot;sean-side-prod-nodes&quot; &#123;</span><br><span class="line">  name       = &quot;sean-side-prod-nodes&quot;</span><br><span class="line">  location   = &quot;asia-east1-c&quot;</span><br><span class="line">  cluster    = google_container_cluster.sean-side-prod-cluster.name</span><br><span class="line">  node_count = 2</span><br><span class="line"></span><br><span class="line">  autoscaling &#123;</span><br><span class="line">    max_node_count = 3</span><br><span class="line">    min_node_count = 1</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  node_config &#123;</span><br><span class="line">    preemptible  = true</span><br><span class="line">    machine_type = &quot;e2-medium&quot;</span><br><span class="line"></span><br><span class="line">    service_account = google_service_account.sean-side-gke-default-sa.email</span><br><span class="line">    oauth_scopes = [</span><br><span class="line">      &quot;https://www.googleapis.com/auth/cloud-platform&quot;</span><br><span class="line">    ]</span><br><span class="line">    labels = &#123;</span><br><span class="line">      env  = &quot;prod&quot;</span><br><span class="line">      proj = &quot;side&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>howto</tag>
-        <tag>kubernetes</tag>
-        <tag>setup</tag>
-        <tag>terraform</tag>
-        <tag>GCP</tag>
       </tags>
   </entry>
   <entry>
