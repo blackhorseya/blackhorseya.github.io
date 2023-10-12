@@ -136,10 +136,10 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load(&quot;@bazel_gazelle//:def.bzl&quot;, &quot;gazelle&quot;)</span><br><span class="line"></span><br><span class="line"># gazelle:prefix github.com/blackhorseya/irent</span><br><span class="line"># gazelle:proto disable_global</span><br><span class="line"></span><br><span class="line">gazelle(name = &quot;gazelle&quot;)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>howto</tag>
         <tag>golang</tag>
-        <tag>bazel</tag>
         <tag>monorepo</tag>
+        <tag>howto</tag>
+        <tag>bazel</tag>
       </tags>
   </entry>
   <entry>
@@ -456,8 +456,8 @@
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The multiple stage is <strong>important</strong> in <code>Dockerfile</code>. It can optimize size of docker image.</p>
 ]]></content>
       <tags>
-        <tag>howto</tag>
         <tag>golang</tag>
+        <tag>howto</tag>
         <tag>docker</tag>
       </tags>
   </entry>
@@ -514,8 +514,8 @@
 <h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p><a href="https://github.com/blackhorseya/todo-app">Todo app</a></p>
 ]]></content>
       <tags>
-        <tag>howto</tag>
         <tag>golang</tag>
+        <tag>howto</tag>
         <tag>DDD</tag>
       </tags>
   </entry>
@@ -862,8 +862,8 @@
 <figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> golang:alpine AS builder</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /src</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># because alpine default exclude git command so you must install git.</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk add --no-cache git</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> GITHUB_TOKEN</span><br><span class="line"><span class="keyword">ARG</span> YOUR_GITHUB_ORG</span><br><span class="line"></span><br><span class="line"><span class="comment"># setup GOPRIVATE env via go</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> go <span class="built_in">env</span> -w GOPRIVATE=<span class="string">&quot;github.com/<span class="variable">$&#123;YOUR_GITHUB_ORG&#125;</span>/*&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup git config</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> git config --global url.<span class="string">&quot;https://<span class="variable">$&#123;GITHUB_TOKEN&#125;</span>@github.com/<span class="variable">$&#123;YOUR_GITHUB_ORG&#125;</span>/&quot;</span>.insteadOf <span class="string">&quot;https://github.com/<span class="variable">$&#123;YOUR_GITHUB_ORG&#125;</span>/&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> go.mod go.sum ./</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> go mod download</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> cmd ./cmd</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> internal ./internal</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> api ./api</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> APP_NAME</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> go build -o app ./cmd/<span class="variable">$&#123;APP_NAME&#125;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> alpine:<span class="number">3</span> AS final</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk add --no-cache tzdata</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder /src/app ./</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> ./app</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>howto</tag>
         <tag>golang</tag>
+        <tag>howto</tag>
         <tag>setup</tag>
       </tags>
   </entry>
@@ -1106,8 +1106,8 @@
 <h2 id="How-to-write-testing"><a href="#How-to-write-testing" class="headerlink" title="How to write testing"></a>How to write testing</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> repoSuite <span class="keyword">struct</span> &#123;</span><br><span class="line">	suite.Suite</span><br><span class="line">	pool     *dockertest.Pool</span><br><span class="line">	resource *dockertest.Resource</span><br><span class="line">	client   *mongo.Client</span><br><span class="line">	repo     IRepo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *repoSuite)</span></span> SetupTest() &#123;</span><br><span class="line">	logger := zap.NewNop()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// new pool by dockertest</span></span><br><span class="line">	pool, err := dockertest.NewPool(<span class="string">&quot;&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	s.pool = pool</span><br><span class="line"></span><br><span class="line">	<span class="comment">// run resource by image name and env</span></span><br><span class="line">	resource, err := pool.Run(<span class="string">&quot;mongo&quot;</span>, <span class="string">&quot;4.4.10&quot;</span>, <span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	s.resource = resource</span><br><span class="line"></span><br><span class="line">	err = pool.Retry(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="type">error</span> &#123;</span><br><span class="line">		uri := fmt.Sprintf(<span class="string">&quot;mongodb://localhost:%s/&quot;</span>, resource.GetPort(<span class="string">&quot;27017/tcp&quot;</span>))</span><br><span class="line">		s.client, err = mongo.Connect(contextx.Background(), options.Client().ApplyURI(uri))</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> s.client.Ping(contextx.Background(), readpref.Primary())</span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	repo, err := CreateIRepo(logger, s.client)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	s.repo = repo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *repoSuite)</span></span> TearDownTest() &#123;</span><br><span class="line">	_ = s.client.Disconnect(contextx.Background())</span><br><span class="line"></span><br><span class="line">	<span class="comment">// purge container</span></span><br><span class="line">	_ = s.pool.Purge(s.resource)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestRepoSuite</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	suite.Run(t, <span class="built_in">new</span>(repoSuite))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test ping mongodb</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *repoSuite)</span></span> Test_impl_PingMongo() &#123;</span><br><span class="line">	<span class="keyword">type</span> args <span class="keyword">struct</span> &#123;</span><br><span class="line">		mock <span class="function"><span class="keyword">func</span><span class="params">()</span></span></span><br><span class="line">	&#125;</span><br><span class="line">	tests := []<span class="keyword">struct</span> &#123;</span><br><span class="line">		name    <span class="type">string</span></span><br><span class="line">		args    args</span><br><span class="line">		want    <span class="type">bool</span></span><br><span class="line">		wantErr <span class="type">bool</span></span><br><span class="line">	&#125;&#123;</span><br><span class="line">		&#123;</span><br><span class="line">			name:    <span class="string">&quot;ping then success&quot;</span>,</span><br><span class="line">			args:    args&#123;&#125;,</span><br><span class="line">			want:    <span class="literal">true</span>,</span><br><span class="line">			wantErr: <span class="literal">false</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, tt := <span class="keyword">range</span> tests &#123;</span><br><span class="line">		s.T().Run(tt.name, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">			<span class="keyword">if</span> tt.args.mock != <span class="literal">nil</span> &#123;</span><br><span class="line">				tt.args.mock()</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			got, err := s.repo.PingMongo(contextx.Background())</span><br><span class="line">			<span class="keyword">if</span> (err != <span class="literal">nil</span>) != tt.wantErr &#123;</span><br><span class="line">				t.Errorf(<span class="string">&quot;PingMongo() error = %v, wantErr %v&quot;</span>, err, tt.wantErr)</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> got != tt.want &#123;</span><br><span class="line">				t.Errorf(<span class="string">&quot;PingMongo() got = %v, want %v&quot;</span>, got, tt.want)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>howto</tag>
         <tag>golang</tag>
+        <tag>howto</tag>
       </tags>
   </entry>
   <entry>
@@ -1117,8 +1117,8 @@
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Build</span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">test:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/setup-go@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">go-version:</span> <span class="string">&#x27;1.16&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/cache@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">~/go/pkg/mod</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">$&#123;&#123;</span> <span class="string">runner.os</span> <span class="string">&#125;&#125;-go-$&#123;&#123;</span> <span class="string">hashFiles(&#x27;**/go.sum&#x27;)</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            $&#123;&#123; runner.os &#125;&#125;-go-</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Lint</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          go get -u golang.org/x/lint/golint</span></span><br><span class="line"><span class="string">          make lint</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">report</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          make report</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Test</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          make test-unit</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">codecov/codecov-action@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.CODECOV_TOKEN</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>howto</tag>
         <tag>golang</tag>
+        <tag>howto</tag>
         <tag>setup</tag>
         <tag>github action</tag>
       </tags>
@@ -1245,8 +1245,8 @@
 <p><a href="https://user.seancheng.space/">Live Demo</a></p>
 ]]></content>
       <tags>
-        <tag>howto</tag>
         <tag>golang</tag>
+        <tag>howto</tag>
         <tag>oauth2</tag>
         <tag>auth0</tag>
       </tags>
@@ -1265,8 +1265,8 @@
 <figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: gen-pb</span></span><br><span class="line"><span class="section">gen-pb:</span></span><br><span class="line">	@protoc --go_out=plugins=grpc,paths=source_relative:. ./internal/pkg/entity/**/*.proto</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>howto</tag>
         <tag>golang</tag>
+        <tag>howto</tag>
         <tag>software</tag>
         <tag>development</tag>
         <tag>protobuf</tag>
@@ -1510,8 +1510,8 @@
 <p><a href="https://github.com/blackhorseya/todo-app">Todo APP</a></p>
 ]]></content>
       <tags>
-        <tag>howto</tag>
         <tag>golang</tag>
+        <tag>howto</tag>
       </tags>
   </entry>
   <entry>
