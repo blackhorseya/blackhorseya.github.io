@@ -19,23 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.seancheng.space","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Sean&#39;s blog">
-<meta property="og:url" content="https://blog.seancheng.space/tags/DDD/index.html">
+    <meta name="description" content="Uncover the power of Monorepos in software development. Streamline collaboration, code sharing, and version control for more efficient and organized projects.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What is a monorepo in Go">
+<meta property="og:url" content="https://blog.seancheng.space/posts/what-is-a-monorepo-in-go/index.html">
 <meta property="og:site_name" content="Sean&#39;s blog">
+<meta property="og:description" content="Uncover the power of Monorepos in software development. Streamline collaboration, code sharing, and version control for more efficient and organized projects.">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-14T00:35:54.000Z">
+<meta property="article:modified_time" content="2023-10-14T00:35:54.000Z">
 <meta property="article:author" content="Sean Zheng">
+<meta property="article:tag" content="golang">
+<meta property="article:tag" content="monorepo">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.seancheng.space/tags/DDD/">
+<link rel="canonical" href="https://blog.seancheng.space/posts/what-is-a-monorepo-in-go/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"tags/DDD/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://blog.seancheng.space/posts/what-is-a-monorepo-in-go/","path":"posts/what-is-a-monorepo-in-go/","title":"What is a monorepo in Go"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Tag: DDD | Sean's blog</title>
+<title>What is a monorepo in Go | Sean's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157746412-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-157746412-1","only_pageview":false}</script>
@@ -125,7 +131,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -138,6 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-a-Monorepo"><span class="nav-number">1.</span> <span class="nav-text">What is a Monorepo?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Concepts-of-a-Monorepo"><span class="nav-number">2.</span> <span class="nav-text">Concepts of a Monorepo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-layout-based-standard"><span class="nav-number">3.</span> <span class="nav-text">Project layout based standard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Go"><span class="nav-number">3.1.</span> <span class="nav-text">Go</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -183,50 +190,137 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">DDD
-          <small>Tag</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.seancheng.space/posts/what-is-a-monorepo-in-go/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sean Zheng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="What is a monorepo in Go | Sean's blog">
+      <meta itemprop="description" content="Uncover the power of Monorepos in software development. Streamline collaboration, code sharing, and version control for more efficient and organized projects.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          What is a monorepo in Go
         </h1>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-14 08:35:54" itemprop="dateCreated datePublished" datetime="2023-10-14T08:35:54+08:00">2023-10-14</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="firestore-visitors-count"></span>
+    </span>
+</div>
+
+            <div class="post-description">Uncover the power of Monorepos in software development. Streamline collaboration, code sharing, and version control for more efficient and organized projects.</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="What-is-a-Monorepo"><a href="#What-is-a-Monorepo" class="headerlink" title="What is a Monorepo?"></a>What is a Monorepo?</h2><p>A monorepo, short for “monolithic repository,” is a single repository housing source code for multiple projects or software components. It simplifies code sharing, version control, and fosters collaboration across teams. It’s a powerful solution for organizations looking to streamline development processes and promote code reuse.</p>
+<h2 id="Concepts-of-a-Monorepo"><a href="#Concepts-of-a-Monorepo" class="headerlink" title="Concepts of a Monorepo"></a>Concepts of a Monorepo</h2><p>The key motivations behind the design of Monorepos include:</p>
+<ul>
+<li><p><strong>Code Sharing</strong>: Storing code for multiple projects in a single repository reduces code duplication and encourages modular, efficient code reuse.</p>
+</li>
+<li><p><strong>Simplified Version Control</strong>: Monorepos simplify version control, ensuring consistent versioning and making dependency management more straightforward.</p>
+</li>
+<li><p><strong>Cross-Team Collaboration</strong>: Allowing different teams to work on the same codebase promotes knowledge sharing, facilitates bug identification and resolution, and fosters team unity.</p>
+</li>
+<li><p><strong>Optimized Continuous Integration and Continuous Deployment (CI&#x2F;CD) Processes</strong>: Monorepos streamline CI&#x2F;CD by enabling changes in one part of the codebase to trigger automated tests and deployments across the entire repository, ensuring compatibility and currency across the system.</p>
+</li>
+</ul>
+<p>In summary, Monorepos are designed to improve development efficiency, enhance collaboration, and reduce the complexity of code management, especially in the context of multiple projects.</p>
+<h2 id="Project-layout-based-standard"><a href="#Project-layout-based-standard" class="headerlink" title="Project layout based standard"></a>Project layout based standard</h2><h3 id="Go"><a href="#Go" class="headerlink" title="Go"></a>Go</h3><p>Your directory structure appears to be well-organized and follows common conventions for structuring Go projects in a Monorepo. Here’s a brief breakdown of the directories you’ve listed:</p>
+<ul>
+<li><p><code>adapter</code>: This directory is typically used for adapting external interfaces, such as implementing interfaces for external services or APIs.</p>
+</li>
+<li><p><code>docs</code>: A directory for documentation, including project documentation, README files, and any other documentation related to your code.</p>
+</li>
+<li><p><code>entity</code>: Often used for domain entities or data models that represent the core data structures of your application.</p>
+</li>
+<li><p><code>examples</code>: A place to include example code or sample applications that demonstrate how to use your packages or libraries.</p>
+</li>
+<li><p><code>internal</code>: The internal directory is used for packages and modules that are specific to your project and are not meant to be exposed for external use.</p>
+</li>
+<li><p><code>pb</code>: This directory may contain Protocol Buffers (protobuf) definitions if you’re using gRPC or other serialization methods.</p>
+</li>
+<li><p><code>pkg</code>: The <code>pkg</code> directory is often used for packages that are meant to be imported and used by other parts of your application or potentially by external applications.</p>
+</li>
+<li><p><code>scripts</code>: A directory for any scripts or automation tools related to your project’s development or deployment.</p>
+</li>
+<li><p><code>web</code>: If your project involves web-related code or a web application, this directory can be used to organize web components and assets.</p>
+</li>
+</ul>
+<p>This directory structure provides a clear separation of concerns and helps maintain a well-structured Go Monorepo. It’s important to note that the structure you choose should align with your project’s requirements and the conventions of your team or organization. Your chosen structure looks sensible and well-organized.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Monorepos, or “single repositories,” have emerged as a compelling choice in modern software development, offering robust solutions for collaboration, code sharing, and version control. The key advantages of this structure include more efficient code sharing, simplified version control, enhanced team collaboration, and optimized Continuous Integration and Continuous Deployment (CI&#x2F;CD) processes.</p>
+<p>By establishing the right structure, selecting suitable tools, defining clear workflows, and leveraging automation, you can successfully implement a Monorepo, simplifying your development processes and improving overall efficiency.</p>
+<p>If your team or organization is grappling with the complexity of managing multiple code repositories or seeking to enhance collaboration among teams, Monorepo is a worthwhile consideration. With this structure, you can more effectively manage large projects, encourage code sharing, and ensure your entire system remains up-to-date and compatible. Monorepo not only provides a more efficient development process but also fosters collaboration and knowledge sharing, propelling your software development projects forward.</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-01-10T08:12:08+08:00"
-              content="2023-01-10">
-          01-10
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/how-to-implement-domain-driven-design-in-golang/" itemprop="url">
-            <span itemprop="name">how to implement domain driven design in golang</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/golang/" rel="tag"># golang</a>
+              <a href="/tags/monorepo/" rel="tag"># monorepo</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/how-to-build-golang-project-using-bazel/" rel="prev" title="how to build golang project using bazel">
+                  <i class="fa fa-chevron-left"></i> how to build golang project using bazel
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
+
 
 </div>
   </main>
